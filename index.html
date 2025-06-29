@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Royal Darts Premier League 2025</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+    header {
+      background-color: #121212;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    header img {
+      max-height: 60px;
+      vertical-align: middle;
+    }
+    nav {
+      background-color: #1f1f1f;
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav button {
+      flex: 1;
+      padding: 1rem;
+      color: white;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    nav button:hover,
+    nav button.active {
+      background-color: #333;
+    }
+    main {
+      padding: 1rem;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
+    table {
+      width: 100%;
+      min-width: 600px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .standings-key {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      color: #444;
+    }
+    footer {
+      background-color: #121212;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    .footer-icons {
+      margin-top: 0.5rem;
+    }
+    .footer-icons a {
+      margin: 0 0.5rem;
+      display: inline-block;
+    }
+    .footer-icons img {
+      height: 24px;
+      width: 24px;
+    }
+    @media screen and (max-width: 600px) {
+      header img {
+        max-height: 50px;
+      }
+      nav button {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+      }
+      th, td {
+        font-size: 0.85rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Tournament Logo" />
+    <h1>Royal Darts Premier League 2025</h1>
+  </header>
+  <nav>
+    <button class="tab-button active" onclick="showTab('fixtures')">Fixtures</button>
+    <button class="tab-button" onclick="showTab('results')">Results</button>
+    <button class="tab-button" onclick="showTab('standings')">Standings</button>
+    <button class="tab-button" onclick="showTab('squads')">Squads</button>
+  </nav>
+  <main>
+    <section id="fixtures" class="section active">
+      <div class="table-scroll">
+        <table id="fixturesTable">
+          <thead>
+            <tr><th>Date</th><th>Time</th><th>Match</th></tr>
+          </thead>
+          <tbody><tr><td colspan="3">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <section id="results" class="section">
+      <div class="table-scroll">
+        <table id="resultsTable">
+          <thead>
+            <tr>
+              <th>Group</th>
+              <th>Avg 1</th>
+              <th>Team 1</th>
+              <th>Score Team 1</th>
+              <th>vs</th>
+              <th>Score Team 2</th>
+              <th>Team 2</th>
+              <th>Avg 2</th>
+            </tr>
+          </thead>
+          <tbody><tr><td colspan="8">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <section id="standings" class="section">
+      <div class="table-scroll">
+        <table id="standingsTable">
+          <thead>
+            <tr><th>Team</th><th>Group</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th></tr>
+          </thead>
+          <tbody><tr><td colspan="10">Loading...</td></tr></tbody>
+        </table>
+      </div>
+      <div class="standings-key">
+        <p><strong>EF</strong> = Events For, <strong>EA</strong> = Events Against, <strong>ED</strong> = Event Difference</p>
+      </div>
+    </section>
+    <section id="squads" class="section">
+      <div id="squadsContainer">Loading...</div>
+    </section>
+  </main>
+  <footer>
+    Built by SUCA Analytics
+    <div class="footer-icons">
+      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="Live" title="Watch Live on Nakka" />
+      </a>
+      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" title="Follow us on Instagram" />
+      </a>
+    </div>
+  </footer>
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzjQ6yBNFFLbWfxyU-idb2j8XNTDrBj1C8kvWBSDaPirUNcU9jtNFxuI5s3CfgDMttA/exec';
+
+    function showTab(tabId) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        renderFixtures(data.Fixtures);
+        renderResults(data.Results);
+        renderStandings(data.Standings);
+        renderSquads(data.Squads);
+      } catch (err) {
+        console.error('Failed to load data:', err);
+      }
+    }
+
+    function renderFixtures(fixtures) {
+      const tbody = document.querySelector('#fixturesTable tbody');
+      tbody.innerHTML = '';
+      fixtures.forEach(f => {
+        const row = `<tr><td>${new Date(f.Date).toDateString()}</td><td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td><td>${f['Team 1']} vs ${f['Team 2']}</td></tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function renderResults(results) {
+      const tbody = document.querySelector('#resultsTable tbody');
+      tbody.innerHTML = '';
+      results.forEach(r => {
+        const row = `<tr><td>${r.Group}</td><td>${r['Avg 1']}</td><td>${r['Team 1']}</td><td>${r['Legs 1']}</td><td>vs</td><td>${r['Legs 2']}</td><td>${r['Team 2']}</td><td>${r['Avg 2']}</td></tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function renderStandings(standings) {
+      const tbody = document.querySelector('#standingsTable tbody');
+      tbody.innerHTML = '';
+      const groups = [...new Set(standings.map(s => s.Group))];
+      groups.forEach(group => {
+        const sorted = standings.filter(s => s.Group === group)
+          .sort((a, b) => b.Points - a.Points || b.LD - a.LD);
+        sorted.forEach(s => {
+          const row = `<tr><td>${s.Team}</td><td>${s.Group}</td><td>${s.P}</td><td>${s.W}</td><td>${s.L}</td><td>${s.LF}</td><td>${s.LA}</td><td>${s.LD}</td><td>${s.Points}</td><td>${s.Avg}</td></tr>`;
+          tbody.innerHTML += row;
+        });
+      });
+    }
+
+    function renderSquads(squads) {
+      const container = document.getElementById('squadsContainer');
+      const teams = [...new Set(squads.map(s => s.Team))];
+      let html = '<div style="display:flex;flex-wrap:wrap;gap:1rem;">';
+      teams.forEach(team => {
+        const players = squads.filter(s => s.Team === team).map(p => `<li>${p.Player}</li>`).join('');
+        html += `<div style="flex:1 1 calc(25% - 1rem);min-width:200px;background:#fff;padding:1rem;border-radius:8px;"><h3>${team}</h3><ul>${players}</ul></div>`;
+      });
+      html += '</div>';
+      container.innerHTML = html;
+    }
+
+    loadData();
+    setInterval(loadData, 60000);
+  </script>
+</body>
+</html>
