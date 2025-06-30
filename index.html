@@ -73,10 +73,12 @@
     /* --- MOBILE & WRAPPING --- */
     .team-cell {
       white-space: normal !important;
-      word-break: break-word;
+      word-break: keep-all !important;   /* Prevent word breaking */
       min-width: 75px;
       max-width: 120px;
       font-size: 1rem;
+      padding-left: 2px;
+      padding-right: 2px;
     }
     @media (max-width: 800px) {
       table { min-width: 0; font-size: 0.93rem;}
@@ -309,9 +311,9 @@
               <tr>
                 <th>Avg 1</th>
                 <th class="team-cell">Team 1</th>
-                <th>Score Team 1</th>
+                <th>Score</th>
                 <th>vs</th>
-                <th>Score Team 2</th>
+                <th>Score</th>
                 <th class="team-cell">Team 2</th>
                 <th>Avg 2</th>
               </tr>
