@@ -250,12 +250,15 @@
       event.target.classList.add('active');
     }
 
+    let fixturesCache = [];
+
     async function loadData() {
       try {
         const res = await fetch(API_URL);
         const data = await res.json();
+        fixturesCache = data.Fixtures || [];
         renderFixtures(data.Fixtures);
-        renderResults(data.Results);
+        renderResults(data.Results, fixturesCache);
         renderStandings(data.Standings);
         renderSquads(data.Squads);
       } catch (err) {
@@ -298,13 +301,32 @@
       container.innerHTML = html;
     }
 
-    // --- RESULTS WITH DATE & GROUP ---
-    function renderResults(results) {
+    // --- RESULTS WITH DATE & GROUP, FIX DATE BY MATCHING FIXTURES IF MISSING ---
+    function renderResults(results, fixtures) {
+      // Prepare a lookup for fixtures: Map "Team 1 vs Team 2" => date
+      const fixtureDateMap = {};
+      fixtures.forEach(fix => {
+        const t1 = fix["Team 1"], t2 = fix["Team 2"];
+        const dateStr = new Date(fix.Date).toDateString();
+        // Both team orders for lookup
+        fixtureDateMap[`${t1}|${t2}`] = dateStr;
+        fixtureDateMap[`${t2}|${t1}`] = dateStr;
+      });
+
+      // For each result, ensure Date is filled by matching the teams with fixtures if needed
       const byDate = {};
       results.forEach(r => {
-        let d = r.Date ? new Date(r.Date).toDateString() : 'Unknown Date';
-        if (!byDate[d]) byDate[d] = [];
-        byDate[d].push(r);
+        let dateVal = "";
+        // Try direct date from Results first
+        if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
+          dateVal = new Date(r.Date).toDateString();
+        } else {
+          // Try to get from fixtures by team names (either order)
+          const t1 = r["Team 1"], t2 = r["Team 2"];
+          dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
+        }
+        if (!byDate[dateVal]) byDate[dateVal] = [];
+        byDate[dateVal].push(r);
       });
 
       let groupAHtml = '', groupBHtml = '';
