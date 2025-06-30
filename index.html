@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Royal Darts Premier League 2025</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
+  <link rel="icon" href="https://n01darts.com/favicon.ico" />
   <style>
     * { box-sizing: border-box; }
     body {
@@ -62,10 +62,14 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     th, td {
-      padding: 0.75rem;
+      padding: 1rem 0.5rem;
       border: 1px solid #ddd;
       text-align: center;
-      white-space: nowrap;
+      word-break: break-word;
+      white-space: normal;
+      vertical-align: middle;
+      font-size: 1rem;
+      line-height: 1.45;
     }
     th {
       background: #ececec;
@@ -148,13 +152,20 @@
     @media screen and (max-width: 1000px) {
       .team-card { min-width: 180px; }
       .team-card-header img { width: 32px; height: 32px; }
+      th, td { font-size: 0.95rem; padding: 0.6rem 0.4rem; }
+    }
+    @media screen and (max-width: 700px) {
+      table { min-width: 360px; }
+      th, td { font-size: 0.9rem; padding: 0.55rem 0.2rem; }
+      .team-card { min-width: 120px; padding: 0.5rem; }
+      .team-card-header img { width: 22px; height: 22px; }
     }
     @media screen and (max-width: 600px) {
       header img { max-height: 50px; }
       nav button { font-size: 0.9rem; padding: 0.75rem; }
-      th, td { font-size: 0.85rem; padding: 0.5rem; }
-      .team-card { min-width: 130px; padding: 0.65rem; }
-      .team-card-header img { width: 24px; height: 24px; }
+      th, td { font-size: 0.85rem; padding: 0.45rem 0.18rem; }
+      .team-card { min-width: 96px; padding: 0.28rem; }
+      .team-card-header img { width: 17px; height: 17px; }
     }
   </style>
 </head>
@@ -214,8 +225,14 @@
       "Hugo & Finn": "team_logos/Hugo-&-Finn.png",
       "Keventer Eagle Eye": "team_logos/Keventer-Eagle-Eye.avif",
       "PKS Titans": "team_logos/PKS-Titans.avif",
-      "Purti Forever": "team_logos/Purti-Forever.avif"
-      // Add more as needed
+      "Purti Forever": "team_logos/Purti-Forever.avif",
+      "Rama Darts": "team_logos/Rama-Darts.avif",
+      "Royals Super Knights": "team_logos/Royals-Super-Knights.avif",
+      "RSV": "team_logos/RSV.avif",
+      "Panthers": "team_logos/Panthers.avif",
+      "Tons of Bull": "team_logos/Tons-of-Bull.avif",
+      "UGH": "team_logos/UGH.avif",
+      "Vyana": "team_logos/Vyana.avif"
     };
 
     const API_URL = 'https://script.google.com/macros/s/AKfycbzjQ6yBNFFLbWfxyU-idb2j8XNTDrBj1C8kvWBSDaPirUNcU9jtNFxuI5s3CfgDMttA/exec';
