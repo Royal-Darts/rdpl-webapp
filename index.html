@@ -194,8 +194,7 @@
     </section>
     <!-- Results -->
     <section id="results" class="section">
-      <div id="resultsGroupA"></div>
-      <div id="resultsGroupB"></div>
+      <div id="resultsContainer"></div>
     </section>
     <!-- Standings -->
     <section id="standings" class="section">
@@ -222,23 +221,24 @@
     </div>
   </footer>
   <script>
+    // --- LOGO MAPPING (matches exactly with your logo files) ---
     const TEAM_LOGOS = {
-      "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
       "Balaji Darts": "team_logos/Balaji-Darts.avif",
       "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
+      "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
       "Bullseye Bandits": "team_logos/Bullseye-Bandits.avif",
       "City Knights": "team_logos/City-Knights.avif",
       "Hugo & Finn": "team_logos/Hugo-&-Finn.png",
       "Keventer Eagle Eye": "team_logos/Keventer-Eagle-Eye.avif",
       "PKS Titans": "team_logos/PKS-Titans.avif",
       "Purti Forever": "team_logos/Purti-Forever.avif",
-      "Rama Darts": "team_logos/Rama-Darts.avif",
+      "Rama Darts": "team_logos/Rama-Darts.png",
       "Royals Super Knights": "team_logos/Royals-Super-Knights.avif",
-      "RSV": "team_logos/RSV.avif",
-      "Panthers": "team_logos/Panthers.avif",
+      "RSV Rising Stars": "team_logos/RSV-Rising-Stars.avif",
+      "The Panthers": "team_logos/The-Panthers.avif",
       "Tons of Bull": "team_logos/Tons-of-Bull.avif",
-      "UGH": "team_logos/UGH.avif",
-      "Vyana": "team_logos/Vyana.avif"
+      "UGW": "team_logos/UGW.png",
+      "Vyana Warriors": "team_logos/Vyana-Warriors.avif"
     };
 
     const API_URL = 'https://script.google.com/macros/s/AKfycbzjQ6yBNFFLbWfxyU-idb2j8XNTDrBj1C8kvWBSDaPirUNcU9jtNFxuI5s3CfgDMttA/exec';
@@ -301,27 +301,24 @@
       container.innerHTML = html;
     }
 
-    // --- RESULTS WITH DATE & GROUP, FIX DATE BY MATCHING FIXTURES IF MISSING ---
+    // --- RESULTS: Grouped by Date, then Group ---
     function renderResults(results, fixtures) {
-      // Prepare a lookup for fixtures: Map "Team 1 vs Team 2" => date
+      // Build fixture date lookup for missing dates in results
       const fixtureDateMap = {};
       fixtures.forEach(fix => {
         const t1 = fix["Team 1"], t2 = fix["Team 2"];
         const dateStr = new Date(fix.Date).toDateString();
-        // Both team orders for lookup
         fixtureDateMap[`${t1}|${t2}`] = dateStr;
         fixtureDateMap[`${t2}|${t1}`] = dateStr;
       });
 
-      // For each result, ensure Date is filled by matching the teams with fixtures if needed
+      // Assign date to each result, using fixture if needed
       const byDate = {};
       results.forEach(r => {
         let dateVal = "";
-        // Try direct date from Results first
         if (r.Date && r.Date !== "null" && r.Date !== "" && r.Date !== undefined) {
           dateVal = new Date(r.Date).toDateString();
         } else {
-          // Try to get from fixtures by team names (either order)
           const t1 = r["Team 1"], t2 = r["Team 2"];
           dateVal = fixtureDateMap[`${t1}|${t2}`] || fixtureDateMap[`${t2}|${t1}`] || "Unknown Date";
         }
@@ -329,22 +326,18 @@
         byDate[dateVal].push(r);
       });
 
-      let groupAHtml = '', groupBHtml = '';
+      let html = '';
       Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        html += `<div class="date-heading">${dateStr}</div>`;
         // Group A for this date
         const groupA = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'A');
-        if (groupA.length) {
-          groupAHtml += `<div class="date-heading">${dateStr}</div>` + resultsTable(groupA, 'A');
-        }
+        if (groupA.length) html += resultsTable(groupA, 'A');
         // Group B for this date
         const groupB = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'B');
-        if (groupB.length) {
-          groupBHtml += `<div class="date-heading">${dateStr}</div>` + resultsTable(groupB, 'B');
-        }
+        if (groupB.length) html += resultsTable(groupB, 'B');
       });
 
-      document.getElementById('resultsGroupA').innerHTML = groupAHtml || '';
-      document.getElementById('resultsGroupB').innerHTML = groupBHtml || '';
+      document.getElementById('resultsContainer').innerHTML = html || '';
     }
 
     function resultsTable(arr, group) {
