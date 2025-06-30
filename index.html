@@ -73,7 +73,7 @@
     /* --- MOBILE & WRAPPING --- */
     .team-cell {
       white-space: normal !important;
-      word-break: keep-all !important;   /* Prevent word breaking */
+      word-break: keep-all !important;
       min-width: 75px;
       max-width: 120px;
       font-size: 1rem;
@@ -270,7 +270,6 @@
         container.innerHTML = '<div class="table-scroll"><table><tbody><tr><td>Loading...</td></tr></tbody></table></div>';
         return;
       }
-      // Group fixtures by date
       const byDate = {};
       fixtures.forEach(f => {
         const d = new Date(f.Date).toDateString();
@@ -299,11 +298,35 @@
       container.innerHTML = html;
     }
 
-    // --- RESULTS ---
+    // --- RESULTS WITH DATE & GROUP ---
     function renderResults(results) {
-      const A = results.filter(r => r.Group?.toUpperCase() === 'A');
-      const B = results.filter(r => r.Group?.toUpperCase() === 'B');
-      const tableHTML = (arr, group) => `
+      const byDate = {};
+      results.forEach(r => {
+        let d = r.Date ? new Date(r.Date).toDateString() : 'Unknown Date';
+        if (!byDate[d]) byDate[d] = [];
+        byDate[d].push(r);
+      });
+
+      let groupAHtml = '', groupBHtml = '';
+      Object.keys(byDate).sort((a, b) => new Date(a) - new Date(b)).forEach(dateStr => {
+        // Group A for this date
+        const groupA = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'A');
+        if (groupA.length) {
+          groupAHtml += `<div class="date-heading">${dateStr}</div>` + resultsTable(groupA, 'A');
+        }
+        // Group B for this date
+        const groupB = byDate[dateStr].filter(r => r.Group?.toUpperCase() === 'B');
+        if (groupB.length) {
+          groupBHtml += `<div class="date-heading">${dateStr}</div>` + resultsTable(groupB, 'B');
+        }
+      });
+
+      document.getElementById('resultsGroupA').innerHTML = groupAHtml || '';
+      document.getElementById('resultsGroupB').innerHTML = groupBHtml || '';
+    }
+
+    function resultsTable(arr, group) {
+      return `
         <div class="group-title">Group ${group}</div>
         <div class="table-scroll">
           <table>
@@ -331,8 +354,6 @@
             </tbody>
           </table>
         </div>`;
-      document.getElementById('resultsGroupA').innerHTML = tableHTML(A, 'A');
-      document.getElementById('resultsGroupB').innerHTML = tableHTML(B, 'B');
     }
 
     // --- STANDINGS ---
