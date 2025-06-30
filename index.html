@@ -156,23 +156,33 @@
       font-size: 0.99rem;
     }
     .footer-icons {
-      margin-top: 0.5rem;
+      margin-top: 0.7rem;
+      text-align: center;
     }
     .footer-icons a {
       margin: 0 0.5rem;
       display: inline-block;
+      vertical-align: middle;
     }
     .footer-icons img {
-      height: 24px;
-      width: 24px;
+      height: 26px;
+      width: 26px;
+      vertical-align: middle;
+      border-radius: 5px;
+      background: #fff;
+      border: 1px solid #eee;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
     }
-    @media screen and (max-width: 1000px) {
-      .team-card { min-width: 180px; }
-      .team-card-header img { width: 32px; height: 32px; }
+    .footer-suca {
+      margin-top: 0.7rem;
+      text-align: center;
+      color: #bdbdbd;
+      font-size: 0.93rem;
+      letter-spacing: 0.01em;
     }
-    @media screen and (max-width: 600px) {
-      .team-card { min-width: 130px; padding: 0.65rem; }
-      .team-card-header img { width: 24px; height: 24px; }
+    @media (max-width: 600px) {
+      .footer-icons img { height: 22px; width: 22px;}
+      .footer-suca { font-size: 0.80rem; }
     }
   </style>
 </head>
@@ -210,18 +220,19 @@
     </section>
   </main>
   <footer>
-    Built by SUCA Analytics
     <div class="footer-icons">
-      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank">
-        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="Live" title="Watch Live on Nakka" />
+      <a href="https://n01darts.com/n01/tournament/comp.php?id=t_NI0o_4352&tab=live" target="_blank" class="icon-link">
+        <img src="https://n01darts.com/favicon.ico" alt="Nakka" title="Watch Live on Nakka"
+          onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<span style=&quot;font-size:13px;vertical-align:middle;color:#ccc;padding-left:2px;&quot;>Nakka</span>');" />
       </a>
-      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank">
+      <a href="https://www.instagram.com/royaldarts_rcgc" target="_blank" class="icon-link">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" title="Follow us on Instagram" />
       </a>
     </div>
+    <div class="footer-suca">Built by SUCA Analytics</div>
   </footer>
   <script>
-    // --- LOGO MAPPING (matches exactly with your logo files) ---
+    // --- LOGO MAPPING ---
     const TEAM_LOGOS = {
       "Balaji Darts": "team_logos/Balaji-Darts.avif",
       "Biscotti Barrels": "team_logos/Biscotti-Barrels.avif",
