@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Royal Darts Premier League 2025</title>
-  <link rel="icon" href="https://n01darts.com/favicon.ico" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/174/174855.png" />
   <style>
     * { box-sizing: border-box; }
     body {
@@ -62,17 +62,32 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
     th, td {
-      padding: 1rem 0.5rem;
+      padding: 0.75rem;
       border: 1px solid #ddd;
       text-align: center;
-      word-break: break-word;
-      white-space: normal;
       vertical-align: middle;
-      font-size: 1rem;
-      line-height: 1.45;
     }
     th {
       background: #ececec;
+    }
+    /* --- MOBILE & WRAPPING --- */
+    .team-cell {
+      white-space: normal !important;
+      word-break: break-word;
+      min-width: 75px;
+      max-width: 120px;
+      font-size: 1rem;
+    }
+    @media (max-width: 800px) {
+      table { min-width: 0; font-size: 0.93rem;}
+      th, td { padding: 0.45rem; font-size: 0.93rem; }
+      .team-cell { min-width: 60px; max-width: 80px; font-size: 0.98rem;}
+    }
+    @media (max-width: 600px) {
+      header img { max-height: 50px; }
+      nav button { font-size: 0.9rem; padding: 0.75rem; }
+      th, td { font-size: 0.85rem; padding: 0.32rem; }
+      .team-cell { min-width: 48px; max-width: 65px; font-size: 0.90rem;}
     }
     .date-heading {
       background: #181f2b;
@@ -152,20 +167,10 @@
     @media screen and (max-width: 1000px) {
       .team-card { min-width: 180px; }
       .team-card-header img { width: 32px; height: 32px; }
-      th, td { font-size: 0.95rem; padding: 0.6rem 0.4rem; }
-    }
-    @media screen and (max-width: 700px) {
-      table { min-width: 360px; }
-      th, td { font-size: 0.9rem; padding: 0.55rem 0.2rem; }
-      .team-card { min-width: 120px; padding: 0.5rem; }
-      .team-card-header img { width: 22px; height: 22px; }
     }
     @media screen and (max-width: 600px) {
-      header img { max-height: 50px; }
-      nav button { font-size: 0.9rem; padding: 0.75rem; }
-      th, td { font-size: 0.85rem; padding: 0.45rem 0.18rem; }
-      .team-card { min-width: 96px; padding: 0.28rem; }
-      .team-card-header img { width: 17px; height: 17px; }
+      .team-card { min-width: 130px; padding: 0.65rem; }
+      .team-card-header img { width: 24px; height: 24px; }
     }
   </style>
 </head>
@@ -215,7 +220,6 @@
     </div>
   </footer>
   <script>
-    // --- TEAM LOGOS MAPPING ---
     const TEAM_LOGOS = {
       "BLC High Rollers": "team_logos/BLC-High-Rollers.avif",
       "Balaji Darts": "team_logos/Balaji-Darts.avif",
@@ -277,15 +281,15 @@
         <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Time</th><th>Team 1</th><th></th><th>Team 2</th></tr>
+            <tr><th>Time</th><th class="team-cell">Team 1</th><th></th><th class="team-cell">Team 2</th></tr>
           </thead>
           <tbody>`;
         byDate[dateStr].forEach(f => {
           html += `<tr>
               <td>${new Date(f.Time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
-              <td>${f['Team 1']}</td>
+              <td class="team-cell">${f['Team 1']}</td>
               <td>vs</td>
-              <td>${f['Team 2']}</td>
+              <td class="team-cell">${f['Team 2']}</td>
             </tr>`;
         });
         html += `</tbody></table></div>`;
@@ -297,7 +301,6 @@
     function renderResults(results) {
       const A = results.filter(r => r.Group?.toUpperCase() === 'A');
       const B = results.filter(r => r.Group?.toUpperCase() === 'B');
-      // Table HTML helper
       const tableHTML = (arr, group) => `
         <div class="group-title">Group ${group}</div>
         <div class="table-scroll">
@@ -305,22 +308,22 @@
             <thead>
               <tr>
                 <th>Avg 1</th>
-                <th>Team 1</th>
+                <th class="team-cell">Team 1</th>
                 <th>Score Team 1</th>
                 <th>vs</th>
                 <th>Score Team 2</th>
-                <th>Team 2</th>
+                <th class="team-cell">Team 2</th>
                 <th>Avg 2</th>
               </tr>
             </thead>
             <tbody>
               ${arr.map(r => `<tr>
                 <td>${r['Avg 1']}</td>
-                <td>${r['Team 1']}</td>
+                <td class="team-cell">${r['Team 1']}</td>
                 <td>${r['Legs 1']}</td>
                 <td>vs</td>
                 <td>${r['Legs 2']}</td>
-                <td>${r['Team 2']}</td>
+                <td class="team-cell">${r['Team 2']}</td>
                 <td>${r['Avg 2']}</td>
               </tr>`).join('')}
             </tbody>
@@ -334,18 +337,27 @@
     function renderStandings(standings) {
       const A = standings.filter(s => s.Group?.toUpperCase() === 'A');
       const B = standings.filter(s => s.Group?.toUpperCase() === 'B');
-      // Sort by points, then LD
       const sortArr = arr => arr.sort((a, b) => b.Points - a.Points || b.LD - a.LD);
       const tableHTML = (arr, group) => `
         <div class="group-title">Group ${group}</div>
         <div class="table-scroll">
           <table>
             <thead>
-              <tr><th>Team</th><th>P</th><th>W</th><th>L</th><th>EF</th><th>EA</th><th>ED</th><th>Pts</th><th>Avg</th></tr>
+              <tr>
+                <th class="team-cell">Team</th>
+                <th>P</th>
+                <th>W</th>
+                <th>L</th>
+                <th>EF</th>
+                <th>EA</th>
+                <th>ED</th>
+                <th>Pts</th>
+                <th>Avg</th>
+              </tr>
             </thead>
             <tbody>
               ${sortArr(arr).map(s => `<tr>
-                <td>${s.Team}</td>
+                <td class="team-cell">${s.Team}</td>
                 <td>${s.P}</td>
                 <td>${s.W}</td>
                 <td>${s.L}</td>
