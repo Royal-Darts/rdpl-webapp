@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stats | Royal Darts Premier League 2025</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="main-nav" class="glass-nav">
+    <div class="nav-logo">
+      <img src="logo.png" alt="RDPL Logo" />
+      <span>Royal Darts Premier League 2025</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="fixtures.html" class="nav-link">Fixtures</a></li>
+      <li><a href="results.html" class="nav-link">Results</a></li>
+      <li><a href="standings.html" class="nav-link">Standings</a></li>
+      <li><a href="squads.html" class="nav-link">Squads</a></li>
+      <li><a href="stats.html" class="nav-link active">Stats</a></li>
+      <li><a href="live.html" class="nav-link">Live</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>Player Statistics & Highlights</h1>
+    <div id="stat-highlights" class="highlight-cards">Loading highlights...</div>
+    <div style="margin-top:2rem">
+      <h2>All Player Stats</h2>
+      <div id="stats-table-container">Loading player stats...</div>
+    </div>
+  </main>
+  <footer class="footer">
+    <p>Built by SUCA Analytics</p>
+    <a href="https://wa.me/?text=Check%20out%20the%20Royal%20Darts%20Premier%20League%202025%20website!" target="_blank" aria-label="Share on WhatsApp" class="whatsapp-share">
+      <img src="whatsapp-icon.svg" alt="WhatsApp" />
+    </a>
+  </footer>
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
+    async function fetchJSON(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return await res.json();
+      } catch (err) {
+        console.error('Fetch error:', err);
+        return null;
+      }
+    }
+    function createEl(type, classes = [], text = '') {
+      const el = document.createElement(type);
+      if (classes.length) el.classList.add(...classes);
+      if (text) el.textContent = text;
+      return el;
+    }
+
+    // Stat Highlights
+    function findHighlights(stats, bestLegArr) {
+      let best3Dart = null, mostLegs = null, highestFinish = null, bestFirst9 = null;
+      stats.forEach(player => {
+        if (player['Match Played'] >= 2) {
+          if (!best3Dart || player['3 Dart Avg'] > best3Dart['3 Dart Avg']) best3Dart = player;
+          if (!mostLegs || player['Legs Won'] > mostLegs['Legs Won']) mostLegs = player;
+          if (!bestFirst9 || player['First 9 Avg'] > bestFirst9['First 9 Avg']) bestFirst9 = player;
+        }
+        if (!highestFinish || player['High Finish'] > highestFinish['High Finish']) highestFinish = player;
+      });
+      // Best Leg from Best Leg array
+      let bestLeg = null;
+      if (bestLegArr && bestLegArr.length) {
+        bestLeg = bestLegArr.reduce((min, cur) =>
+          (cur['Best Leg'] && (!min || cur['Best Leg'] < min['Best Leg'])) ? cur : min, null);
+      }
+      return { best3Dart, mostLegs, highestFinish, bestFirst9, bestLeg };
+    }
+
+    function renderHighlights(high, container) {
+      container.innerHTML = '';
+      [
+        {
+          label: "Best 3-Dart Avg",
+          value: high.best3Dart ? `${high.best3Dart.Player} (${high.best3Dart.Team}) - ${high.best3Dart['3 Dart Avg']}` : "—"
+        },
+        {
+          label: "Most Legs Won",
+          value: high.mostLegs ? `${high.mostLegs.Player} (${high.mostLegs.Team}) - ${high.mostLegs['Legs Won']}` : "—"
+        },
+        {
+          label: "Highest Finish",
+          value: high.highestFinish ? `${high.highestFinish.Player} (${high.highestFinish.Team}) - ${high.highestFinish['High Finish']}` : "—"
+        },
+        {
+          label: "Best First 9 Avg",
+          value: high.bestFirst9 ? `${high.bestFirst9.Player} (${high.bestFirst9.Team}) - ${high.bestFirst9['First 9 Avg']}` : "—"
+        },
+        {
+          label: "Best Leg",
+          value: high.bestLeg ? `${high.bestLeg.Players} (${high.bestLeg.Team}) - ${high.bestLeg['Best Leg']}` : "—"
+        }
+      ].forEach(h => {
+        const div = createEl('div', ['highlight-card']);
+        div.innerHTML = `<strong>${h.label}:</strong> <span>${h.value}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    function renderStatsTable(stats, container) {
+      if (!stats || !stats.length) {
+        container.textContent = 'No player stats data found.';
+        return;
+      }
+      const table = document.createElement('table');
+      table.className = 'stats-table';
+      table.innerHTML = `<thead>
+        <tr>
+          <th>Player</th>
+          <th>Team</th>
+          <th>Match Played</th>
+          <th>Legs Won</th>
+          <th>3 Dart Avg</th>
+          <th>First 9 Avg</th>
+          <th>High Finish</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${stats.map(p => `
+          <tr>
+            <td>${p.Player}</td>
+            <td><img src="team_logos/${p.Team}.png" alt="${p.Team}" class="team-logo-sm"/> ${p.Team}</td>
+            <td>${p['Match Played']}</td>
+            <td>${p['Legs Won']}</td>
+            <td>${p['3 Dart Avg']}</td>
+            <td>${p['First 9 Avg']}</td>
+            <td>${p['High Finish']}</td>
+          </tr>
+        `).join('')}
+      </tbody>`;
+      container.innerHTML = '';
+      container.appendChild(table);
+    }
+
+    async function renderStats() {
+      const data = await fetchJSON(API_URL);
+      const stats = Array.isArray(data?.Stats) ? data.Stats : [];
+      const bestLeg = Array.isArray(data?.['Best Leg']) ? data['Best Leg'] : [];
+      // Highlights
+      renderHighlights(findHighlights(stats, bestLeg), document.getElementById('stat-highlights'));
+      // Table
+      renderStatsTable(stats, document.getElementById('stats-table-container'));
+    }
+    document.addEventListener('DOMContentLoaded', renderStats);
+  </script>
+  <style>
+    .highlight-cards {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      flex: 1 1 200px;
+      color: #f2c94c;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(242, 201, 76, 0.5);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #e1e8f0;
+      margin-bottom: 1.5rem;
+    }
+    .stats-table th, .stats-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .stats-table th { color: #f2c94c;}
+    .team-logo-sm {
+      height: 20px;
+      width: auto;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.7));
+    }
+    @media (max-width: 900px) {
+      .highlight-cards { flex-direction: column; gap: 1rem;}
+      .stats-table td, .stats-table th{ font-size:0.96em;}
+    }
+  </style>
+</body>
+</html>

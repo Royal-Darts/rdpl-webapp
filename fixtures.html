@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fixtures | Royal Darts Premier League 2025</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="main-nav" class="glass-nav">
+    <div class="nav-logo">
+      <img src="logo.png" alt="RDPL Logo" />
+      <span>Royal Darts Premier League 2025</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="fixtures.html" class="nav-link active">Fixtures</a></li>
+      <li><a href="results.html" class="nav-link">Results</a></li>
+      <li><a href="standings.html" class="nav-link">Standings</a></li>
+      <li><a href="squads.html" class="nav-link">Squads</a></li>
+      <li><a href="stats.html" class="nav-link">Stats</a></li>
+      <li><a href="live.html" class="nav-link">Live</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>Fixtures</h1>
+    <div id="fixtures-content">Loading fixtures...</div>
+  </main>
+  <footer class="footer">
+    <p>Built by SUCA Analytics</p>
+    <a href="https://wa.me/?text=Check%20out%20the%20Royal%20Darts%20Premier%20League%202025%20website!" target="_blank" aria-label="Share on WhatsApp" class="whatsapp-share">
+      <img src="whatsapp-icon.svg" alt="WhatsApp" />
+    </a>
+  </footer>
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
+    async function fetchJSON(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return await res.json();
+      } catch (err) {
+        console.error('Fetch error:', err);
+        return null;
+      }
+    }
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString(undefined, { weekday:'short', year:'numeric', month:'short', day:'numeric' });
+    }
+    function formatTime(timeStr) {
+      if (!timeStr) return '';
+      try {
+        const d = new Date(timeStr);
+        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } catch { return timeStr; }
+    }
+    function createEl(type, classes = [], text = '') {
+      const el = document.createElement(type);
+      if (classes.length) el.classList.add(...classes);
+      if (text) el.textContent = text;
+      return el;
+    }
+    function groupFixturesByDate(fixtures) {
+      const byDate = {};
+      fixtures.forEach(fx => {
+        const d = formatDate(fx.Date);
+        if (!byDate[d]) byDate[d] = [];
+        byDate[d].push(fx);
+      });
+      return byDate;
+    }
+    async function renderFixtures() {
+      const content = document.getElementById('fixtures-content');
+      const data = await fetchJSON(API_URL);
+      if (!data || !Array.isArray(data.Fixtures) || !data.Fixtures.length) {
+        content.textContent = 'No fixtures found.';
+        return;
+      }
+      // Remove incomplete or empty matches (where teams are empty)
+      const fixtures = data.Fixtures.filter(fx => fx['Team 1'] && fx['Team 2']);
+      const byDate = groupFixturesByDate(fixtures);
+      content.innerHTML = '';
+      Object.entries(byDate).forEach(([date, matches]) => {
+        const dateSection = createEl('section', ['fixture-date-section']);
+        const header = createEl('h2', [], date);
+        dateSection.appendChild(header);
+        // Group by A/B
+        ['A','B'].forEach(group => {
+          const groupMatches = matches.filter(m => m.Group === group);
+          if (groupMatches.length) {
+            const groupTitle = createEl('h3', [], `Group ${group}`);
+            dateSection.appendChild(groupTitle);
+            const table = document.createElement('table');
+            table.className = 'fixtures-table';
+            table.innerHTML = `<thead>
+              <tr>
+                <th>Time</th>
+                <th>Team 1</th>
+                <th></th>
+                <th>Team 2</th>
+              </tr></thead><tbody>
+              ${groupMatches.map(fx =>
+                `<tr>
+                  <td>${formatTime(fx.Time)}</td>
+                  <td><img src="team_logos/${fx['Team 1']}.png" alt="${fx['Team 1']}" class="team-logo-sm"/> ${fx['Team 1']}</td>
+                  <td style="text-align:center;">vs</td>
+                  <td><img src="team_logos/${fx['Team 2']}.png" alt="${fx['Team 2']}" class="team-logo-sm"/> ${fx['Team 2']}</td>
+                </tr>`
+              ).join('')}
+            </tbody>`;
+            dateSection.appendChild(table);
+          }
+        });
+        // Other groups (e.g. Finals, Qualifiers)
+        const others = matches.filter(m => m.Group !== 'A' && m.Group !== 'B');
+        if (others.length) {
+          const groupTitle = createEl('h3', [], 'Playoffs / Finals');
+          dateSection.appendChild(groupTitle);
+          const table = document.createElement('table');
+          table.className = 'fixtures-table';
+          table.innerHTML = `<thead>
+            <tr>
+              <th>Time</th>
+              <th>Group</th>
+              <th>Team 1</th>
+              <th></th>
+              <th>Team 2</th>
+            </tr></thead><tbody>
+            ${others.map(fx =>
+              `<tr>
+                <td>${formatTime(fx.Time)}</td>
+                <td>${fx.Group}</td>
+                <td>${fx['Team 1']||''}</td>
+                <td style="text-align:center;">vs</td>
+                <td>${fx['Team 2']||''}</td>
+              </tr>`
+            ).join('')}
+          </tbody>`;
+          dateSection.appendChild(table);
+        }
+        content.appendChild(dateSection);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderFixtures);
+  </script>
+  <style>
+    .fixture-date-section { margin-bottom: 2rem;}
+    .fixtures-table { width:100%; border-collapse:collapse; color:#e1e8f0; margin-bottom: 1rem;}
+    .fixtures-table th, .fixtures-table td { padding:0.5rem 0.5rem; text-align:left; border-bottom:1px solid rgba(255,255,255,0.08);}
+    .fixtures-table th { color:#f2c94c;}
+    .team-logo-sm {height:20px; width:auto; margin-right:0.5rem;vertical-align:middle;}
+    @media(max-width:700px){
+      .fixtures-table td, .fixtures-table th{ font-size:0.96em;}
+    }
+  </style>
+</body>
+</html>

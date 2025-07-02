@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Squads | Royal Darts Premier League 2025</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="main-nav" class="glass-nav">
+    <div class="nav-logo">
+      <img src="logo.png" alt="RDPL Logo" />
+      <span>Royal Darts Premier League 2025</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="fixtures.html" class="nav-link">Fixtures</a></li>
+      <li><a href="results.html" class="nav-link">Results</a></li>
+      <li><a href="standings.html" class="nav-link">Standings</a></li>
+      <li><a href="squads.html" class="nav-link active">Squads</a></li>
+      <li><a href="stats.html" class="nav-link">Stats</a></li>
+      <li><a href="live.html" class="nav-link">Live</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>Team Squads</h1>
+    <div id="squads-container" class="squads-grid">Loading squads...</div>
+  </main>
+  <footer class="footer">
+    <p>Built by SUCA Analytics</p>
+    <a href="https://wa.me/?text=Check%20out%20the%20Royal%20Darts%20Premier%20League%202025%20website!" target="_blank" aria-label="Share on WhatsApp" class="whatsapp-share">
+      <img src="whatsapp-icon.svg" alt="WhatsApp" />
+    </a>
+  </footer>
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
+    async function fetchJSON(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return await res.json();
+      } catch (err) {
+        console.error('Fetch error:', err);
+        return null;
+      }
+    }
+    function createEl(type, classes = [], text = '') {
+      const el = document.createElement(type);
+      if (classes.length) el.classList.add(...classes);
+      if (text) el.textContent = text;
+      return el;
+    }
+    async function renderSquads() {
+      const container = document.getElementById('squads-container');
+      const data = await fetchJSON(API_URL);
+      if (!data || !Array.isArray(data.Squads) || !data.Squads.length) {
+        container.textContent = 'No squad data found.';
+        return;
+      }
+      // Group by team
+      const squadsByTeam = {};
+      data.Squads.forEach(entry => {
+        if (!entry.Team || !entry.Player) return;
+        if (!squadsByTeam[entry.Team]) squadsByTeam[entry.Team] = [];
+        squadsByTeam[entry.Team].push(entry.Player);
+      });
+      container.innerHTML = '';
+      Object.entries(squadsByTeam).forEach(([team, players]) => {
+        const card = createEl('div', ['squad-card']);
+        card.innerHTML = `
+          <div class="squad-team-header">
+            <img src="team_logos/${team}.png" alt="${team}" class="team-logo-lg" onerror="this.style.opacity='0.2'"/>
+            <h2>${team}</h2>
+          </div>
+          <ul class="player-list">
+            ${players.map(p => `<li>${p}</li>`).join('')}
+          </ul>
+        `;
+        container.appendChild(card);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', renderSquads);
+  </script>
+  <style>
+    .squads-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-content: flex-start;
+    }
+    .squad-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.15);
+      padding: 1.2rem 1rem 1rem 1rem;
+      min-width: 220px;
+      max-width: 270px;
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .squad-team-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .team-logo-lg {
+      height: 48px;
+      margin-bottom: 0.3rem;
+    }
+    .squad-card h2 {
+      color: #f2c94c;
+      font-size: 1.2em;
+      margin-bottom: 0;
+      text-align: center;
+      font-weight: 700;
+    }
+    .player-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-align: left;
+      width: 100%;
+    }
+    .player-list li {
+      padding: 0.22rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 1.03em;
+    }
+    @media (max-width: 900px) {
+      .squads-grid {flex-direction: column; gap: 1.2rem;}
+      .squad-card {max-width: none;}
+    }
+  </style>
+</body>
+</html>

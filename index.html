@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Royal Darts Premier League 2025</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav id="main-nav" class="glass-nav">
+    <div class="nav-logo">
+      <img src="logo.png" alt="RDPL Logo" />
+      <span>Royal Darts Premier League 2025</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="fixtures.html" class="nav-link">Fixtures</a></li>
+      <li><a href="results.html" class="nav-link">Results</a></li>
+      <li><a href="standings.html" class="nav-link">Standings</a></li>
+      <li><a href="squads.html" class="nav-link">Squads</a></li>
+      <li><a href="stats.html" class="nav-link">Stats</a></li>
+      <li><a href="live.html" class="nav-link">Live</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <section id="hero">
+      <h1>Welcome to the Royal Darts Premier League 2025</h1>
+      <p>Your home for all live scores, fixtures, standings, squads, and stats.</p>
+    </section>
+
+    <section id="dashboard-highlights">
+      <h2>Latest Highlights</h2>
+      <div id="highlights-container">Loading highlights...</div>
+    </section>
+
+    <section id="quick-standings">
+      <h2>Standings Snapshot</h2>
+      <div class="group-standings">
+        <div>
+          <h3>Group A</h3>
+          <div id="standings-groupA">Loading...</div>
+        </div>
+        <div>
+          <h3>Group B</h3>
+          <div id="standings-groupB">Loading...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Built by SUCA Analytics</p>
+    <a href="https://wa.me/?text=Check%20out%20the%20Royal%20Darts%20Premier%20League%202025%20website!" target="_blank" aria-label="Share on WhatsApp" class="whatsapp-share">
+      <img src="whatsapp-icon.svg" alt="WhatsApp" />
+    </a>
+  </footer>
+
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/AKfycby6BCE5cyBaxpz-Jt-TeRH6k5Jeq-vqelr8S7rt32e7wFjBzEvuBrYi4yPaEBz2Kari/exec';
+
+    async function fetchJSON(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+        return await res.json();
+      } catch (err) {
+        console.error('Fetch error:', err);
+        return null;
+      }
+    }
+
+    function createEl(type, classes = [], text = '') {
+      const el = document.createElement(type);
+      if (classes.length) el.classList.add(...classes);
+      if (text) el.textContent = text;
+      return el;
+    }
+
+    // Highlights Section
+    async function loadHighlights() {
+      const data = await fetchJSON(API_URL);
+      const container = document.getElementById('highlights-container');
+      if (!data || !Array.isArray(data.Stats) || data.Stats.length === 0) {
+        container.textContent = 'No highlights available.';
+        return;
+      }
+
+      // Find best 3-dart avg (min matches played = 2), most legs won, highest finish, best leg, best first 9 avg
+      let best3Dart = null, mostLegs = null, highestFinish = null, bestFirst9 = null;
+      data.Stats.forEach(player => {
+        if (player['Match Played'] >= 2) {
+          if (!best3Dart || player['3 Dart Avg'] > best3Dart['3 Dart Avg']) best3Dart = player;
+          if (!mostLegs || player['Legs Won'] > mostLegs['Legs Won']) mostLegs = player;
+          if (!bestFirst9 || player['First 9 Avg'] > bestFirst9['First 9 Avg']) bestFirst9 = player;
+        }
+        if (!highestFinish || player['High Finish'] > highestFinish['High Finish']) highestFinish = player;
+      });
+
+      // Best Leg from Best Leg tab
+      let bestLeg = null;
+      if (data['Best Leg'] && data['Best Leg'].length) {
+        bestLeg = data['Best Leg'].reduce((min, cur) =>
+          (cur['Best Leg'] && (!min || cur['Best Leg'] < min['Best Leg'])) ? cur : min, null);
+      }
+
+      container.innerHTML = '';
+      [
+        {
+          label: "Best 3-Dart Avg",
+          value: best3Dart ? `${best3Dart.Player} (${best3Dart.Team}) - ${best3Dart['3 Dart Avg']}` : "—"
+        },
+        {
+          label: "Most Legs Won",
+          value: mostLegs ? `${mostLegs.Player} (${mostLegs.Team}) - ${mostLegs['Legs Won']}` : "—"
+        },
+        {
+          label: "Highest Finish",
+          value: highestFinish ? `${highestFinish.Player} (${highestFinish.Team}) - ${highestFinish['High Finish']}` : "—"
+        },
+        {
+          label: "Best First 9 Avg",
+          value: bestFirst9 ? `${bestFirst9.Player} (${bestFirst9.Team}) - ${bestFirst9['First 9 Avg']}` : "—"
+        },
+        {
+          label: "Best Leg",
+          value: bestLeg ? `${bestLeg.Players} (${bestLeg.Team}) - ${bestLeg['Best Leg']}` : "—"
+        }
+      ].forEach(h => {
+        const div = createEl('div', ['highlight-card']);
+        div.innerHTML = `<strong>${h.label}:</strong> <span>${h.value}</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    // Standings Section (Split by Group)
+    async function loadStandings() {
+      const data = await fetchJSON(API_URL);
+      if (!data || !Array.isArray(data.Standings)) return;
+      const groupA = data.Standings.filter(t => t.Group === 'A');
+      const groupB = data.Standings.filter(t => t.Group === 'B');
+
+      function renderTable(teams, elId) {
+        const el = document.getElementById(elId);
+        if (!teams.length) {
+          el.textContent = "No data.";
+          return;
+        }
+        const table = document.createElement('table');
+        table.className = 'standings-table';
+        table.innerHTML = `<thead>
+          <tr>
+            <th>Pos</th>
+            <th>Team</th>
+            <th>P</th>
+            <th>W</th>
+            <th>L</th>
+            <th>LF</th>
+            <th>LA</th>
+            <th>LD</th>
+            <th>Pts</th>
+          </tr></thead><tbody>
+          ${teams
+            .sort((a,b)=>b.Points-a.Points)
+            .map((team, idx) =>
+              `<tr>
+                <td>${idx + 1}</td>
+                <td><img src="team_logos/${team.Team}.png" alt="${team.Team}" class="team-logo-sm"/> ${team.Team}</td>
+                <td>${team.P}</td>
+                <td>${team.W}</td>
+                <td>${team.L}</td>
+                <td>${team.LF}</td>
+                <td>${team.LA}</td>
+                <td>${team.LD}</td>
+                <td>${team.Points}</td>
+              </tr>`
+            ).join('')}
+        </tbody>`;
+        el.innerHTML = "";
+        el.appendChild(table);
+      }
+      renderTable(groupA, 'standings-groupA');
+      renderTable(groupB, 'standings-groupB');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHighlights();
+      loadStandings();
+    });
+  </script>
+  <style>
+    #highlights-container {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .highlight-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      flex: 1 1 200px;
+      color: #f2c94c;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(242, 201, 76, 0.5);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .group-standings {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .group-standings > div {
+      flex: 1 1 350px;
+      min-width: 220px;
+    }
+    .standings-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #e1e8f0;
+      margin-bottom: 1.5rem;
+    }
+    .standings-table th, .standings-table td {
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .team-logo-sm {
+      height: 20px;
+      width: auto;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      filter: drop-shadow(0 0 1px rgba(0,0,0,0.7));
+    }
+    @media (max-width: 900px) {
+      .group-standings { flex-direction: column; gap: 1rem;}
+    }
+  </style>
+</body>
+</html>
