@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Match Details | Darts Carnival 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a81100">
+  <link rel="icon" type="image/avif" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif">
+  <style>
+    :root {
+      --primary: #a81100;
+      --gold: #ffe174;
+      --silver: #d2d7df;
+      --eliminated: #ffefef;
+      --highlight: #fff6dd;
+      --background: #fafafa;
+      --surface: #fff;
+      --accent: #0b2239;
+      --border: #e2e8f0;
+      --radius: 18px;
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--accent);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    }
+    header {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 60px;
+      box-shadow: var(--shadow);
+      padding: 0 12px;
+      position: sticky; top: 0; z-index: 12;
+    }
+    header img {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+      box-shadow: 0 1px 4px #0001;
+      flex-shrink: 0;
+    }
+    .header-titlebox { flex: 1; min-width: 0; }
+    .header-title {
+      font-size: 1.19rem;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.12;
+      margin: 0;
+      white-space: normal;
+      word-break: break-word;
+    }
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 12px 8px 22px 8px;
+      background: var(--background);
+    }
+    .match-header-card {
+      background: var(--highlight);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0002;
+      margin: 13px 0 18px 0;
+      padding: 20px 7vw 12px 7vw;
+      display: flex; flex-direction: column; align-items: center;
+      animation: fadein .7s cubic-bezier(.55,0,.2,1);
+      position: relative;
+    }
+    @keyframes fadein { from { opacity:0;transform: translateY(18px);} to{opacity:1;transform:none;} }
+    .match-players {
+      font-size: 1.28em;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.01em;
+      text-align: center;
+      margin-bottom: 7px;
+      display: flex; align-items: center; gap: 13px; flex-wrap: wrap; justify-content: center;
+    }
+    .match-vs-icon {
+      font-weight: 900;
+      color: #aaa;
+      font-size: 1.0em;
+      background: #fff;
+      border-radius: 50%;
+      width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 1px 3px #a8110012;
+    }
+    .match-scoreboard {
+      display: flex; gap: 18px; align-items: center; justify-content: center;
+      font-size: 1.28em; font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .match-player-name { color: var(--primary); min-width: 70px; }
+    .match-score { color: #1d8208; }
+    .match-date {
+      color: #888; font-size: 1em; margin-top: 6px; text-align:center;
+    }
+    .set-section {
+      margin-bottom: 32px;
+      border-radius: 13px;
+      background: #fff;
+      box-shadow: 0 2px 16px #0001;
+      padding: 16px 3vw 10px 3vw;
+    }
+    .set-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1em;
+      margin-bottom: 9px;
+    }
+    .legs-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+    .leg-card {
+      background: var(--surface);
+      border-radius: 12px;
+      box-shadow: 0 1px 7px #0002;
+      padding: 10px 3vw 10px 3vw;
+      display: flex;
+      flex-direction: column;
+      animation: fadein .7s cubic-bezier(.55,0,.2,1);
+      min-width: 0;
+    }
+    .leg-info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3px;
+    }
+    .leg-num { font-weight: 700; color: #1d3971; }
+    .leg-winner { color: #118811; font-weight: 700; margin-left: 4px;}
+    .leg-score-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 14px;
+      margin-top: 3px;
+      flex-wrap: wrap;
+    }
+    .player-score-block {
+      background: #eee; border-radius: 8px; padding: 6px 14px;
+      font-weight: 700; color: var(--primary);
+      min-width: 75px; text-align: center;
+    }
+    .leg-events-list {
+      margin-top: 7px;
+      font-size: .98em;
+      color: #444;
+      background: #f8f8f8;
+      border-radius: 10px;
+      padding: 7px 10px 7px 13px;
+      box-shadow: 0 1px 4px #0001;
+      overflow-x: auto;
+    }
+    .leg-event-item { margin-bottom: 2px; }
+    .match-detail-back-btn {
+      margin: 20px auto 0 auto;
+      padding: 11px 28px;
+      font-size: 1.09em;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 18px;
+      font-weight: 800;
+      box-shadow: 0 1px 7px #0002;
+      cursor: pointer;
+      transition: background .2s;
+      display: block;
+    }
+    .match-detail-back-btn:hover { background: #6c0600; }
+    .loading-spinner {
+      margin: 60px 0 40px 0;
+      text-align: center;
+      color: #a81100;
+      font-size: 1.15em;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+    @media (max-width:600px) {
+      .match-header-card, .set-section { padding-left: 2vw; padding-right: 2vw; }
+      .header-title { font-size: 1.03rem;}
+      .match-players { font-size: 1em;}
+      .match-scoreboard { font-size: 1.08em;}
+    }
+    @media (max-width:410px) {
+      .match-players { font-size: .96em;}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="Royal Darts Carnival Logo">
+  <div class="header-titlebox">
+    <div class="header-title">Darts Carnival 2025</div>
+  </div>
+</header>
+<main id="matchmain">
+  <div class="loading-spinner">Loading match details...</div>
+</main>
+<script>
+const params = new URLSearchParams(location.search);
+const tmatch_id = params.get('tmatch_id');
+const main = document.getElementById('matchmain');
+if (!tmatch_id) {
+  main.innerHTML = `<div class="loading-spinner" style="color:#a81100">No match ID provided!</div>`;
+} else {
+  fetchMatchDetails(tmatch_id);
+}
+async function fetchMatchDetails(tid) {
+  main.innerHTML = `<div class="loading-spinner">Loading match details...</div>`;
+  try {
+    const res = await fetch(`https://n01darts.com/n01/tournament/n01_history.php?cmd=get_detail&tid=${encodeURIComponent(tid)}`);
+    if (!res.ok) throw new Error("Could not load match.");
+    const data = await res.json();
+    main.innerHTML = renderFancyMatch(data);
+  } catch (e) {
+    main.innerHTML = `<div class="loading-spinner" style="color:#a81100">Could not load match details.<br>${e.message||e}</div>`;
+  }
+}
+
+function renderFancyMatch(data) {
+  if (!data || !data.players || !data.sets || !data.players[0]) {
+    return `<div class="loading-spinner" style="color:#a81100">No detailed data for this match.</div>`;
+  }
+  // Header: players, score, date
+  const pA = data.players[0]?.name || "Player 1";
+  const pB = data.players[1]?.name || "Player 2";
+  let totalA = 0, totalB = 0, totalSetsA = 0, totalSetsB = 0;
+  let out = `<div class="match-header-card">
+    <div class="match-players">
+      <span class="match-player-name">${pA}</span>
+      <span class="match-vs-icon">VS</span>
+      <span class="match-player-name">${pB}</span>
+    </div>
+    <div class="match-scoreboard" id="match-scoreboard"></div>
+    <div class="match-date">${data.date ? ("Played: "+data.date) : ""}</div>
+  </div>`;
+  // Sets
+  data.sets.forEach((set, setIdx) => {
+    // Count legs for each
+    let legsA = 0, legsB = 0;
+    set.legs.forEach(leg => {
+      if (leg.winner === 0) legsA++;
+      else if (leg.winner === 1) legsB++;
+    });
+    if (legsA > legsB) totalSetsA++;
+    else if (legsB > legsA) totalSetsB++;
+    out += `<div class="set-section">
+      <div class="set-title">Set ${setIdx+1} &mdash; <b>${pA} ${legsA} - ${legsB} ${pB}</b></div>
+      <div class="legs-timeline">`;
+    set.legs.forEach((leg, lidx) => {
+      totalA += (leg.winner === 0) ? 1 : 0;
+      totalB += (leg.winner === 1) ? 1 : 0;
+      out += `<div class="leg-card">
+        <div class="leg-info-row">
+          <span class="leg-num">Leg ${lidx+1}</span>
+          <span class="leg-winner">${leg.winner_name ? ("Winner: " + leg.winner_name) : ""}</span>
+        </div>
+        <div class="leg-score-row">
+          <span class="player-score-block">${pA}: ${leg.scores?.[0] ?? ''}</span>
+          <span class="player-score-block">${pB}: ${leg.scores?.[1] ?? ''}</span>
+        </div>
+        ${leg.events?.length ? `<div class="leg-events-list">
+          ${leg.events.map(ev=>`<div class="leg-event-item">${ev.text||ev}</div>`).join('')}
+        </div>` : ''}
+      </div>`;
+    });
+    out += `</div></div>`;
+  });
+  // Fill the main match scoreboard (set + leg wins)
+  setTimeout(()=>{
+    const sb = document.getElementById('match-scoreboard');
+    if (sb) sb.innerHTML = `<span class="match-player-name">${pA}</span> 
+      <span class="match-score">${totalSetsA}</span> 
+      <span style="color:#666;font-weight:400">sets</span>
+      <span class="match-score">${totalA}</span>
+      <span style="margin:0 12px;font-weight:400;color:#aaa">|</span>
+      <span class="match-score">${totalB}</span>
+      <span style="color:#666;font-weight:400">sets</span>
+      <span class="match-score">${totalSetsB}</span>
+      <span class="match-player-name">${pB}</span>`;
+  },1);
+
+  out += `<button class="match-detail-back-btn" onclick="history.back()">Back</button>`;
+  return out;
+}
+</script>
+</body>
+</html>
