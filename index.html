@@ -1037,19 +1037,16 @@
         let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
         return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
       }).forEach(([date, games]) => {
-        out += `<div class="date-group"><div class="date-label">${date}</div>
-          <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
-        games.forEach(r => {
-          let a = +r["Score A"]||0, b = +r["Score B"]||0;
-          let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
-          out += `<tr>
-            <td>${r["Team A"]}</td><td style="color:#a81100;font-weight:700;">vs</td>
-            <td>${r["Team B"]}</td><td>${a} - ${b}</td>
-            <td class="winner-cell">${win}</td>
-<td>
-  <button class="view-match-btn" onclick="loadMatchDetails('${r.MatchID||""}')">View Details</button>
-</td>
-          </tr>`;
+        out += `<tr>
+  <td>${r["Team A"]}</td>
+  <td style="color:#a81100;font-weight:700;">vs</td>
+  <td>${r["Team B"]}</td>
+  <td>${a} - ${b}</td>
+  <td class="winner-cell">${win}</td>
+  <td>
+    <a class="view-match-btn" href="match.html?matchid=${encodeURIComponent(r.TMATCH_ID)}" target="_blank">View Details</a>
+  </td>
+</tr>`;
         });
         out += `</table></div>`;
       });
