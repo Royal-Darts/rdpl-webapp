@@ -377,6 +377,145 @@
   .teamstats-popup-scroll table.stats-table { min-width: 270px;}
   .team-stats-popup-header { font-size: 1.04em; padding-left: 6px; padding-right: 44px;}
 }
+.matchdetail-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-radius: 22px;
+  box-shadow: 0 2px 18px #0002;
+  padding: 8px 0 20px 0;
+}
+.matchdetail-header-fancy {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--highlight);
+  border-radius: 22px 22px 0 0;
+  padding: 22px 12px 17px 16px;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  min-height: 84px;
+  position: relative;
+}
+.matchdetail-header-fancy .players {
+  flex: 1;
+  font-size: 1.23em;
+  font-weight: 900;
+  color: var(--primary);
+}
+.matchdetail-header-fancy .teams-row {
+  font-size: 1.06em;
+  color: #444;
+  margin-bottom: 2px;
+}
+.matchdetail-header-fancy .score {
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.24em;
+  font-weight: 900;
+  border-radius: 14px;
+  padding: 5px 14px;
+  margin-left: 9px;
+  margin-right: 9px;
+  box-shadow: 0 1px 3px #0001;
+}
+.matchdetail-header-fancy .avatar {
+  width: 49px; height: 49px; border-radius: 50%; background: #fff; object-fit: cover; box-shadow: 0 1px 7px #0002;
+  border: 2px solid #e2e2e2;
+  margin-right: 7px;
+}
+.matchdetail-header-fancy .details {
+  color: #666; font-size: 0.98em; font-weight: 600; margin-top: 1px;
+}
+.matchdetail-sets {
+  margin: 18px 0 0 0;
+  padding: 0 10px;
+}
+.matchdetail-set {
+  margin-bottom: 17px;
+  background: #faf7ea;
+  border-radius: 13px;
+  box-shadow: 0 1px 8px #0001;
+  padding: 10px 9px 10px 11px;
+  position: relative;
+}
+.matchdetail-set-title {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.08em;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+}
+.matchdetail-leg {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 7px;
+  box-shadow: 0 1px 6px #0001;
+  padding: 7px 7px 5px 10px;
+  gap: 8px;
+  font-size: 1em;
+  flex-wrap: wrap;
+}
+.matchdetail-leg .leg-num {
+  font-weight: 700; color: var(--primary); margin-right: 8px;
+}
+.matchdetail-leg .player-score {
+  margin-right: 11px; font-weight: 500;
+  color: #246;
+  background: #e2e7ff;
+  padding: 3px 11px;
+  border-radius: 9px;
+}
+.matchdetail-leg .winner {
+  color: #178a19;
+  font-weight: 800;
+  margin-left: 6px;
+  background: #dbffd9;
+  padding: 3px 9px;
+  border-radius: 7px;
+}
+.matchdetail-leg .events {
+  font-size: .97em;
+  margin-left: 8px;
+  color: #7a5702;
+  background: #fff1c1;
+  padding: 2px 9px;
+  border-radius: 7px;
+}
+.matchdetail-highs {
+  display: flex; gap: 11px; margin: 19px 0 0 0; flex-wrap: wrap; font-size: 1.03em;
+}
+.matchdetail-high-card {
+  background: #f0f7fa;
+  border-radius: 13px;
+  padding: 10px 15px;
+  color: #2176ae;
+  font-weight: 700;
+  box-shadow: 0 1px 5px #abd1ff24;
+}
+.matchdetail-back-btn {
+  display: block;
+  margin: 28px auto 2px auto;
+  padding: 13px 30px;
+  font-size: 1.13em;
+  font-weight: 700;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 2px 7px #0002;
+  cursor: pointer;
+  transition: background .18s;
+}
+.matchdetail-back-btn:hover { background: #600900; }
+@media (max-width: 700px) {
+  .matchdetail-wrap { border-radius: 0; padding: 2px 0 19px 0;}
+  .matchdetail-header-fancy { border-radius: 0 0 18px 18px; min-height: 68px; flex-direction: column;}
+  .matchdetail-header-fancy .avatar { margin-bottom: 8px; }
+}
   </style>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
@@ -458,6 +597,7 @@
     </div>
     <div id="squads-list"></div>
   </section>
+<section id="tab-matchdetails" hidden></section>
 </main>
 <!-- Popups: Player, Info, TeamStats -->
 <div class="popup-backdrop" id="popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
@@ -906,6 +1046,9 @@
             <td>${r["Team A"]}</td><td style="color:#a81100;font-weight:700;">vs</td>
             <td>${r["Team B"]}</td><td>${a} - ${b}</td>
             <td class="winner-cell">${win}</td>
+<td>
+  <button class="view-match-btn" onclick="loadMatchDetails('${r.MatchID||""}')">View Details</button>
+</td>
           </tr>`;
         });
         out += `</table></div>`;
@@ -1019,7 +1162,131 @@
       </div>
     `);
   };
+window.loadMatchDetails = async function(matchID) {
+  if (!matchID) {
+    alert("Match ID not available.");
+    return;
+  }
+  // Hide all tabs, show match details
+  document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
+  const sec = document.getElementById('tab-matchdetails');
+  sec.hidden = false;
+  sec.innerHTML = `<div style="padding:30px 0;text-align:center;color:#666">Loading detailed match data...</div>`;
+  // Fetch from Nakka API
+  try {
+    const res = await fetch(`https://n01darts.com/n01/tournament/n01_history.php?cmd=get_detail&tid=${matchID}`);
+    if (!res.ok) throw new Error("Failed to fetch match data");
+    const data = await res.json();
+    sec.innerHTML = renderMatchDetailLayout(data);
+  } catch (e) {
+    sec.innerHTML = `<div style="padding:30px 0;text-align:center;color:#a81100">Failed to load match details.</div>`;
+  }
+}
+window.loadMatchDetails = async function(matchID) {
+  if (!matchID) {
+    alert("Match ID not available.");
+    return;
+  }
+  // Hide all tabs, show match details
+  document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
+  const sec = document.getElementById('tab-matchdetails');
+  sec.hidden = false;
+  sec.innerHTML = `<div style="padding:30px 0;text-align:center;color:#666">Loading detailed match data...</div>`;
+  // Fetch from Nakka API
+  try {
+    const res = await fetch(`https://n01darts.com/n01/tournament/n01_history.php?cmd=get_detail&tid=${matchID}`);
+    if (!res.ok) throw new Error("Failed to fetch match data");
+    const data = await res.json();
+    sec.innerHTML = renderMatchDetailLayoutFancy(data);
+    // Scroll to top on load
+    sec.scrollIntoView({behavior:'smooth'});
+    window.scrollTo(0,0);
+  } catch (e) {
+    sec.innerHTML = `<div style="padding:30px 0;text-align:center;color:#a81100">Failed to load match details.</div>`;
+  }
+};
 
+function renderMatchDetailLayoutFancy(data) {
+  if (!data || !data.players || !data.sets) {
+    return `<div style="padding:30px 0;text-align:center;color:#a81100">No data for this match.</div>`;
+  }
+  // Player avatars, names, team names (use initials as placeholder if no image)
+  let avatars = data.players.map(p => 
+    `<div>
+      <div class="avatar" style="background:#fff;text-align:center;line-height:49px;font-weight:700;font-size:1.16em;">${(p.name||'?').split(' ').map(x=>x[0]).join('').toUpperCase()}</div>
+      <div style="font-size:.99em;color:#444;font-weight:600;text-align:center">${p.name}</div>
+    </div>`
+  ).join('');
+  let matchScore = (data.sets || []).reduce((arr, set) => {
+    (set.legs||[]).forEach(leg=>{
+      (leg.winner!=null) && (arr[leg.winner] = (arr[leg.winner]||0)+1);
+    }); return arr;
+  }, []);
+  // Header
+  let out = `<div class="matchdetail-wrap">
+    <div class="matchdetail-header-fancy">
+      ${avatars}
+      <div class="players">
+        <div class="teams-row">${data.players.map(p=>p.name).join(' <span class="score">vs</span> ')}</div>
+        <div class="score">
+          ${(matchScore[0]||0)} - ${(matchScore[1]||0)}
+        </div>
+        <div class="details">
+          ${data.date ? `Played on ${data.date}` : ""}
+          ${data.sets && data.sets.length>0 ? `<span style="margin-left:11px;">Sets: ${data.sets.length}</span>` : ""}
+        </div>
+      </div>
+    </div>`;
+
+  // Highs/Events (e.g. 180s, 140s, high finish)
+  let highs = [];
+  if (data.stats) {
+    if (data.stats.high_finish) highs.push(`<div class="matchdetail-high-card">High Finish: <b>${data.stats.high_finish}</b></div>`);
+    if (data.stats['180s']) highs.push(`<div class="matchdetail-high-card">180s: <b>${data.stats['180s']}</b></div>`);
+    if (data.stats['140s']) highs.push(`<div class="matchdetail-high-card">140s: <b>${data.stats['140s']}</b></div>`);
+    if (data.stats['100s']) highs.push(`<div class="matchdetail-high-card">100+: <b>${data.stats['100s']}</b></div>`);
+  }
+  if (highs.length) {
+    out += `<div class="matchdetail-highs">${highs.join('')}</div>`;
+  }
+
+  // Sets and legs
+  out += `<div class="matchdetail-sets">`;
+  data.sets.forEach((set, sidx) => {
+    out += `<div class="matchdetail-set">
+      <div class="matchdetail-set-title">Set ${sidx+1}</div>`;
+    set.legs.forEach((leg, lidx) => {
+      out += `<div class="matchdetail-leg">
+        <span class="leg-num">Leg ${lidx+1}</span>`;
+      leg.scores.forEach((score, pidx) => {
+        out += `<span class="player-score">${data.players[pidx].name}: <b>${score}</b></span>`;
+      });
+      if (leg.winner_name) {
+        out += `<span class="winner">Winner: ${leg.winner_name}</span>`;
+      }
+      // Highlight best events, e.g. high finish, 180s
+      let events = [];
+      if (leg.high_finish) events.push(`High Finish: ${leg.high_finish}`);
+      if (leg['180s']) events.push(`180s: ${leg['180s']}`);
+      if (leg['140s']) events.push(`140s: ${leg['140s']}`);
+      if (leg['100s']) events.push(`100+: ${leg['100s']}`);
+      if (events.length) {
+        out += `<span class="events">${events.join(' • ')}</span>`;
+      }
+      out += `</div>`;
+    });
+    out += `</div>`;
+  });
+  out += `</div>`;
+  // Back button
+  out += `<button class="matchdetail-back-btn" onclick="goBackToResults()">Back to Results</button>`;
+  out += `</div>`;
+  return out;
+}
+window.goBackToResults = function() {
+  document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
+  document.getElementById('tab-results').hidden = false;
+};
   // --- Popup helpers ---
   function showCustomPopup(html) {
     let pb = document.getElementById('popup-backdrop');
