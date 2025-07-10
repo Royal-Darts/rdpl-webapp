@@ -391,6 +391,25 @@
 .badge-gold { background: linear-gradient(90deg, #ffe174 90%, #fff2 100%); color: #935f07; border: 1px solid #ffe174;}
 .badge-silver { background: linear-gradient(90deg, #d2d7df 90%, #fff2 100%); color: #606e84; border: 1px solid #d2d7df;}
 .badge-elim { background: #ececec; color: #444; border: 1px solid #dedede;}
+  .knockout-badge {
+  display: inline-block;
+  font-size: 0.95em;
+  font-weight: 700;
+  padding: 4px 13px 4px 11px;
+  border-radius: 17px;
+  margin-left: 8px;
+  vertical-align: middle;
+  background: #fff6dd;
+  color: #ab7700;
+  border: 1.5px solid #ffe174;
+  box-shadow: 0 1px 5px #ffe17455;
+  letter-spacing: 0.02em;
+}
+.knockout-row.gold { background: linear-gradient(90deg, #ffe17422 70%, #fff7 100%);}
+.knockout-row.silver { background: linear-gradient(90deg, #d2d7df33 70%, #fff8 100%);}
+.knockout-row.final { border-left: 6px solid #ffe174; }
+.knockout-row.qual { border-left: 6px solid #b4deff; }
+.knockout-row.elim { border-left: 6px solid #ff8888; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
@@ -899,47 +918,119 @@
 
   /* --- Results Page by Group and Date --- */
   function renderResultsList() {
-    if (!resultsData.length) {
-      document.getElementById('results-list').innerHTML =
-        `<div style="color:#888;padding:10px">No results loaded.</div>`;
-      return;
-    }
-    let byGroup = {};
-    resultsData.forEach(r => {
-      let group = r.Group || "Other";
-      (byGroup[group] = byGroup[group] || []).push(r);
-    });
-
-    let out = '';
-    Object.entries(byGroup).forEach(([group, matches]) => {
-      let byDate = {};
-      matches.forEach(r => {
-        let date = r.Date || '';
-        (byDate[date] = byDate[date] || []).push(r);
-      });
-      out += `<div style="margin-bottom:30px">
-        <div style="font-size:1.12em;font-weight:800;color:var(--primary);margin:12px 0 7px 3px;">Group: ${group}</div>`;
-      Object.entries(byDate).sort((a,b)=>{
-        let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
-        return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
-      }).forEach(([date, games]) => {
-        out += `<div class="date-group"><div class="date-label">${date}</div>
-          <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
-        games.forEach(r => {
-          let a = +r["Score A"]||0, b = +r["Score B"]||0;
-          let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
-          out += `<tr>
-            <td>${r["Team A"]}</td><td style="color:#a81100;font-weight:700;">vs</td>
-            <td>${r["Team B"]}</td><td>${a} - ${b}</td>
-            <td class="winner-cell">${win}</td>
-          </tr>`;
-        });
-        out += `</table></div>`;
-      });
-      out += `</div>`;
-    });
-    document.getElementById('results-list').innerHTML = out;
+  if (!resultsData.length) {
+    document.getElementById('results-list').innerHTML =
+      `<div style="color:#888;padding:10px">No results loaded.</div>`;
+    return;
   }
+
+  // Helper: Returns true if result is a knockout
+  function isKnockout(group) {
+    return !group || (group.trim().toLowerCase() !== "a" && group.trim().toLowerCase() !== "b");
+  }
+
+  // Helper: Pretty round name and badge type
+  function knockoutLabel(group) {
+    if (!group) return {label:"Knockout", badge:""};
+    let g = group.toLowerCase();
+    if (g.includes("final")) return {label: "Finals 🏆", badge:"gold final"};
+    if (g.includes("gold")) return {label: "Gold " + group.replace(/gold/gi, ""), badge:"gold"};
+    if (g.includes("silver")) return {label: "Silver " + group.replace(/silver/gi, ""), badge:"silver"};
+    if (g.includes("eliminator")) return {label: "Eliminator", badge:"elim"};
+    if (g.includes("qualifier")) return {label: "Qualifier", badge:"qual"};
+    return {label: group, badge:""};
+  }
+
+  // Separate knockout and group matches
+  let knockouts = resultsData.filter(r => isKnockout(r.Group));
+  let groups = resultsData.filter(r => !isKnockout(r.Group));
+
+  let out = '';
+
+  // ---- Knockout Table ----
+  if (knockouts.length) {
+    out += `<div style="margin-bottom:35px">
+      <div style="font-size:1.25em;font-weight:900;color:#a81100;margin:20px 0 10px 3px;letter-spacing:.02em;text-shadow:0 2px 10px #ffe17422;">Knockout Stage Results</div>
+      <table class="results-table" style="margin-bottom:0.5em">
+        <tr>
+          <th style="background:var(--gold);color:#935f07;">Round</th>
+          <th>Team A</th>
+          <th></th>
+          <th>Team B</th>
+          <th>Score</th>
+          <th>Winner</th>
+        </tr>`;
+    // Show most recent knockouts first (finals at bottom)
+    knockouts.sort((a, b) => {
+      // Finals last, then gold, then silver, then eliminator, then qualifier, then by date
+      let gOrder = g => {
+        if (!g) return 99;
+        let g2 = g.toLowerCase();
+        if (g2.includes("final")) return 5;
+        if (g2.includes("gold")) return 4;
+        if (g2.includes("silver")) return 3;
+        if (g2.includes("eliminator")) return 2;
+        if (g2.includes("qualifier")) return 1;
+        return 0;
+      };
+      let x = gOrder(a.Group), y = gOrder(b.Group);
+      if (x !== y) return y - x;
+      let d1 = Date.parse(a.Date + " 2025"), d2 = Date.parse(b.Date + " 2025");
+      return (isNaN(d1) || isNaN(d2)) ? 0 : d2 - d1;
+    });
+    knockouts.forEach(r => {
+      let badgeInfo = knockoutLabel(r.Group);
+      let a = +r["Score A"]||0, b = +r["Score B"]||0;
+      let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
+      out += `<tr class="knockout-row ${badgeInfo.badge}">
+        <td><span class="knockout-badge">${badgeInfo.label}</span></td>
+        <td>${r["Team A"]}</td>
+        <td style="color:#a81100;font-weight:700;">vs</td>
+        <td>${r["Team B"]}</td>
+        <td>${a} - ${b}</td>
+        <td class="winner-cell">${win}</td>
+      </tr>`;
+    });
+    out += `</table></div>`;
+  }
+
+  // ---- Group Tables (A, B) ----
+  let byGroup = {};
+  groups.forEach(r => {
+    let group = r.Group || "Other";
+    (byGroup[group] = byGroup[group] || []).push(r);
+  });
+
+  Object.entries(byGroup).forEach(([group, matches]) => {
+    let byDate = {};
+    matches.forEach(r => {
+      let date = r.Date || '';
+      (byDate[date] = byDate[date] || []).push(r);
+    });
+    out += `<div style="margin-bottom:30px">
+      <div style="font-size:1.12em;font-weight:800;color:var(--primary);margin:12px 0 7px 3px;">Group: ${group}</div>`;
+    Object.entries(byDate).sort((a,b)=>{
+      let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
+      return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
+    }).forEach(([date, games]) => {
+      out += `<div class="date-group"><div class="date-label">${date}</div>
+        <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
+      games.forEach(r => {
+        let a = +r["Score A"]||0, b = +r["Score B"]||0;
+        let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
+        out += `<tr>
+          <td>${r["Team A"]}</td><td style="color:#a81100;font-weight:700;">vs</td>
+          <td>${r["Team B"]}</td><td>${a} - ${b}</td>
+          <td class="winner-cell">${win}</td>
+        </tr>`;
+      });
+      out += `</table></div>`;
+    });
+    out += `</div>`;
+  });
+
+  document.getElementById('results-list').innerHTML = out;
+}
 
   /* --- Squads Page: Team Filter, TeamStats Popup --- */
   function renderSquadsList() {
