@@ -4,345 +4,542 @@
   <meta charset="UTF-8">
   <title>Royal Darts Carnival 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fffbe9">
-  <link rel="icon" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#ffe174">
+  <link rel="icon" type="image/avif" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto:wght@500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #b61320;
-      --secondary: #f6c948;
-      --accent: #1e2a44;
-      --background: #fffdfa;
+      --primary: #ba181b;
+      --primary-dark: #a81100;
+      --gold: #ffe174;
+      --silver: #e6eaf0;
+      --accent: #1565c0;
+      --highlight: #fdf6e3;
+      --background: #f8fafc;
       --surface: #fff;
-      --surface-alt: #f8f9fa;
-      --highlight-gold: linear-gradient(90deg, #ffe174 80%, #fff7d7 100%);
-      --highlight-silver: linear-gradient(90deg, #dee1e7 80%, #fff 100%);
-      --border: #e6e7ea;
+      --border: #e3e7ee;
       --radius: 22px;
-      --shadow: 0 6px 30px 0 rgba(176,181,194,.15);
-      --nav-z: 40;
-      --transition: 0.19s cubic-bezier(.4,0,.2,1);
+      --shadow: 0 4px 24px 0 rgba(40,30,80,0.07);
+      --shadow-card: 0 4px 16px 0 rgba(80,40,20,0.10);
+      --header-height: 70px;
+      --transition: 0.18s cubic-bezier(.4,0,.2,1);
+      --nav-z: 99;
+      --badge-gold: linear-gradient(90deg, #ffe174 80%, #fff6c6 100%);
+      --badge-silver: linear-gradient(90deg, #e6eaf0 80%, #fff 100%);
+      --badge-elim: linear-gradient(90deg, #ececec 90%, #fff 100%);
     }
     * { box-sizing: border-box; }
-
     html, body {
       margin: 0; padding: 0;
-      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-family: 'Inter', 'Roboto', Arial, sans-serif;
       background: var(--background);
-      color: var(--accent);
+      color: #232949;
       min-height: 100vh;
-      font-size: 17px;
-      letter-spacing: 0.01em;
+      font-size: 16.3px;
+      -webkit-font-smoothing: antialiased;
+      letter-spacing: 0.02em;
     }
     body { display: flex; flex-direction: column; min-height: 100vh; }
 
-    /* --- HEADER / NAV --- */
+    /* HEADER */
     header {
+      position: sticky; top: 0; z-index: var(--nav-z);
       width: 100vw;
-      min-height: 68px;
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(3px);
+      box-shadow: 0 2px 24px #e3e7ee77;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 0 24px;
-      position: sticky; top: 0; z-index: var(--nav-z);
-      border-bottom: 1.5px solid var(--border);
+      height: var(--header-height);
+      gap: 16px;
+      padding: 0 24px 0 8px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.18s;
+    }
+    header img {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+      box-shadow: 0 2px 8px #ffe17499;
+      margin-left: 8px;
+      border: 2.5px solid #ffe174;
     }
     .header-titlebox {
-      display: flex; flex-direction: column;
-      justify-content: center;
+      flex: 1; display: flex; flex-direction: column; min-width: 0;
+      justify-content: center; overflow: hidden;
     }
     .header-title {
-      font-size: 2rem;
-      font-weight: 900;
+      font-size: 2.1rem;
+      font-weight: 800;
       color: var(--primary);
+      line-height: 1.13;
+      margin: 0;
       letter-spacing: 0.01em;
-      margin: 0 0 2px 0;
-      line-height: 1.06;
+      white-space: normal;
     }
-    .header-subtitle {
-      font-size: 1.09em;
-      font-weight: 600;
-      color: #998c87;
-      letter-spacing: 0.01em;
-      margin-top: 1px;
+    .header-sub {
+      font-size: 0.98em; color: #64748b; font-weight: 500; letter-spacing: 0.02em;
     }
-    .nav-bar {
-      display: flex;
-      gap: 1.5vw;
-      align-items: center;
-      margin-left: auto;
+    .nav-horiz {
+      display: flex; gap: 2px; align-items: flex-end;
+      margin-left: auto; margin-right: 10px;
     }
-    .nav-btn {
-      font-size: 1.01em;
+    .nav-horiz button {
       background: none;
       border: none;
-      color: var(--accent);
-      font-weight: 600;
-      padding: 12px 19px;
-      border-radius: 16px;
-      transition: background var(--transition), color var(--transition), font-weight var(--transition);
+      color: #232949;
+      font-size: 1.05em;
+      padding: 10px 17px;
+      font-weight: 700;
+      border-radius: 32px 32px 0 0;
+      transition: background var(--transition), color var(--transition);
       cursor: pointer;
-      letter-spacing: 0.01em;
+      margin: 0 1px;
+      white-space: nowrap;
       outline: none;
-      position: relative;
     }
-    .nav-btn.active,
-    .nav-btn:focus-visible {
-      background: var(--highlight-gold);
+    .nav-horiz button.active,
+    .nav-horiz button:focus-visible {
+      background: var(--gold);
       color: var(--primary);
-      font-weight: 900;
-      box-shadow: 0 2px 12px #ffe17435;
+      box-shadow: 0 -1px 16px #ffe17433;
+    }
+    .burger-btn {
+      display: none;
+      background: none; border: none; color: var(--primary-dark);
+      font-size: 2.3em; cursor: pointer; padding: 0 10px 0 6px;
     }
 
-    @media (max-width: 700px) {
-      .header-title { font-size: 1.18rem;}
-      .nav-btn { font-size: .99em; padding: 10px 10px;}
-      header { padding: 0 7px;}
+    /* Drawer for mobile nav */
+    .nav-drawer-backdrop {
+      display: none;
+      position: fixed; z-index: calc(var(--nav-z) + 1);
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: #0006;
+      align-items: stretch;
+      transition: opacity 0.16s;
     }
-    @media (max-width:430px) {
-      .header-title { font-size: 1.03rem;}
-      .nav-btn { padding: 7px 4px;}
+    .nav-drawer-backdrop.show { display: flex; }
+    .nav-drawer {
+      width: min(83vw, 380px);
+      background: #fff;
+      box-shadow: 6px 0 26px #ffe17477;
+      height: 100vh;
+      padding-top: 34px;
+      padding-left: 7px;
+      display: flex;
+      flex-direction: column;
+      border-top-right-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
     }
-    /* --- BADGES --- */
+    .nav-drawer-close {
+      background: none; border: none;
+      font-size: 2.1em; color: #aaa;
+      cursor: pointer;
+      position: absolute; top: 14px; right: 22px;
+    }
+    .nav-links { display: flex; flex-direction: column; gap: 3px; }
+    .nav-links button {
+      font-size: 1.15em; text-align: left;
+      border-radius: 14px; padding: 12px 18px; margin: 2px 0;
+      font-weight: 700; background: none; border: none;
+      color: #232949;
+      transition: background 0.16s;
+    }
+    .nav-links button.active { background: var(--gold); color: var(--primary);}
+    @media (max-width:900px) {
+      .nav-horiz { display: none; }
+      .burger-btn { display: flex;}
+    }
+    @media (min-width:901px) {
+      .nav-drawer-backdrop { display: none !important; }
+      .burger-btn { display: none !important; }
+      .nav-horiz { display: flex !important; }
+    }
+    /* MAIN LAYOUT & CARDS */
+    main {
+      flex: 1;
+      padding: 32px 0 35px 0;
+      max-width: 1150px;
+      margin: 0 auto;
+      width: 100%;
+      min-height: 64vh;
+      background: var(--background);
+    }
+    .section-title {
+      font-size: 1.34em;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 26px 0 16px 4px;
+      letter-spacing: 0.01em;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 32px;
+      padding: 26px 30px 22px 30px;
+      transition: box-shadow var(--transition), transform var(--transition);
+      border: 1.5px solid var(--border);
+    }
+    .card:hover { box-shadow: 0 6px 28px #ffe17455; transform: translateY(-2px) scale(1.013);}
+    .card-table { width: 100%; border-spacing: 0; font-size: 1.04em;}
+    .card-table th, .card-table td { padding: 10px 8px; text-align: center;}
+    .card-table th { background: #f9f9f9; color: var(--primary-dark); font-weight: 800;}
+    .card-table tr { transition: background 0.13s;}
+    .card-table tr:hover { background: #ffe17422;}
+    .fixtures-table th, .fixtures-table td { padding: 9px 7px; }
+    /* Badges for knockout/identifications */
     .fixture-badge {
       display: inline-block;
-      font-size: 0.97em;
+      font-size: 0.98em;
       font-weight: 700;
-      padding: 3.5px 13px;
-      border-radius: 14px;
-      margin-left: 10px;
+      padding: 3.5px 14px;
+      border-radius: 15px;
+      margin-left: 7px;
+      margin-top: -2px;
       vertical-align: middle;
-      box-shadow: 0 2px 8px #0001;
-      letter-spacing: 0.02em;
-      border: none;
-      background: #eee;
-    }
-    .badge-gold    { background: var(--highlight-gold); color: #aa7918; }
-    .badge-silver  { background: var(--highlight-silver); color: #666d81;}
-    .badge-elim    { background: #e8e8e8; color: #b61320;}
-    .badge-qual    { background: #e2ffe7; color: #1d8439; }
-    .badge-other   { background: #f1f3ff; color: #595a87; }
-    /* --- TABLES --- */
-    table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin-bottom: 18px;
-      background: var(--surface);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 2px 14px #f5e1c14d;
-    }
-    th, td {
-      text-align: center;
-      padding: 13px 8px;
-      font-size: 1.03em;
-      border-bottom: 1.5px solid var(--border);
-    }
-    th {
-      background: var(--surface-alt);
-      color: var(--primary);
-      font-weight: 800;
       letter-spacing: 0.01em;
-      font-size: 1.08em;
+      box-shadow: 0 1px 4px #ffe17433;
+      border: 1.2px solid #ffe174a0;
     }
-    tr:last-child td { border-bottom: none; }
-    /* --- SECTION TITLES --- */
-    .tab-title {
-      font-size: 1.25em;
-      font-weight: 900;
-      color: var(--primary);
-      margin: 34px 0 19px 6px;
-      letter-spacing: 0.02em;
-      line-height: 1.15;
+    .badge-gold { background: var(--badge-gold); color: #7b6102;}
+    .badge-silver { background: var(--badge-silver); color: #6c6e84;}
+    .badge-elim { background: var(--badge-elim); color: #656565;}
+    .badge-other { background: #e8f3ff; color: #1e3a8a;}
+    /* Buttons & Inputs */
+    button, .button {
+      font-family: inherit;
+      border-radius: 16px;
+      padding: 8px 18px;
+      font-size: 1em;
+      font-weight: 700;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 1px 8px #ffe17455;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+      outline: none;
     }
-    /* --- CARD HIGHLIGHTS --- */
+    button:active, .button:active { background: #a81100;}
+    button:focus-visible, .button:focus { outline: 2px solid var(--primary);}
+    input, select {
+      font-family: inherit;
+      border-radius: 14px;
+      border: 1.3px solid var(--border);
+      font-size: 1em;
+      padding: 8px 13px;
+      background: #fff;
+      margin-bottom: 8px;
+      color: #232949;
+      box-shadow: 0 1px 3px #ffe17422;
+    }
+    /* Responsive */
+    @media (max-width: 850px) {
+      main { padding: 20px 2vw 29px 2vw; }
+      .card { padding: 13px 3vw 13px 3vw;}
+      .header-title { font-size: 1.3rem;}
+      .section-title { font-size: 1.13em;}
+    }
+    @media (max-width: 600px) {
+      .card-table th, .card-table td { font-size: 0.95em;}
+      .card { padding: 9px 3vw 12px 3vw;}
+      .fixtures-table th, .fixtures-table td { padding: 7px 3px; }
+    }
+
+    /* HIGHLIGHT CARDS (STAT HIGHLIGHTS) */
     .highlight-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 28px 36px;
-      margin: 25px 0 25px 0;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 23px 32px; margin-bottom: 20px; margin-top: 9px;
     }
     .stat-card {
-      background: var(--surface-alt);
-      border-radius: 18px;
-      box-shadow: 0 2px 12px #0001;
-      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-      padding: 22px 18px 18px 24px;
-      min-height: 96px;
-      gap: 3.5px;
-      border: 1.5px solid #faecd5;
-      position: relative;
-    }
-    .stat-card .label { font-size: 1.01em; font-weight: 700; color: var(--primary); }
-    .stat-card .value { font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1.08;}
-    .stat-card .player { font-size: 1.12em; font-weight: 600; color: #686877; opacity: 0.82; margin-top: 2px;}
-    .highlight-footer {
-      color: #bbb;
-      font-size: 1em;
-      font-style: italic;
-      margin-bottom: 19px;
-      margin-left: 5px;
-      margin-top: 6px;
-    }
-    /* --- QUICK STANDINGS --- */
-    .quick-standings {
+      background: var(--highlight);
       border-radius: var(--radius);
-      box-shadow: 0 2px 10px #fdeac83d;
-      background: var(--surface);
-      overflow: hidden;
-      margin-bottom: 14px;
+      padding: 22px 18px 20px 22px;
+      box-shadow: 0 3px 16px #ffe17444;
+      display: flex; flex-direction: column; align-items: flex-start; min-height: 96px; justify-content: center;
+      gap: 5px; position: relative; border: 1.4px solid #ffe174;
+      animation: fadein 0.36s;
     }
-    .cup-gold { background: linear-gradient(90deg, #ffe17444 88%, #fff5 100%);}
-    .cup-silver { background: linear-gradient(90deg, #d2d7df42 88%, #fff 100%);}
-    .cup-eliminated { background: #ffefef44;}
-    /* --- POPUPS --- */
+    @keyframes fadein { from { opacity: 0; transform: scale(.98);} to { opacity: 1; transform: scale(1);} }
+    .stat-card .label { font-size: 1.09rem; font-weight: 700; color: var(--primary-dark);}
+    .stat-card .value { font-size: 2.14rem; font-weight: 900; color: var(--primary); line-height: 1.08; margin-top: 3px;}
+    .stat-card .player { font-size: 1.13rem; font-weight: 500; color: #2d3748; opacity: 0.94; margin-top: 2px;}
+    .highlight-footer { color: #878; font-size: 1em; margin-bottom: 33px; margin-left: 5px; font-style: italic; letter-spacing: 0.01em;}
+
+    /* TABLES and STANDINGS */
+    .quick-standings, .standings-table, .fixtures-table, .results-table, .stats-table, .top10-table {
+      width: 100%; border-spacing: 0; border-radius: var(--radius); overflow: hidden; background: var(--surface);
+      box-shadow: 0 1px 10px #ffe17422; margin-bottom: 18px;
+      border: 1.2px solid #e4e9f5;
+    }
+    .quick-standings th, .quick-standings td,
+    .standings-table th, .standings-table td,
+    .fixtures-table th, .fixtures-table td,
+    .results-table th, .results-table td,
+    .stats-table th, .stats-table td,
+    .top10-table th, .top10-table td {
+      padding: 11px 8px; text-align: center; font-size: 1.02em; border-bottom: 1px solid #f0f1f6;
+    }
+    .winner-cell { font-weight: 700; color: #388700; background: #e9ffe3; border-radius: 9px;}
+    .cup-gold { background: linear-gradient(90deg, #ffe174 92%, #fff5 100%);}
+    .cup-silver { background: linear-gradient(90deg, #e6eaf0 92%, #fff 100%);}
+    .cup-eliminated { background: #fcf0ef;}
+
+    /* Player links */
+    .player-link {
+      color: var(--primary-dark); font-weight: 600; cursor: pointer; text-decoration: underline dotted;
+      background: none; border: none; padding: 0;
+      transition: color 0.13s;
+    }
+    .player-link:hover { color: var(--accent);}
+    /* Info Icon for MVP */
+    .info-icon {
+      display: inline-block; font-size: 1.07em; color: var(--accent);
+      background: #e7f3fe; border-radius: 50%; width: 1.19em; height: 1.19em;
+      text-align: center; font-weight: 800; cursor: pointer; margin-left: 7px; margin-bottom: -1px;
+      line-height: 1.17em; box-shadow: 0 1px 2px #acd2ff44;
+      transition: background 0.14s, color 0.14s;
+    }
+    .info-icon:hover { background: #b3e4ff; color: #14387b;}
+
+    /* Popup Styles (Player, Info, Team Stats) */
     .popup-backdrop {
-      display: none;
-      position: fixed;
-      z-index: 999;
+      display: none; position: fixed; z-index: 9999;
       left: 0; top: 0; width: 100vw; height: 100vh;
-      background: #0008;
-      align-items: center; justify-content: center;
-      transition: opacity 0.16s;
-      overflow: auto;
+      background: #0007; align-items: center; justify-content: center;
+      transition: opacity 0.13s; overflow: auto;
     }
     .popup-backdrop.show { display: flex; }
     .popup-card, .info-popup-card, .teamstats-popup-card {
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 8px 40px #0003;
-      padding: 20px 18px 15px 18px;
-      min-width: 0;
-      width: 340px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      animation: popupAppear 0.23s cubic-bezier(.68,-0.55,.27,1.55);
-      max-height: 92vh;
-      overflow-y: auto;
-      border: 1.5px solid #ffe1745e;
+      background: #fff; border-radius: 20px; box-shadow: 0 8px 44px #ffe17455;
+      padding: 20px 12px 12px 12px; max-width: 98vw; width: 340px;
+      display: flex; flex-direction: column; align-items: center; position: relative;
+      animation: popupAppear 0.25s cubic-bezier(.68,-0.55,.27,1.55);
+      max-height: 91vh; overflow-y: auto; border: 2px solid #ffe17455;
     }
-    @keyframes popupAppear { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes popupAppear { from { transform: scale(.93); opacity: 0;} to { transform: scale(1); opacity: 1; } }
+    .popup-card img { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 3px solid #ffe174; background: #fff; margin-bottom: 11px;}
+    .popup-card .name { font-size: 1.32rem; font-weight: 800; color: var(--primary-dark);}
+    .popup-card .team { font-size: 1.11rem; color: #555; margin-bottom: 7px;}
+    .popup-card .stat-group-title { color: var(--primary); font-weight: 700; margin: 7px 0 4px 0; font-size: 1.03em;}
+    .popup-card table.stats-list { width: 100%; border-collapse: collapse; margin-bottom: 2px;}
+    .popup-card .stats-list td { padding: 4px 6px 4px 0; text-align: left; font-size: 0.98em;}
+    .popup-card .stats-list td:first-child { font-weight: 600; color: #444;}
+    .popup-card .stats-list td:last-child { font-weight: 700; color: #343d4b;}
     .popup-card .close-btn, .info-popup-card .close-btn, .teamstats-popup-card .close-btn {
-      position: absolute; top: 13px; right: 20px;
-      font-size: 2.2em; color: #aaa; background: none;
-      border: none; cursor: pointer; transition: color 0.16s;
+      position: absolute; top: 8px; right: 13px;
+      font-size: 2em; color: #888; background: none;
+      border: none; cursor: pointer; transition: color 0.17s; z-index: 2;
     }
-    .popup-card .close-btn:hover,
-    .info-popup-card .close-btn:hover,
-    .teamstats-popup-card .close-btn:hover { color: var(--primary);}
-    /* --- RESPONSIVE --- */
-    @media (max-width:600px) {
-      .highlight-cards { grid-template-columns: 1fr; gap: 16px;}
-      .stat-card { padding: 17px 11px 12px 17px;}
-      .tab-title { font-size: 1.09em; margin-top: 21px;}
-      .popup-card, .info-popup-card, .teamstats-popup-card { width: 98vw; padding: 13px 3vw 10px 3vw; }
-      table, th, td { font-size: .97em;}
+    .popup-card .close-btn:hover, .info-popup-card .close-btn:hover, .teamstats-popup-card .close-btn:hover { color: var(--primary);}
+    .save-card-btn {
+      margin-top: 13px; background: var(--primary-dark);
+      color: #fff; font-weight: 700; padding: 8px 16px;
+      border: none; border-radius: 14px;
+      font-size: 1em; box-shadow: 0 1px 10px #ffe17433;
+      cursor: pointer; transition: background 0.19s;
+    }
+    .save-card-btn:hover { background: #850b00; }
+    .team-stats-header-card {
+      background: var(--highlight);
+      border-radius: 14px; margin-bottom: 13px;
+      padding: 14px 11px 7px 14px;
+      font-size: 1.14em; color: var(--primary-dark); font-weight: 700; box-shadow: 0 2px 10px #ffe17433; text-align: center;
+    }
+    .team-stats-note { color: #898; font-size: .98em; font-style: italic; margin: 5px 0 9px 3px;}
+
+    /* Squad/Player List */
+    #squads-list { margin-top: 10px;}
+    .squad-team-section { margin-bottom: 23px;}
+    .squad-team-name-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;}
+    .squad-team-name { font-size: 1.19em; font-weight: 700; color: var(--primary); cursor: pointer;}
+    .squad-team-name:hover { text-decoration: underline dotted;}
+    .squad-player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(151px,1fr)); gap: 12px;}
+    .squad-player-card { background: var(--surface); box-shadow: 0 2px 8px #ffe17411; border-radius: 15px; padding: 10px 7px 12px 7px; text-align: center; min-height: 69px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.06em; }
+    .squad-player-card button { background: none; border: none; color: var(--primary-dark); font-size: 1.08em; font-weight: 600; cursor: pointer; text-decoration: underline dotted; padding: 0; margin: 0 0 2px 0;}
+    .squad-player-card .squad-sets { color: #666; font-size: 0.95em;}
+
+    /* Footer */
+    footer {
+      width: 100%; text-align: center;
+      color: #7b6e2a; font-size: 1.07em; background: var(--gold);
+      font-weight: 700; letter-spacing: 0.05em;
+      border-top: 2.2px solid #ffe174; margin-top: 19px;
+      box-shadow: 0 -1px 14px #ffe17433;
+      padding: 12px 0 8px 0;
+      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 18px;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
-  <header>
-    <div class="header-titlebox">
-      <div class="header-title">Royal Darts Carnival 2025</div>
-      <div class="header-subtitle">Live • Fixtures • Results • Stats</div>
+<header>
+  <img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="Royal Darts Carnival 2025 Logo" loading="lazy">
+  <div class="header-titlebox">
+    <div class="header-title">Royal Darts Carnival 2025</div>
+    <div class="header-sub">The Ultimate Team Darts Showdown</div>
+  </div>
+  <button class="burger-btn" id="burger-btn" aria-label="Open menu">&#9776;</button>
+  <div class="nav-horiz" id="nav-horiz">
+    <button data-tab="home" class="active" aria-current="page">Home</button>
+    <button data-tab="fixtures">Fixtures</button>
+    <button data-tab="results">Results</button>
+    <button data-tab="standings">Standings</button>
+    <button data-tab="stats">Stats</button>
+    <button data-tab="top10">Top 10</button>
+    <button data-tab="live">Live</button>
+    <button data-tab="squads">Squads</button>
+  </div>
+</header>
+<div class="nav-drawer-backdrop" id="drawer-backdrop" tabindex="-1">
+  <nav class="nav-drawer" role="navigation" aria-label="Main Navigation">
+    <button class="nav-drawer-close" aria-label="Close menu" id="drawer-close">&times;</button>
+    <div class="nav-links">
+      <button data-tab="home">Home</button>
+      <button data-tab="fixtures">Fixtures</button>
+      <button data-tab="results">Results</button>
+      <button data-tab="standings">Standings</button>
+      <button data-tab="stats">Stats</button>
+      <button data-tab="top10">Top 10</button>
+      <button data-tab="live">Live</button>
+      <button data-tab="squads">Squads</button>
     </div>
-    <nav class="nav-bar">
-      <button class="nav-btn active" data-tab="home" aria-current="page">Home</button>
-      <button class="nav-btn" data-tab="fixtures">Fixtures</button>
-      <button class="nav-btn" data-tab="results">Results</button>
-      <button class="nav-btn" data-tab="standings">Standings</button>
-      <button class="nav-btn" data-tab="stats">Stats</button>
-      <button class="nav-btn" data-tab="top10">Top 10</button>
-      <button class="nav-btn" data-tab="live">Live</button>
-      <button class="nav-btn" data-tab="squads">Squads</button>
-    </nav>
-  </header>
-
-  <main>
-    <section id="tab-home">
-      <div class="tab-title">Today's Fixtures</div>
+  </nav>
+</div>
+<main>
+  <!-- HOME TAB -->
+  <section id="tab-home">
+    <div class="section-title">Today’s Fixtures</div>
+    <div class="card">
       <div class="fixtures-list" id="today-fixtures"></div>
-      <div class="tab-title">Quick Standings</div>
+    </div>
+    <div class="section-title">Quick Standings</div>
+    <div class="card" style="overflow-x:auto;">
       <table class="quick-standings" id="quick-standings"></table>
-      <div class="tab-title">Stat Highlights</div>
+    </div>
+    <div class="section-title">Stat Highlights</div>
+    <div class="card" style="padding-bottom:11px;">
       <div class="highlight-cards" id="stat-highlights"></div>
       <div class="highlight-footer">*2 matches min played</div>
-    </section>
-    <section id="tab-fixtures" hidden>
-      <div class="tab-title">All Fixtures</div>
+    </div>
+  </section>
+  <!-- FIXTURES TAB -->
+  <section id="tab-fixtures" hidden>
+    <div class="section-title">All Fixtures</div>
+    <div class="card" style="overflow-x:auto;">
       <div class="fixtures-list" id="fixtures-list"></div>
-    </section>
-    <section id="tab-results" hidden>
-      <div class="tab-title">All Results</div>
+    </div>
+  </section>
+  <!-- RESULTS TAB -->
+  <section id="tab-results" hidden>
+    <div class="section-title">All Results</div>
+    <div class="card" style="overflow-x:auto;">
       <div class="results-list" id="results-list"></div>
-    </section>
-    <section id="tab-standings" hidden>
-      <div class="tab-title">Group Standings</div>
+    </div>
+  </section>
+  <!-- STANDINGS TAB -->
+  <section id="tab-standings" hidden>
+    <div class="section-title">Group Standings</div>
+    <div class="card" style="overflow-x:auto;">
       <div id="standings-tables"></div>
-    </section>
-    <section id="tab-stats" hidden>
-      <div class="tab-title">Player Statistics</div>
-      <input id="stats-search" placeholder="Search player..." style="width:98%;max-width:330px;padding:9px 10px;border-radius:20px;border:1px solid #e3e3e3;margin:8px 0 18px 0;font-size:1em;">
-      <div style="overflow-x:auto">
+    </div>
+  </section>
+  <!-- STATS TAB -->
+  <section id="tab-stats" hidden>
+    <div class="section-title">Player Statistics</div>
+    <div class="card" style="overflow-x:auto;">
+      <input id="stats-search" placeholder="Search player..." style="width:98%;max-width:330px;padding:10px 14px;margin-bottom:17px;margin-top:2px;">
+      <div style="overflow-x:auto;">
         <table class="stats-table" id="stats-table"></table>
       </div>
-    </section>
-    <section id="tab-top10" hidden>
-      <div class="tab-title">Top 10 Rankings</div>
+    </div>
+  </section>
+  <!-- TOP 10 TAB -->
+  <section id="tab-top10" hidden>
+    <div class="section-title">Top 10 Rankings</div>
+    <div class="card" style="overflow-x:auto;">
       <div id="top10-tables"></div>
-    </section>
-    <section id="tab-live" hidden>
+    </div>
+  </section>
+  <!-- LIVE TAB -->
+  <section id="tab-live" hidden>
+    <div class="section-title">Live Scores</div>
+    <div class="card" style="overflow-x:auto;padding:0;">
       <iframe id="live-iframe" src="https://n01darts.com/n01/tournament/comp.php?id=t_OxWz_6427&tab=live"
-        style="width:100%;height:73vh;border-radius:20px;border:none;box-shadow:0 2px 20px #ffe17466;"></iframe>
-    </section>
-    <section id="tab-squads" hidden>
-      <div class="tab-title">Squads / Player List</div>
-      <div class="squad-team-filter-row">
-        <label for="squad-team-filter">Team:</label>
+        style="width:100%;height:72vh;border-radius:18px;border:none;box-shadow:0 2px 20px #ffe17444;"></iframe>
+    </div>
+  </section>
+  <!-- SQUADS TAB -->
+  <section id="tab-squads" hidden>
+    <div class="section-title">Squads / Player List</div>
+    <div class="card">
+      <div class="squad-team-filter-row" style="margin-bottom:12px;">
+        <label for="squad-team-filter" style="color:#7b6102;">Team:</label>
         <select id="squad-team-filter" class="squad-team-filter">
           <option value="">All Teams</option>
         </select>
       </div>
       <div id="squads-list"></div>
-    </section>
-  </main>
-  <div class="popup-backdrop" id="popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
-  <footer style="text-align:center;padding:21px 0 14px 0;font-size:1.08em;font-weight:700;color:#bda781;">
-    Built by SUCA Analytics
-  </footer>
+    </div>
+  </section>
+</main>
+<!-- Popups: Player, Info, TeamStats -->
+<div class="popup-backdrop" id="popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
+<footer>
+  Built by SUCA Analytics
+</footer>
 <script>
-  // --- CONFIG: Update this if API or fixtures endpoint changes
+  // CONFIG: Update this if you change the endpoint or fixtures JSON location
   const API_URL = "https://script.google.com/macros/s/AKfycbxg9ASk6TWcgMn4O25XgTtHdxOULY-Dlw6UpcyzWpBwEXXlNS_FoOi4BVjR4HBS55QU7A/exec";
+  const LOGO_URL = "https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif";
   const FIXTURES_JSON_URL = "csvjson.json";
+
   let allData = {}, statsData = [], standingsData = [], fixturesData = [], resultsData = [];
   let filteredStats = [];
   let lastSort = {col:null, asc:true};
 
-  // --- Responsive Navigation ---
   document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
+    setupDrawer();
     fetchAllData();
     setInterval(fetchAllData, 60000);
   });
 
-  function setupNavigation() {
-    document.querySelectorAll('.nav-btn').forEach(btn => {
+  function setupDrawer() {
+    const burgerBtn = document.getElementById('burger-btn');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const drawer = document.querySelector('.nav-drawer');
+    const closeBtn = document.getElementById('drawer-close');
+    const navLinks = drawer.querySelectorAll('.nav-links button');
+    burgerBtn.onclick = () => { backdrop.classList.add('show'); backdrop.style.display='flex'; };
+    closeBtn.onclick = () => { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);}
+    backdrop.onclick = (e) => { if(e.target === backdrop) { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180); } };
+    navLinks.forEach(btn => {
       btn.onclick = () => {
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
-        document.getElementById('tab-' + btn.dataset.tab).hidden = false;
-        btn.setAttribute('aria-current','page');
+        backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);
+        activateTab(btn.dataset.tab);
       };
     });
   }
+  function setupNavigation() {
+    document.querySelectorAll('nav button, .nav-horiz button, .nav-drawer .nav-links button').forEach(btn => {
+      btn.onclick = () => { activateTab(btn.dataset.tab); };
+    });
+  }
+  function activateTab(tab) {
+    document.querySelectorAll('nav button, .nav-drawer .nav-links button, .nav-horiz button').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tab);
+      if(btn.dataset.tab === tab) btn.setAttribute('aria-current','page');
+      else btn.removeAttribute('aria-current');
+    });
+    document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
+    document.getElementById('tab-' + tab).hidden = false;
+  }
 
-  // --- Data Load ---
   async function fetchAllData() {
     try {
       let res = await fetch(API_URL + "?cachebust=" + Math.random());
@@ -353,8 +550,7 @@
       fixturesData = await fetchFixturesJson(FIXTURES_JSON_URL);
       renderAll();
     } catch (err) {
-      document.getElementById('today-fixtures').innerHTML =
-        `<div style="color:#d53a2a;padding:12px">Error loading data. Please refresh.</div>`;
+      document.getElementById('today-fixtures').innerHTML = `<div style="color:#c00;padding:12px;font-weight:700;">Error loading data: ${err}</div>`;
     }
   }
   async function fetchFixturesJson(url) {
@@ -371,6 +567,7 @@
     if (pos <= 5) return "silver";
     return "eliminated";
   }
+
   function renderAll() {
     renderTodayFixtures();
     renderQuickStandings();
@@ -382,11 +579,12 @@
     renderTop10Tables();
     renderSquadsList();
   }
-  // --- Today's Fixtures (with Knockout Badges) ---
+
+  // --- Home Page Today Fixtures (with knockout badges) ---
   function renderTodayFixtures() {
     if (!fixturesData.length) {
       document.getElementById('today-fixtures').innerHTML =
-        `<div style="color:#bbb;padding:12px">No fixtures scheduled for today.</div>`;
+        `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
       return;
     }
     let today = new Date();
@@ -406,27 +604,25 @@
     });
     if (!todays.length) {
       document.getElementById('today-fixtures').innerHTML =
-        `<div style="color:#bbb;padding:12px">No fixtures scheduled for today.</div>`;
+        `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
       return;
     }
-
     function getBadge(group) {
       if (!group) return '';
       let g = group.toLowerCase();
-      if (g.includes('gold'))    return `<span class="fixture-badge badge-gold">${group}</span>`;
-      if (g.includes('silver'))  return `<span class="fixture-badge badge-silver">${group}</span>`;
+      if (g.includes('gold')) return `<span class="fixture-badge badge-gold">${group.replace(/^\w/, c => c.toUpperCase())}</span>`;
+      if (g.includes('silver')) return `<span class="fixture-badge badge-silver">${group.replace(/^\w/, c => c.toUpperCase())}</span>`;
       if (g.includes('eliminator')) return `<span class="fixture-badge badge-elim">Eliminator</span>`;
-      if (g.includes('qualifier'))  return `<span class="fixture-badge badge-qual">Qualifier</span>`;
+      if (g.includes('qualifier')) return `<span class="fixture-badge badge-gold">Qualifier</span>`;
       return '';
     }
-
-    let out = `<table class="fixtures-table">
+    let out = `<table class="fixtures-table card-table">
       <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th><th></th></tr>`;
     todays.forEach(f => {
       out += `<tr>
         <td>${f.Time || ""}</td>
         <td>${f["Team A"]||""}</td>
-        <td style="color:#b61320;font-weight:700;">vs</td>
+        <td style="color:#ba181b;font-weight:700;">vs</td>
         <td>${f["Team B"]||""}</td>
         <td>${getBadge(f.Group)}</td>
       </tr>`;
@@ -434,12 +630,11 @@
     out += `</table>`;
     document.getElementById('today-fixtures').innerHTML = out;
   }
-
-  // --- Fixtures Page ---
+  // --- Fixtures Page: Group by Date with badges ---
   function renderFixturesList() {
     if (!fixturesData.length) {
       document.getElementById('fixtures-list').innerHTML =
-        `<div style="color:#bbb;padding:10px">No fixtures loaded.</div>`;
+        `<div style="color:#888;padding:10px">No fixtures loaded.</div>`;
       return;
     }
     let byDate = {};
@@ -452,16 +647,25 @@
       let d1 = Date.parse(a + " 2025"), d2 = Date.parse(b + " 2025");
       return (isNaN(d1)||isNaN(d2)) ? a.localeCompare(b) : d1-d2;
     });
+    function getBadge(group) {
+      if (!group) return '';
+      let g = group.toLowerCase();
+      if (g.includes('gold')) return `<span class="fixture-badge badge-gold">${group.replace(/^\w/, c => c.toUpperCase())}</span>`;
+      if (g.includes('silver')) return `<span class="fixture-badge badge-silver">${group.replace(/^\w/, c => c.toUpperCase())}</span>`;
+      if (g.includes('eliminator')) return `<span class="fixture-badge badge-elim">Eliminator</span>`;
+      if (g.includes('qualifier')) return `<span class="fixture-badge badge-gold">Qualifier</span>`;
+      return '';
+    }
     dateKeys.forEach(dateLabel => {
       let matches = byDate[dateLabel];
-      out += `<div class="date-group"><div class="date-label" style="font-weight:700;font-size:1.11em;color:#e7b000;margin:0 0 6px 2px;">${dateLabel}</div>
-        <table>
+      out += `<div class="date-group"><div class="date-label" style="font-weight:700;font-size:1.11em;color:#ba181b;margin-bottom:6px">${dateLabel}</div>
+        <table class="fixtures-table card-table">
           <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th><th></th></tr>`;
       matches.forEach(f => {
         out += `<tr>
           <td>${f.Time || ""}</td>
           <td>${f["Team A"]}</td>
-          <td style="color:#b61320;font-weight:700;">vs</td>
+          <td style="color:#ba181b;font-weight:700;">vs</td>
           <td>${f["Team B"]}</td>
           <td>${getBadge(f.Group)}</td>
         </tr>`;
@@ -499,7 +703,8 @@
       </div>
     `).join('');
   }
-  // --- Standings ---
+
+  // --- Quick Standings ---
   function renderQuickStandings() {
     if (!standingsData.length) return;
     let byGroup = {};
@@ -514,7 +719,7 @@
         ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
         (asNum(b.For) - asNum(a.For))
       );
-      out += `<tr><th colspan="10" style="background:var(--primary);color:#fff;font-size:1.08em;">${group}</th></tr>`;
+      out += `<tr><th colspan="10" style="background:var(--primary);color:#fff;font-size:1.13em;">${group}</th></tr>`;
       out += `<tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th></tr>`;
       teams.forEach((t,i) => {
         let cup = getCupByPosition(i+1);
@@ -529,6 +734,7 @@
     document.getElementById('quick-standings').innerHTML = out;
   }
 
+  // --- Standings Tables (Full) ---
   function renderStandingsTables() {
     if (!standingsData.length) return;
     let byGroup = {};
@@ -544,8 +750,8 @@
         (asNum(b.For) - asNum(a.For))
       );
       out += `<div style="margin-bottom:23px">
-        <div style="font-size:1.13em;font-weight:800;color:var(--primary);margin:9px 0 3px 0">${group}</div>
-        <table class="standings-table">
+        <div style="font-size:1.12em;font-weight:700;color:var(--primary-dark);margin:9px 0 3px 0">${group}</div>
+        <table class="standings-table card-table">
           <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th><th>Cup</th></tr>`;
       teams.forEach((t,i) => {
         let cup = getCupByPosition(i+1);
@@ -567,7 +773,7 @@
   function renderResultsList() {
     if (!resultsData.length) {
       document.getElementById('results-list').innerHTML =
-        `<div style="color:#bbb;padding:10px">No results loaded.</div>`;
+        `<div style="color:#888;padding:10px">No results loaded.</div>`;
       return;
     }
     let byGroup = {};
@@ -575,7 +781,6 @@
       let group = r.Group || "Other";
       (byGroup[group] = byGroup[group] || []).push(r);
     });
-
     let out = '';
     Object.entries(byGroup).forEach(([group, matches]) => {
       let byDate = {};
@@ -583,19 +788,19 @@
         let date = r.Date || '';
         (byDate[date] = byDate[date] || []).push(r);
       });
-      out += `<div style="margin-bottom:30px">
-        <div style="font-size:1.13em;font-weight:900;color:var(--primary);margin:10px 0 7px 2px;">Group: ${group}</div>`;
+      out += `<div style="margin-bottom:27px">
+        <div style="font-size:1.11em;font-weight:800;color:var(--primary);margin:11px 0 7px 3px;">Group: ${group}</div>`;
       Object.entries(byDate).sort((a,b)=>{
         let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
         return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
       }).forEach(([date, games]) => {
         out += `<div class="date-group"><div class="date-label">${date}</div>
-          <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
+          <table class="results-table card-table"><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
         games.forEach(r => {
           let a = +r["Score A"]||0, b = +r["Score B"]||0;
           let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
           out += `<tr>
-            <td>${r["Team A"]}</td><td style="color:#b61320;font-weight:700;">vs</td>
+            <td>${r["Team A"]}</td><td style="color:#ba181b;font-weight:700;">vs</td>
             <td>${r["Team B"]}</td><td>${a} - ${b}</td>
             <td class="winner-cell">${win}</td>
           </tr>`;
@@ -607,7 +812,7 @@
     document.getElementById('results-list').innerHTML = out;
   }
 
-  // --- Player Stats Table ---
+  // --- Stats Table ---
   function renderStatsTable() {
     if (!statsData.length) return;
     const cols = [
@@ -617,16 +822,14 @@
     let s = document.getElementById('stats-search').value?.toLowerCase?.() || "";
     filteredStats = statsData.filter(r => (r.Player||"").toLowerCase().includes(s));
     doStatsTable(filteredStats, cols);
-
     document.getElementById('stats-search').oninput = () => {
       let s = document.getElementById('stats-search').value.toLowerCase();
       let data = statsData.filter(r => (r.Player||"").toLowerCase().includes(s));
       doStatsTable(data, cols);
     };
-
     function doStatsTable(rows, cols) {
       let ths = cols.map(c =>
-        `<th data-col="${c}" style="cursor:pointer">${c} <span style="font-size:0.91em;opacity:.53">${
+        `<th data-col="${c}" style="cursor:pointer">${c} <span style="font-size:0.92em;opacity:.56">${
           lastSort.col===c ? (lastSort.asc ? "▲" : "▼") : ""
         }</span></th>`
       ).join('');
@@ -641,8 +844,6 @@
         }
       }).join('') + `</tr>`).join('');
       document.getElementById('stats-table').innerHTML = `<tr>${ths}</tr>${trs}`;
-
-      // Add sorting
       document.querySelectorAll('#stats-table th').forEach((th,i) => {
         th.onclick = () => {
           let col = th.getAttribute('data-col');
@@ -661,7 +862,7 @@
     }
   }
 
-  // --- Top 10 Rankings ---
+  // --- Top 10 Page ---
   function renderTop10Tables() {
     if (!statsData.length || !standingsData.length) return;
     const cats = [
@@ -682,19 +883,19 @@
         return (+b[cat.key]||0) - (+a[cat.key]||0);
       });
       let top = el.slice(0,10);
-      out += `<div class="top10-list-section">
-        <div class="top10-list-title">
+      out += `<div class="top10-list-section" style="margin-bottom:27px;">
+        <div class="top10-list-title" style="font-weight:700;font-size:1.13em;color:var(--primary-dark);margin:7px 0 7px 0;">
           Top 10 ${cat.label}
           ${cat.info ? `<span class="info-icon" onclick="showMvpInfo()" title="How is MVP calculated?">i</span>` : ''}
         </div>
-        <table class="top10-list-table">
+        <table class="top10-table card-table">
         <tr><th>Rank</th><th>Player</th><th>Team</th><th>${cat.label}</th></tr>`;
       top.forEach((p,i) => {
         let v = cat.compute ? p._MVP.toFixed(3)
            : cat.key==="100+" ? p._100Total : p[cat.key];
         out += `<tr>
           <td>#${i+1}</td>
-          <td><button onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>
+          <td><button onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')" class="player-link">${p.Player}</button></td>
           <td>${p.Team}</td>
           <td>${v}</td>
         </tr>`;
@@ -704,7 +905,7 @@
     document.getElementById('top10-tables').innerHTML = out;
   }
 
-  // --- MVP Calculation ---
+  // MVP Calculation
   function calcMVPScore(p) {
     if (!statsData.length || !standingsData.length) return 0;
     let valid = statsData.filter(x=>asNum(x["Match Played"])>=2 && asNum(x["3 Dart Avg"]) && asNum(x["Legs Played"]) && asNum(x["Legs Won"]));
@@ -727,14 +928,12 @@
     let teamSuccess = (totalTeams>1) ? 1-((teamRank-1)/(totalTeams-1)) : 1;
     return (normAvg*0.40) + (normWinRate*0.25) + (normLegsWon*0.20) + (normHF*0.05) + (teamSuccess*0.10);
   }
-
-  // --- MVP Info Popup ---
   window.showMvpInfo = function() {
     showCustomPopup(`
       <div class="info-popup-card">
         <button class="close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-        <div style="font-weight:700;font-size:1.14em;margin:4px 0 14px 0;color:var(--primary);">How is MVP calculated?</div>
-        <div style="font-size:1.06em;line-height:1.56">
+        <div style="font-weight:700;font-size:1.11em;margin:4px 0 14px 0;color:var(--primary);">How is MVP calculated?</div>
+        <div style="font-size:1.01em;line-height:1.56">
         <b>MVP Score =</b> (NormAvg × 0.40) + (NormWinRate × 0.25) + (NormLegsWon × 0.20) + (NormHighFinish × 0.05) + (TeamSuccess × 0.10)<br><br>
         <b>Where:</b><br>
         NormAvg = Player’s 3DAvg ÷ Highest 3DAvg<br>
@@ -748,13 +947,12 @@
     `);
   };
 
-  // --- Squads ---
+  // --- Squads List ---
   function renderSquadsList() {
     if (!statsData.length) return;
     let byTeam = {};
     statsData.forEach(p => (byTeam[p.Team] = byTeam[p.Team]||[]).push(p));
     let teams = Object.keys(byTeam).sort();
-    // Team filter dropdown
     let sel = document.getElementById('squad-team-filter');
     if (sel.innerHTML === "" || sel.options.length !== teams.length+1) {
       sel.innerHTML = `<option value="">All Teams</option>` + teams.map(t=>`<option>${t}</option>`).join('');
@@ -765,25 +963,24 @@
     let out = '';
     showTeams.forEach(team => {
       let players = byTeam[team];
-      out += `<div class="squad-team-section" style="margin-bottom:24px">
-        <div class="squad-team-name-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
-          <span class="squad-team-name" onclick="showTeamStats('${encodeURIComponent(team)}')" title="Show stats for this team" style="font-size:1.13em;font-weight:700;color:var(--primary);cursor:pointer;">${team}</span>
-          <span class="team-stats-note" style="color:#bbb;font-size:.96em;font-style:italic;">Tap team for full stats</span>
+      out += `<div class="squad-team-section">
+        <div class="squad-team-name-row">
+          <span class="squad-team-name" onclick="showTeamStats('${encodeURIComponent(team)}')" title="Show stats for this team">${team}</span>
+          <span class="team-stats-note">Tap team for full stats</span>
         </div>
-        <div class="squad-player-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;">
-      `;
+        <div class="squad-player-grid">`;
       players.forEach(p=>{
-        out += `<div class="squad-player-card" style="background:var(--surface);box-shadow:0 2px 7px #ffe17418;border-radius:14px;padding:11px 7px 13px 7px;text-align:center;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.06em;">
-          <button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')" style="background:none;border:none;color:var(--primary);font-size:1.08em;font-weight:600;cursor:pointer;text-decoration:underline dotted;padding:0;margin:0 0 2px 0;">${p.Player}</button>
-          <div class="squad-sets" style="color:#888;font-size:0.92em;">${p["Sets Played"]||""} Sets, ${p["3 Dart Avg"]||""} 3DA</div>
+        out += `<div class="squad-player-card">
+          <button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">
+            ${p.Player}
+          </button>
+          <div class="squad-sets">${p["Sets Played"]||""} Sets, ${p["3 Dart Avg"]||""} 3DA</div>
         </div>`;
       });
       out += `</div></div>`;
     });
     document.getElementById('squads-list').innerHTML = out;
   }
-
-  // --- Team Stats Modal ---
   window.showTeamStats = function(teamEnc) {
     let team = decodeURIComponent(teamEnc);
     let players = statsData.filter(p=>p.Team===team);
@@ -803,11 +1000,12 @@
     }).join('')+'</tr>').join('');
     showCustomPopup(`
       <div class="teamstats-popup-card">
-        <div class="team-stats-popup-header" style="background:var(--highlight-gold);border-bottom:1px solid #ececec;padding:14px 20px 10px 16px;color:var(--primary);font-size:1.13em;font-weight:800;text-align:center;">All Player Stats for ${team}
-          <button class="team-stats-popup-close-btn close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
+        <div class="team-stats-header-card">
+          All Player Stats for ${team}
+          <button class="close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
         </div>
-        <div class="teamstats-popup-scroll" style="overflow:auto;padding:13px 11px 19px 11px;flex:1 1 auto;min-height:0;">
-          <table class="stats-table" style="width:100%">
+        <div style="overflow-x:auto;">
+          <table class="stats-table card-table" style="width:100%">
             <tr>${ths}</tr>${trs}
           </table>
         </div>
@@ -815,17 +1013,17 @@
     `);
   };
 
-  // --- Player Popup ---
+  // --- Player popup ---
   window.showPlayerPopup = function(nameEnc) {
     let name = decodeURIComponent(nameEnc);
     let p = statsData.find(x=>x.Player===name);
     if (!p) return;
-    let img = `<img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="Player Photo" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid #ffe174;background:#fff;margin-bottom:7px;">`;
+    let img = `<img src="${LOGO_URL}" alt="Player Photo">`;
     function grp(lbl, keys) {
       let rows = keys.filter(k=>p[k]!=null).map(k=>
         `<tr><td>${k}</td><td>${k.includes("Win Rate")? (asNum(p[k])*100).toFixed(1)+"%":p[k]}</td></tr>`
       ).join('');
-      return rows ? `<div class="stat-group-title" style="color:var(--primary);font-weight:700;margin:7px 0 4px 0;font-size:1.05em;">${lbl}</div><table class="stats-list" style="width:100%">${rows}</table>` : '';
+      return rows ? `<div class="stat-group-title">${lbl}</div><table class="stats-list">${rows}</table>` : '';
     }
     let core = ["Sets Played","Sets Won","3 Dart Avg","First 9 Avg","High Finish","100+","140+","180's"];
     let win  = ["Match Played","Win Rate (Legs)","Win Rate (Sets)","Legs Played","Legs Won","Legs Diff"];
@@ -837,20 +1035,20 @@
       ${grp("Highlights", ex)}
       ${grp("Other", other)}
     </div>`;
-    let btn = `<button class="save-card-btn" onclick="saveCardAsImage()" style="margin-top:13px;background:var(--primary);color:#fff;font-weight:700;padding:7px 14px;border:none;border-radius:16px;font-size:1em;box-shadow:0 1px 10px #ffe17425;cursor:pointer;transition:background 0.17s;">Save card as image</button>`;
+    let btn = `<button class="save-card-btn" onclick="saveCardAsImage()">Save card as image</button>`;
     showCustomPopup(`
       <div class="popup-card">
         <button class="close-btn" aria-label="Close" onclick="closeCustomPopup()">&times;</button>
         ${img}
-        <div class="name" style="font-size:1.18rem;font-weight:800;color:var(--primary);">${p.Player}</div>
-        <div class="team" style="font-size:1.04rem;color:#888;margin-bottom:7px;">${p.Team}</div>
+        <div class="name">${p.Player}</div>
+        <div class="team">${p.Team}</div>
         ${sections}
         ${btn}
       </div>
     `);
   };
 
-  // --- Popup Helpers ---
+  // --- Popup helpers ---
   function showCustomPopup(html) {
     let pb = document.getElementById('popup-backdrop');
     pb.innerHTML = html;
@@ -865,7 +1063,6 @@
     document.body.style.overflow = '';
   }
   window.closeCustomPopup = closeCustomPopup;
-
   window.saveCardAsImage = function() {
     let card = document.querySelector('.popup-card');
     if(!card) return;
@@ -877,13 +1074,10 @@
         a.click();
       });
   };
-
-  // Backdrop click closes popup
   document.getElementById('popup-backdrop').onclick = function(e) {
     if (e.target === this) closeCustomPopup();
   };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script defer src="https://analytics.vercel.com/script.js"></script>
 </body>
 </html>
