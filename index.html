@@ -1,534 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DSD7RBYT7Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-DSD7RBYT7Q');
-</script>
   <meta charset="UTF-8">
-  <title>Darts Carnival 2025</title>
+  <title>Royal Darts Carnival 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#a81100">
-  <link rel="icon" type="image/avif" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif">
+  <meta name="theme-color" content="#fffbe9">
+  <link rel="icon" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #a81100;
-      --gold: #ffe174;
-      --silver: #d2d7df;
-      --eliminated: #ffefef;
-      --highlight: #fff6dd;
-      --background: #fafafa;
+      --primary: #b61320;
+      --secondary: #f6c948;
+      --accent: #1e2a44;
+      --background: #fffdfa;
       --surface: #fff;
-      --accent: #0b2239;
-      --border: #e2e8f0;
-      --radius: 18px;
-      --shadow: 0 4px 16px rgba(0,0,0,0.06);
-      --logo-size: 42px;
-      --transition: 0.2s cubic-bezier(.4,0,.2,1);
-      --nav-z: 50;
-      --drawer-width: 81vw;
-      --max-drawer: 340px;
-      --info-blue: #268aff;
+      --surface-alt: #f8f9fa;
+      --highlight-gold: linear-gradient(90deg, #ffe174 80%, #fff7d7 100%);
+      --highlight-silver: linear-gradient(90deg, #dee1e7 80%, #fff 100%);
+      --border: #e6e7ea;
+      --radius: 22px;
+      --shadow: 0 6px 30px 0 rgba(176,181,194,.15);
+      --nav-z: 40;
+      --transition: 0.19s cubic-bezier(.4,0,.2,1);
     }
     * { box-sizing: border-box; }
+
     html, body {
       margin: 0; padding: 0;
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       background: var(--background);
       color: var(--accent);
       min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
+      font-size: 17px;
+      letter-spacing: 0.01em;
     }
     body { display: flex; flex-direction: column; min-height: 100vh; }
 
-    /* HEADER & NAV */
+    /* --- HEADER / NAV --- */
     header {
+      width: 100vw;
+      min-height: 68px;
       background: var(--surface);
       box-shadow: var(--shadow);
       display: flex;
-      flex-direction: row;
       align-items: center;
-      padding: 0 8px 0 0;
+      justify-content: space-between;
       gap: 8px;
-      min-height: 56px;
+      padding: 0 24px;
       position: sticky; top: 0; z-index: var(--nav-z);
-      width: 100vw;
-      overflow: visible;
-    }
-    header img {
-      width: var(--logo-size); height: var(--logo-size);
-      min-width: 30px; min-height: 30px;
-      border-radius: 50%;
-      background: #fff;
-      object-fit: cover;
-      box-shadow: 0 1px 4px #0001;
-      flex-shrink: 0;
-      margin-left: 8px;
+      border-bottom: 1.5px solid var(--border);
     }
     .header-titlebox {
-      display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0;
-      justify-content: center; overflow: hidden;
+      display: flex; flex-direction: column;
+      justify-content: center;
     }
     .header-title {
-      font-size: 1.18rem;
+      font-size: 2rem;
       font-weight: 900;
       color: var(--primary);
-      line-height: 1.18;
-      word-break: break-word;
-      white-space: normal;
-      margin: 0 0 0 2px;
+      letter-spacing: 0.01em;
+      margin: 0 0 2px 0;
+      line-height: 1.06;
     }
-    .nav-horiz {
+    .header-subtitle {
+      font-size: 1.09em;
+      font-weight: 600;
+      color: #998c87;
+      letter-spacing: 0.01em;
+      margin-top: 1px;
+    }
+    .nav-bar {
       display: flex;
-      gap: 3px;
-      align-items: flex-end;
+      gap: 1.5vw;
+      align-items: center;
       margin-left: auto;
-      margin-right: 15px;
     }
-    .nav-horiz button {
+    .nav-btn {
+      font-size: 1.01em;
       background: none;
       border: none;
       color: var(--accent);
-      font-size: 1rem;
-      min-width: 68px;
-      padding: 8px 10px;
-      font-weight: 500;
+      font-weight: 600;
+      padding: 12px 19px;
       border-radius: 16px;
-      transition: background var(--transition);
+      transition: background var(--transition), color var(--transition), font-weight var(--transition);
       cursor: pointer;
+      letter-spacing: 0.01em;
       outline: none;
-      margin: 0 1px;
-      white-space: nowrap;
-    }
-    .nav-horiz button.active,
-    .nav-horiz button:focus-visible {
-      background: var(--primary);
-      color: #fff;
-    }
-    .burger-btn {
-      background: none;
-      border: none;
-      color: var(--primary);
-      font-size: 2.2em;
-      padding: 0 13px 0 7px;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      z-index: var(--nav-z);
-    }
-    /* NAV DRAWER */
-    .nav-drawer-backdrop {
-      position: fixed;
-      z-index: calc(var(--nav-z) + 1);
-      left: 0; top: 0; width: 100vw; height: 100vh;
-      background: #0006;
-      display: none;
-      transition: opacity 0.16s;
-      align-items: stretch;
-    }
-    .nav-drawer-backdrop.show { display: flex; }
-    .nav-drawer {
-      width: min(var(--drawer-width), var(--max-drawer));
-      max-width: 94vw;
-      background: var(--surface);
-      box-shadow: 6px 0 18px #0003;
-      height: 100vh;
-      padding-top: 20px;
-      padding-left: 7px;
-      display: flex;
-      flex-direction: column;
       position: relative;
-      animation: drawerIn .22s cubic-bezier(.55,0,.4,1);
-      border-top-right-radius: var(--radius);
-      border-bottom-right-radius: var(--radius);
     }
-    @keyframes drawerIn { from { transform: translateX(-80px); opacity: 0; } to { transform: none; opacity: 1; } }
-    .nav-drawer .nav-drawer-close {
-      background: none;
-      border: none;
-      font-size: 2em;
-      color: #aaa;
-      cursor: pointer;
-      position: absolute;
-      top: 5px; right: 12px;
+    .nav-btn.active,
+    .nav-btn:focus-visible {
+      background: var(--highlight-gold);
+      color: var(--primary);
+      font-weight: 900;
+      box-shadow: 0 2px 12px #ffe17435;
     }
-    .nav-drawer .nav-links {
-      display: flex; flex-direction: column; gap: 3px;
+
+    @media (max-width: 700px) {
+      .header-title { font-size: 1.18rem;}
+      .nav-btn { font-size: .99em; padding: 10px 10px;}
+      header { padding: 0 7px;}
     }
-    .nav-drawer .nav-links button {
-      font-size: 1.04em;
-      text-align: left;
-      min-width: 0;
-      border-radius: 11px;
-      padding: 10px 10px;
-      margin: 2px 1px;
+    @media (max-width:430px) {
+      .header-title { font-size: 1.03rem;}
+      .nav-btn { padding: 7px 4px;}
+    }
+    /* --- BADGES --- */
+    .fixture-badge {
+      display: inline-block;
+      font-size: 0.97em;
       font-weight: 700;
+      padding: 3.5px 13px;
+      border-radius: 14px;
+      margin-left: 10px;
+      vertical-align: middle;
+      box-shadow: 0 2px 8px #0001;
+      letter-spacing: 0.02em;
+      border: none;
+      background: #eee;
     }
-    .nav-drawer .nav-links button.active { background: var(--primary); color: #fff;}
-    @media (max-width:900px) {
-      .nav-horiz { display: none; }
-      .burger-btn { display: flex;}
+    .badge-gold    { background: var(--highlight-gold); color: #aa7918; }
+    .badge-silver  { background: var(--highlight-silver); color: #666d81;}
+    .badge-elim    { background: #e8e8e8; color: #b61320;}
+    .badge-qual    { background: #e2ffe7; color: #1d8439; }
+    .badge-other   { background: #f1f3ff; color: #595a87; }
+    /* --- TABLES --- */
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-bottom: 18px;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 14px #f5e1c14d;
     }
-    @media (min-width:901px) {
-      .nav-drawer-backdrop { display: none !important; }
-      .burger-btn { display: none !important; }
-      .nav-horiz { display: flex !important; }
+    th, td {
+      text-align: center;
+      padding: 13px 8px;
+      font-size: 1.03em;
+      border-bottom: 1.5px solid var(--border);
     }
-
-    /* GENERAL LAYOUT */
-    main { flex: 1; padding: 10px 0 23px 0; max-width: 1100px; margin: 0 auto; width: 100%; min-height: 60vh; background: var(--background);}
-    .tab-title { font-size: 1.13em; font-weight: 700; margin: 17px 0 11px 3px; color: var(--primary);}
-    section[hidden] { display: none !important; }
-
-    .fixtures-list table, .fixtures-table { font-size: 1em; }
-    @media (max-width:600px) { .fixtures-list table, .fixtures-table { font-size: 0.97em; } }
-    .highlight-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px 30px; margin-bottom: 12px;}
-    .stat-card { background: var(--highlight); border-radius: var(--radius); padding: 18px 20px 16px 20px; box-shadow: 0 2px 10px #0001; display: flex; flex-direction: column; align-items: flex-start; min-height: 96px; justify-content: center; gap: 5px; position: relative;}
-    .stat-card .label { font-size: 1.07rem; font-weight: 700; color: var(--primary); opacity: .89;}
-    .stat-card .value { font-size: 1.75rem; font-weight: 900; color: var(--accent); line-height: 1.08; margin-top: 3px;}
-    .stat-card .player { font-size: 1.09rem; font-weight: 500; color: var(--accent); opacity: 0.84; margin-top: -2px;}
-    .highlight-footer { color: #888; font-size: 0.99em; margin-bottom: 32px; margin-left: 5px; margin-top: 6px; font-style: italic; letter-spacing: 0.01em;}
-    .quick-standings { margin-top: 14px; margin-bottom: 10px; border-radius: var(--radius); box-shadow: 0 1px 8px #0001; overflow: hidden; background: var(--surface);}
-    .quick-standings th, .quick-standings td { padding: 7px 8px; text-align: center;}
-    .quick-standings th { background: #f5f5f5; font-size: 0.98em; font-weight: 700; color: var(--primary);}
-    .cup-gold { background: linear-gradient(90deg, var(--gold) 95%, #fff5 100%);}
-    .cup-silver { background: linear-gradient(90deg, var(--silver) 95%, #fff 100%);}
-    .cup-eliminated { background: var(--eliminated);}
-    .fixtures-list, .results-list { margin-bottom: 30px;}
-    .fixtures-list .date-group, .results-list .date-group { margin-bottom: 17px;}
-    .fixtures-list .date-label, .results-list .date-label { font-weight: 700; font-size: 1.07em; margin: 12px 0 8px 3px; color: var(--primary);}
-    .fixtures-list table, .results-list table, .standings-table, .stats-table, .squads-table, .top10-table { width: 100%; border-spacing: 0; border-radius: var(--radius); overflow: hidden; box-shadow: 0 1px 10px #0001; background: var(--surface);}
-    .fixtures-list th, .results-list th, .standings-table th, .stats-table th, .squads-table th, .top10-table th { background: #f5f5f5; padding: 9px 6px; font-size: 1em; font-weight: 700; color: var(--primary); text-align: center; cursor: pointer; user-select: none;}
-    .fixtures-list td, .results-list td, .standings-table td, .stats-table td, .squads-table td, .top10-table td { padding: 8px 5px; text-align: center; font-size: 0.97em; border-bottom: 1px solid var(--border);}
-    .winner-cell { font-weight: 700; color: #388700; background: #e9ffe3; border-radius: 8px;}
-    .stats-table .player-link, .squads-table .player-link { color: var(--primary); font-weight: 600; cursor: pointer; text-decoration: underline dotted; background: none; border: none; padding: 0;}
-    .team-filter { width: 180px; margin: 8px 0 14px 0; border-radius: 18px; padding: 8px 10px; border: 1px solid #ccc; font-size: 1em; background: #fff; color: #222;}
-    /* POPUP - Small mobile fixes */
+    th {
+      background: var(--surface-alt);
+      color: var(--primary);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      font-size: 1.08em;
+    }
+    tr:last-child td { border-bottom: none; }
+    /* --- SECTION TITLES --- */
+    .tab-title {
+      font-size: 1.25em;
+      font-weight: 900;
+      color: var(--primary);
+      margin: 34px 0 19px 6px;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+    }
+    /* --- CARD HIGHLIGHTS --- */
+    .highlight-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 28px 36px;
+      margin: 25px 0 25px 0;
+    }
+    .stat-card {
+      background: var(--surface-alt);
+      border-radius: 18px;
+      box-shadow: 0 2px 12px #0001;
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+      padding: 22px 18px 18px 24px;
+      min-height: 96px;
+      gap: 3.5px;
+      border: 1.5px solid #faecd5;
+      position: relative;
+    }
+    .stat-card .label { font-size: 1.01em; font-weight: 700; color: var(--primary); }
+    .stat-card .value { font-size: 2rem; font-weight: 900; color: var(--accent); line-height: 1.08;}
+    .stat-card .player { font-size: 1.12em; font-weight: 600; color: #686877; opacity: 0.82; margin-top: 2px;}
+    .highlight-footer {
+      color: #bbb;
+      font-size: 1em;
+      font-style: italic;
+      margin-bottom: 19px;
+      margin-left: 5px;
+      margin-top: 6px;
+    }
+    /* --- QUICK STANDINGS --- */
+    .quick-standings {
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px #fdeac83d;
+      background: var(--surface);
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .cup-gold { background: linear-gradient(90deg, #ffe17444 88%, #fff5 100%);}
+    .cup-silver { background: linear-gradient(90deg, #d2d7df42 88%, #fff 100%);}
+    .cup-eliminated { background: #ffefef44;}
+    /* --- POPUPS --- */
     .popup-backdrop {
       display: none;
       position: fixed;
       z-index: 999;
       left: 0; top: 0; width: 100vw; height: 100vh;
-      background: #0007;
+      background: #0008;
       align-items: center; justify-content: center;
-      transition: opacity 0.13s;
+      transition: opacity 0.16s;
       overflow: auto;
     }
     .popup-backdrop.show { display: flex; }
     .popup-card, .info-popup-card, .teamstats-popup-card {
       background: #fff;
-      border-radius: 18px;
+      border-radius: 24px;
       box-shadow: 0 8px 40px #0003;
-      padding: 16px 10px 8px 10px;
-      max-width: 97vw;
+      padding: 20px 18px 15px 18px;
       min-width: 0;
       width: 340px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      animation: popupAppear 0.22s cubic-bezier(.68,-0.55,.27,1.55);
-      max-height: 91vh;
+      animation: popupAppear 0.23s cubic-bezier(.68,-0.55,.27,1.55);
+      max-height: 92vh;
       overflow-y: auto;
+      border: 1.5px solid #ffe1745e;
     }
-    .info-popup-card { min-width: 250px; width: 90vw;}
-    .teamstats-popup-card { width: 98vw; max-width: 560px; padding: 10px 7px 18px 7px;}
     @keyframes popupAppear { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .popup-card img { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); background: #fff; margin-bottom: 7px;}
-    .popup-card .name { font-size: 1.18rem; font-weight: 800; color: var(--primary); }
-    .popup-card .team { font-size: 1.04rem; color: #555; margin-bottom: 9px;}
-    .popup-card .stats-sections { display: grid; grid-template-columns: 1fr; gap: 8px 0; margin-top: 6px; margin-bottom: 7px; width: 100%;}
-    .popup-card .stat-group-title { color: var(--primary); font-weight: 700; margin: 7px 0 4px 0; font-size: 1.05em;}
-    .popup-card table.stats-list { width: 100%; border-collapse: collapse; margin-bottom: 2px;}
-    .popup-card .stats-list td { padding: 4px 6px 4px 0; text-align: left; font-size: 0.98em;}
-    .popup-card .stats-list td:first-child { font-weight: 600; color: #444;}
-    .popup-card .stats-list td:last-child { font-weight: 700; color: var(--accent);}
     .popup-card .close-btn, .info-popup-card .close-btn, .teamstats-popup-card .close-btn {
-      position: absolute; top: 8px; right: 12px;
-      font-size: 2em; color: #888; background: none;
-      border: none; cursor: pointer; transition: color 0.17s;
-      z-index: 2;
+      position: absolute; top: 13px; right: 20px;
+      font-size: 2.2em; color: #aaa; background: none;
+      border: none; cursor: pointer; transition: color 0.16s;
     }
-    .popup-card .close-btn:hover, .info-popup-card .close-btn:hover, .teamstats-popup-card .close-btn:hover { color: var(--primary);}
-    .save-card-btn {
-      margin-top: 11px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 700;
-      padding: 7px 14px;
-      border: none;
-      border-radius: 16px;
-      font-size: 1em;
-      box-shadow: 0 1px 10px #0001;
-      cursor: pointer;
-      transition: background 0.19s;
+    .popup-card .close-btn:hover,
+    .info-popup-card .close-btn:hover,
+    .teamstats-popup-card .close-btn:hover { color: var(--primary);}
+    /* --- RESPONSIVE --- */
+    @media (max-width:600px) {
+      .highlight-cards { grid-template-columns: 1fr; gap: 16px;}
+      .stat-card { padding: 17px 11px 12px 17px;}
+      .tab-title { font-size: 1.09em; margin-top: 21px;}
+      .popup-card, .info-popup-card, .teamstats-popup-card { width: 98vw; padding: 13px 3vw 10px 3vw; }
+      table, th, td { font-size: .97em;}
     }
-    .save-card-btn:hover { background: #600900; }
-    .team-stats-header-card {
-      background: var(--highlight);
-      border-radius: 14px;
-      margin-bottom: 13px;
-      padding: 14px 11px 7px 14px;
-      font-size: 1.12em;
-      color: var(--primary);
-      font-weight: 700;
-      box-shadow: 0 2px 10px #0001;
-      text-align: center;
-    }
-    .team-stats-note {
-      color: #888; font-size: .95em; font-style: italic; margin: 5px 0 9px 3px;
-    }
-    /* "i" icon for info */
-    .info-icon {
-      display: inline-block;
-      font-size: 1.05em;
-      color: var(--info-blue);
-      background: #e7f3fe;
-      border-radius: 50%;
-      width: 1.22em; height: 1.22em;
-      text-align: center;
-      font-weight: 800;
-      cursor: pointer;
-      margin-left: 7px;
-      margin-bottom: -1px;
-      line-height: 1.19em;
-      box-shadow: 0 1px 2px #acd2ff44;
-    }
-    /* TOP 10 PAGE: Single column tables */
-    .top10-list-section { margin-bottom: 27px;}
-    .top10-list-title { font-weight: 700; font-size: 1.13em; color: var(--primary); margin: 7px 0 7px 0;}
-    .top10-list-table { width: 100%; border-collapse: collapse; background: var(--surface); box-shadow: 0 1px 7px #0001; border-radius: 14px; overflow: hidden;}
-    .top10-list-table th { background: #f5f5f5; color: var(--primary); font-size: 1em; font-weight: 700; padding: 9px 4px;}
-    .top10-list-table td { padding: 8px 3px; font-size: .99em;}
-    .top10-list-table td button { color: var(--primary); font-weight: 700; background: none; border: none; cursor: pointer;}
-    @media (max-width:500px) {
-      .top10-list-table th, .top10-list-table td { font-size: 0.96em;}
-      .popup-card, .info-popup-card, .teamstats-popup-card { padding: 8px 3vw 7px 3vw; width: 98vw;}
-    }
-    #squads-list { margin-top: 10px;}
-    .squad-team-section { margin-bottom: 19px;}
-    .squad-team-name-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3px;}
-    .squad-team-name { font-size: 1.13em; font-weight: 700; color: var(--primary); cursor: pointer;}
-    .squad-team-name:hover { text-decoration: underline dotted;}
-    .squad-player-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 12px;}
-    .squad-player-card { background: var(--surface); box-shadow: 0 2px 8px #0001; border-radius: 14px; padding: 11px 7px 13px 7px; text-align: center; min-height: 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 1.06em;}
-    .squad-player-card button { background: none; border: none; color: var(--primary); font-size: 1.08em; font-weight: 600; cursor: pointer; text-decoration: underline dotted; padding: 0; margin: 0 0 2px 0;}
-    .squad-player-card .squad-sets { color: #666; font-size: 0.92em;}
-    .squad-team-filter-row { display: flex; align-items: center; gap: 9px; margin-bottom: 10px;}
-    .squad-team-filter-row label { color: #444; font-size: 1em; font-weight: 500;}
-    .squad-team-filter { width: 170px; border-radius: 18px; padding: 8px 10px; border: 1px solid #ccc; font-size: 1em; background: #fff; color: #222;}
-  /* Improved Team Stats Popup for Mobile */
-.teamstats-popup-card {
-  position: relative;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 8px 40px #0003;
-  width: 96vw; max-width: 540px;
-  max-height: 94vh;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0;
-  overflow: hidden;
-}
-.team-stats-popup-header {
-  background: var(--highlight);
-  border-bottom: 1px solid #ececec;
-  padding: 14px 20px 10px 16px;
-  color: var(--primary);
-  font-size: 1.16em;
-  font-weight: 800;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 50px;
-}
-.team-stats-popup-close-btn {
-  position: absolute;
-  top: 10px; right: 16px;
-  font-size: 1.8em;
-  color: #888;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 3;
-}
-.teamstats-popup-scroll {
-  overflow: auto;
-  padding: 13px 11px 19px 11px;
-  flex: 1 1 auto;
-  min-height: 0;
-}
-.teamstats-popup-scroll table.stats-table {
-  min-width: 370px;
-}
-@media (max-width:500px) {
-  .teamstats-popup-card { width: 99vw; max-width: 99vw; }
-  .teamstats-popup-scroll table.stats-table { min-width: 270px;}
-  .team-stats-popup-header { font-size: 1.04em; padding-left: 6px; padding-right: 44px;}
-}
-    .fixture-badge {
-  display: inline-block;
-  font-size: 0.92em;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 16px;
-  margin-left: 8px;
-  vertical-align: middle;
-  box-shadow: 0 1px 4px #0001;
-  letter-spacing: 0.02em;
-}
-.badge-gold { background: linear-gradient(90deg, #ffe174 90%, #fff2 100%); color: #935f07; border: 1px solid #ffe174;}
-.badge-silver { background: linear-gradient(90deg, #d2d7df 90%, #fff2 100%); color: #606e84; border: 1px solid #d2d7df;}
-.badge-elim { background: #ececec; color: #444; border: 1px solid #dedede;}
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
-<header>
-  <img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="Royal Darts Carnival 2025 Logo" loading="lazy">
-  <div class="header-titlebox"><div class="header-title">Darts Carnival 2025</div></div>
-  <button class="burger-btn" id="burger-btn" aria-label="Open menu">&#9776;</button>
-  <div class="nav-horiz" id="nav-horiz">
-    <button data-tab="home" class="active" aria-current="page">Home</button>
-    <button data-tab="fixtures">Fixtures</button>
-    <button data-tab="results">Results</button>
-    <button data-tab="standings">Standings</button>
-    <button data-tab="stats">Stats</button>
-    <button data-tab="top10">Top 10</button>
-    <button data-tab="live">Live</button>
-    <button data-tab="squads">Squads</button>
-  </div>
-</header>
-<div class="nav-drawer-backdrop" id="drawer-backdrop" tabindex="-1">
-  <nav class="nav-drawer" role="navigation" aria-label="Main Navigation">
-    <button class="nav-drawer-close" aria-label="Close menu" id="drawer-close">&times;</button>
-    <div class="nav-links">
-      <button data-tab="home">Home</button>
-      <button data-tab="fixtures">Fixtures</button>
-      <button data-tab="results">Results</button>
-      <button data-tab="standings">Standings</button>
-      <button data-tab="stats">Stats</button>
-      <button data-tab="top10">Top 10</button>
-      <button data-tab="live">Live</button>
-      <button data-tab="squads">Squads</button>
+  <header>
+    <div class="header-titlebox">
+      <div class="header-title">Royal Darts Carnival 2025</div>
+      <div class="header-subtitle">Live • Fixtures • Results • Stats</div>
     </div>
-  </nav>
-</div>
-<main>
-  <section id="tab-home">
-    <div class="tab-title">Today’s Fixtures</div>
-    <div class="fixtures-list" id="today-fixtures"></div>
-    <div class="tab-title">Quick Standings</div>
-    <table class="quick-standings" id="quick-standings"></table>
-    <div class="tab-title">Stat Highlights</div>
-    <div class="highlight-cards" id="stat-highlights"></div>
-    <div class="highlight-footer">*2 matches min played</div>
-  </section>
-  <section id="tab-fixtures" hidden>
-    <div class="tab-title">All Fixtures</div>
-    <div class="fixtures-list" id="fixtures-list"></div>
-  </section>
-  <section id="tab-results" hidden>
-    <div class="tab-title">All Results</div>
-    <div class="results-list" id="results-list"></div>
-  </section>
-  <section id="tab-standings" hidden>
-    <div class="tab-title">Group Standings</div>
-    <div id="standings-tables"></div>
-  </section>
-  <section id="tab-stats" hidden>
-    <div class="tab-title">Player Statistics</div>
-    <input id="stats-search" placeholder="Search player..." style="width:98%;max-width:330px;padding:9px 10px;border-radius:20px;border:1px solid #e3e3e3;margin:8px 0 18px 0;font-size:1em;">
-    <div style="overflow-x:auto">
-      <table class="stats-table" id="stats-table"></table>
-    </div>
-  </section>
-  <section id="tab-top10" hidden>
-    <div class="tab-title">Top 10 Rankings</div>
-    <div id="top10-tables"></div>
-  </section>
-  <section id="tab-live" hidden>
-    <iframe id="live-iframe" src="https://n01darts.com/n01/tournament/comp.php?id=t_OxWz_6427&tab=live"
-      style="width:100%;height:72vh;border-radius:18px;border:none;box-shadow:0 2px 20px #0002;"></iframe>
-  </section>
-  <section id="tab-squads" hidden>
-    <div class="tab-title">Squads / Player List</div>
-    <div class="squad-team-filter-row">
-      <label for="squad-team-filter">Team:</label>
-      <select id="squad-team-filter" class="squad-team-filter">
-        <option value="">All Teams</option>
-      </select>
-    </div>
-    <div id="squads-list"></div>
-  </section>
-</main>
-<!-- Popups: Player, Info, TeamStats -->
-<div class="popup-backdrop" id="popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
-<footer>
-  Built by SUCA Analytics
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script>
-  // CONFIG: Update this to your live API endpoint and fixtures JSON path if needed
-  const API_URL = "https://script.google.com/macros/s/AKfycbxg9ASk6TWcgMn4O25XgTtHdxOULY-Dlw6UpcyzWpBwEXXlNS_FoOi4BVjR4HBS55QU7A/exec";
-  const LOGO_URL = "https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif";
-  const FIXTURES_JSON_URL = "csvjson.json";
+    <nav class="nav-bar">
+      <button class="nav-btn active" data-tab="home" aria-current="page">Home</button>
+      <button class="nav-btn" data-tab="fixtures">Fixtures</button>
+      <button class="nav-btn" data-tab="results">Results</button>
+      <button class="nav-btn" data-tab="standings">Standings</button>
+      <button class="nav-btn" data-tab="stats">Stats</button>
+      <button class="nav-btn" data-tab="top10">Top 10</button>
+      <button class="nav-btn" data-tab="live">Live</button>
+      <button class="nav-btn" data-tab="squads">Squads</button>
+    </nav>
+  </header>
 
+  <main>
+    <section id="tab-home">
+      <div class="tab-title">Today's Fixtures</div>
+      <div class="fixtures-list" id="today-fixtures"></div>
+      <div class="tab-title">Quick Standings</div>
+      <table class="quick-standings" id="quick-standings"></table>
+      <div class="tab-title">Stat Highlights</div>
+      <div class="highlight-cards" id="stat-highlights"></div>
+      <div class="highlight-footer">*2 matches min played</div>
+    </section>
+    <section id="tab-fixtures" hidden>
+      <div class="tab-title">All Fixtures</div>
+      <div class="fixtures-list" id="fixtures-list"></div>
+    </section>
+    <section id="tab-results" hidden>
+      <div class="tab-title">All Results</div>
+      <div class="results-list" id="results-list"></div>
+    </section>
+    <section id="tab-standings" hidden>
+      <div class="tab-title">Group Standings</div>
+      <div id="standings-tables"></div>
+    </section>
+    <section id="tab-stats" hidden>
+      <div class="tab-title">Player Statistics</div>
+      <input id="stats-search" placeholder="Search player..." style="width:98%;max-width:330px;padding:9px 10px;border-radius:20px;border:1px solid #e3e3e3;margin:8px 0 18px 0;font-size:1em;">
+      <div style="overflow-x:auto">
+        <table class="stats-table" id="stats-table"></table>
+      </div>
+    </section>
+    <section id="tab-top10" hidden>
+      <div class="tab-title">Top 10 Rankings</div>
+      <div id="top10-tables"></div>
+    </section>
+    <section id="tab-live" hidden>
+      <iframe id="live-iframe" src="https://n01darts.com/n01/tournament/comp.php?id=t_OxWz_6427&tab=live"
+        style="width:100%;height:73vh;border-radius:20px;border:none;box-shadow:0 2px 20px #ffe17466;"></iframe>
+    </section>
+    <section id="tab-squads" hidden>
+      <div class="tab-title">Squads / Player List</div>
+      <div class="squad-team-filter-row">
+        <label for="squad-team-filter">Team:</label>
+        <select id="squad-team-filter" class="squad-team-filter">
+          <option value="">All Teams</option>
+        </select>
+      </div>
+      <div id="squads-list"></div>
+    </section>
+  </main>
+  <div class="popup-backdrop" id="popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
+  <footer style="text-align:center;padding:21px 0 14px 0;font-size:1.08em;font-weight:700;color:#bda781;">
+    Built by SUCA Analytics
+  </footer>
+<script>
+  // --- CONFIG: Update this if API or fixtures endpoint changes
+  const API_URL = "https://script.google.com/macros/s/AKfycbxg9ASk6TWcgMn4O25XgTtHdxOULY-Dlw6UpcyzWpBwEXXlNS_FoOi4BVjR4HBS55QU7A/exec";
+  const FIXTURES_JSON_URL = "csvjson.json";
   let allData = {}, statsData = [], standingsData = [], fixturesData = [], resultsData = [];
   let filteredStats = [];
   let lastSort = {col:null, asc:true};
 
-  // Burger nav & responsive
+  // --- Responsive Navigation ---
   document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
-    setupDrawer();
     fetchAllData();
     setInterval(fetchAllData, 60000);
   });
 
-  function setupDrawer() {
-    const burgerBtn = document.getElementById('burger-btn');
-    const backdrop = document.getElementById('drawer-backdrop');
-    const drawer = document.querySelector('.nav-drawer');
-    const closeBtn = document.getElementById('drawer-close');
-    const navLinks = drawer.querySelectorAll('.nav-links button');
-    burgerBtn.onclick = () => { backdrop.classList.add('show'); backdrop.style.display='flex'; };
-    closeBtn.onclick = () => { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);}
-    backdrop.onclick = (e) => { if(e.target === backdrop) { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180); } };
-    navLinks.forEach(btn => {
+  function setupNavigation() {
+    document.querySelectorAll('.nav-btn').forEach(btn => {
       btn.onclick = () => {
-        backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);
-        activateTab(btn.dataset.tab);
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
+        document.getElementById('tab-' + btn.dataset.tab).hidden = false;
+        btn.setAttribute('aria-current','page');
       };
     });
   }
-  function setupNavigation() {
-  // For all navs
-  document.querySelectorAll('nav button, .nav-horiz button, .nav-drawer .nav-links button').forEach(btn => {
-    btn.onclick = () => { activateTab(btn.dataset.tab); };
-  });
-}
-  function activateTab(tab) {
-  document.querySelectorAll('nav button, .nav-drawer .nav-links button, .nav-horiz button').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === tab);
-    if(btn.dataset.tab === tab) btn.setAttribute('aria-current','page');
-    else btn.removeAttribute('aria-current');
-  });
-  document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
-  document.getElementById('tab-' + tab).hidden = false;
-}
 
+  // --- Data Load ---
   async function fetchAllData() {
     try {
       let res = await fetch(API_URL + "?cachebust=" + Math.random());
@@ -539,7 +353,8 @@
       fixturesData = await fetchFixturesJson(FIXTURES_JSON_URL);
       renderAll();
     } catch (err) {
-      alert("Error loading data: " + err);
+      document.getElementById('today-fixtures').innerHTML =
+        `<div style="color:#d53a2a;padding:12px">Error loading data. Please refresh.</div>`;
     }
   }
   async function fetchFixturesJson(url) {
@@ -556,7 +371,6 @@
     if (pos <= 5) return "silver";
     return "eliminated";
   }
-
   function renderAll() {
     renderTodayFixtures();
     renderQuickStandings();
@@ -568,65 +382,64 @@
     renderTop10Tables();
     renderSquadsList();
   }
-
-  // --- Home Page Today Fixtures (MOBILE/DATE SAFE) ---
+  // --- Today's Fixtures (with Knockout Badges) ---
   function renderTodayFixtures() {
-  if (!fixturesData.length) {
-    document.getElementById('today-fixtures').innerHTML =
-      `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
-    return;
-  }
-  let today = new Date();
-  let todayDay = today.getDate();
-  let todayMonth = today.getMonth();
-  let todays = fixturesData.filter(f => {
-    if (!f.Date) return false;
-    let parts = (f.Date+"").split(' ');
-    if (parts.length < 2) return false;
-    let day = parseInt(parts[0], 10);
-    let monthStr = parts[1].toLowerCase();
-    let monthNum = [
-      "january","february","march","april","may","june","july","august",
-      "september","october","november","december"
-    ].indexOf(monthStr);
-    return day === todayDay && monthNum === todayMonth;
-  });
-  if (!todays.length) {
-    document.getElementById('today-fixtures').innerHTML =
-      `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
-    return;
+    if (!fixturesData.length) {
+      document.getElementById('today-fixtures').innerHTML =
+        `<div style="color:#bbb;padding:12px">No fixtures scheduled for today.</div>`;
+      return;
+    }
+    let today = new Date();
+    let todayDay = today.getDate();
+    let todayMonth = today.getMonth();
+    let todays = fixturesData.filter(f => {
+      if (!f.Date) return false;
+      let parts = (f.Date+"").split(' ');
+      if (parts.length < 2) return false;
+      let day = parseInt(parts[0], 10);
+      let monthStr = parts[1].toLowerCase();
+      let monthNum = [
+        "january","february","march","april","may","june","july","august",
+        "september","october","november","december"
+      ].indexOf(monthStr);
+      return day === todayDay && monthNum === todayMonth;
+    });
+    if (!todays.length) {
+      document.getElementById('today-fixtures').innerHTML =
+        `<div style="color:#bbb;padding:12px">No fixtures scheduled for today.</div>`;
+      return;
+    }
+
+    function getBadge(group) {
+      if (!group) return '';
+      let g = group.toLowerCase();
+      if (g.includes('gold'))    return `<span class="fixture-badge badge-gold">${group}</span>`;
+      if (g.includes('silver'))  return `<span class="fixture-badge badge-silver">${group}</span>`;
+      if (g.includes('eliminator')) return `<span class="fixture-badge badge-elim">Eliminator</span>`;
+      if (g.includes('qualifier'))  return `<span class="fixture-badge badge-qual">Qualifier</span>`;
+      return '';
+    }
+
+    let out = `<table class="fixtures-table">
+      <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th><th></th></tr>`;
+    todays.forEach(f => {
+      out += `<tr>
+        <td>${f.Time || ""}</td>
+        <td>${f["Team A"]||""}</td>
+        <td style="color:#b61320;font-weight:700;">vs</td>
+        <td>${f["Team B"]||""}</td>
+        <td>${getBadge(f.Group)}</td>
+      </tr>`;
+    });
+    out += `</table>`;
+    document.getElementById('today-fixtures').innerHTML = out;
   }
 
-  function getBadge(group) {
-    if (!group) return '';
-    let g = group.toLowerCase();
-    if (g.includes('gold')) return `<span class="fixture-badge badge-gold">Gold ${g.replace('gold','').toUpperCase()}</span>`;
-    if (g.includes('silver')) return `<span class="fixture-badge badge-silver">Silver ${g.replace('silver','').toUpperCase()}</span>`;
-    if (g.includes('eliminator')) return `<span class="fixture-badge badge-elim">Eliminator</span>`;
-    if (g.includes('qualifier')) return `<span class="fixture-badge badge-gold">Qualifier</span>`;
-    return '';
-  }
-
-  let out = `<table class="fixtures-table">
-    <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th><th></th></tr>`;
-  todays.forEach(f => {
-    out += `<tr>
-      <td>${f.Time || ""}</td>
-      <td>${f["Team A"]||""}</td>
-      <td style="color:#a81100;font-weight:700;">vs</td>
-      <td>${f["Team B"]||""}</td>
-      <td>${getBadge(f.Group)}</td>
-    </tr>`;
-  });
-  out += `</table>`;
-  document.getElementById('today-fixtures').innerHTML = out;
-}
-
-  // --- Fixtures Page: Group by Date ---
+  // --- Fixtures Page ---
   function renderFixturesList() {
     if (!fixturesData.length) {
       document.getElementById('fixtures-list').innerHTML =
-        `<div style="color:#888;padding:10px">No fixtures loaded.</div>`;
+        `<div style="color:#bbb;padding:10px">No fixtures loaded.</div>`;
       return;
     }
     let byDate = {};
@@ -641,15 +454,16 @@
     });
     dateKeys.forEach(dateLabel => {
       let matches = byDate[dateLabel];
-      out += `<div class="date-group"><div class="date-label">${dateLabel}</div>
+      out += `<div class="date-group"><div class="date-label" style="font-weight:700;font-size:1.11em;color:#e7b000;margin:0 0 6px 2px;">${dateLabel}</div>
         <table>
-          <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th></tr>`;
+          <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th><th></th></tr>`;
       matches.forEach(f => {
         out += `<tr>
           <td>${f.Time || ""}</td>
           <td>${f["Team A"]}</td>
-          <td style="color:#a81100;font-weight:700;">vs</td>
+          <td style="color:#b61320;font-weight:700;">vs</td>
           <td>${f["Team B"]}</td>
+          <td>${getBadge(f.Group)}</td>
         </tr>`;
       });
       out += `</table></div>`;
@@ -657,7 +471,7 @@
     document.getElementById('fixtures-list').innerHTML = out;
   }
 
-  /* --- Stat Highlights (NO Best Leg) --- */
+  // --- Stat Highlights ---
   function renderStatHighlights() {
     if (!statsData.length) return;
     function bestStat(col, bestFn, postFn) {
@@ -685,8 +499,7 @@
       </div>
     `).join('');
   }
-
-  /* --- Standings (Quick and Full) --- */
+  // --- Standings ---
   function renderQuickStandings() {
     if (!standingsData.length) return;
     let byGroup = {};
@@ -697,11 +510,11 @@
     let out = '';
     Object.entries(byGroup).forEach(([group, teams]) => {
       teams.sort((a, b) =>
-  (+b.Points||0) - (+a.Points||0) ||
-  ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
-  (asNum(b.For) - asNum(a.For))
-);
-      out += `<tr><th colspan="10" style="background:var(--primary);color:#fff;font-size:1.1em;">${group}</th></tr>`;
+        (+b.Points||0) - (+a.Points||0) ||
+        ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
+        (asNum(b.For) - asNum(a.For))
+      );
+      out += `<tr><th colspan="10" style="background:var(--primary);color:#fff;font-size:1.08em;">${group}</th></tr>`;
       out += `<tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th></tr>`;
       teams.forEach((t,i) => {
         let cup = getCupByPosition(i+1);
@@ -715,6 +528,7 @@
     });
     document.getElementById('quick-standings').innerHTML = out;
   }
+
   function renderStandingsTables() {
     if (!standingsData.length) return;
     let byGroup = {};
@@ -725,12 +539,12 @@
     let out = '';
     Object.entries(byGroup).forEach(([group, teams]) => {
       teams.sort((a, b) =>
-  (+b.Points||0) - (+a.Points||0) ||
-  ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
-  (asNum(b.For) - asNum(a.For))
-);
+        (+b.Points||0) - (+a.Points||0) ||
+        ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
+        (asNum(b.For) - asNum(a.For))
+      );
       out += `<div style="margin-bottom:23px">
-        <div style="font-size:1.11em;font-weight:700;color:var(--primary);margin:9px 0 3px 0">${group}</div>
+        <div style="font-size:1.13em;font-weight:800;color:var(--primary);margin:9px 0 3px 0">${group}</div>
         <table class="standings-table">
           <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th><th>Cup</th></tr>`;
       teams.forEach((t,i) => {
@@ -749,7 +563,51 @@
     document.getElementById('standings-tables').innerHTML = out;
   }
 
-  /* --- Stats Table + Sorting (NO TEAM FILTER) --- */
+  // --- Results ---
+  function renderResultsList() {
+    if (!resultsData.length) {
+      document.getElementById('results-list').innerHTML =
+        `<div style="color:#bbb;padding:10px">No results loaded.</div>`;
+      return;
+    }
+    let byGroup = {};
+    resultsData.forEach(r => {
+      let group = r.Group || "Other";
+      (byGroup[group] = byGroup[group] || []).push(r);
+    });
+
+    let out = '';
+    Object.entries(byGroup).forEach(([group, matches]) => {
+      let byDate = {};
+      matches.forEach(r => {
+        let date = r.Date || '';
+        (byDate[date] = byDate[date] || []).push(r);
+      });
+      out += `<div style="margin-bottom:30px">
+        <div style="font-size:1.13em;font-weight:900;color:var(--primary);margin:10px 0 7px 2px;">Group: ${group}</div>`;
+      Object.entries(byDate).sort((a,b)=>{
+        let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
+        return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
+      }).forEach(([date, games]) => {
+        out += `<div class="date-group"><div class="date-label">${date}</div>
+          <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
+        games.forEach(r => {
+          let a = +r["Score A"]||0, b = +r["Score B"]||0;
+          let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
+          out += `<tr>
+            <td>${r["Team A"]}</td><td style="color:#b61320;font-weight:700;">vs</td>
+            <td>${r["Team B"]}</td><td>${a} - ${b}</td>
+            <td class="winner-cell">${win}</td>
+          </tr>`;
+        });
+        out += `</table></div>`;
+      });
+      out += `</div>`;
+    });
+    document.getElementById('results-list').innerHTML = out;
+  }
+
+  // --- Player Stats Table ---
   function renderStatsTable() {
     if (!statsData.length) return;
     const cols = [
@@ -768,7 +626,7 @@
 
     function doStatsTable(rows, cols) {
       let ths = cols.map(c =>
-        `<th data-col="${c}" style="cursor:pointer">${c} <span style="font-size:0.92em;opacity:.56">${
+        `<th data-col="${c}" style="cursor:pointer">${c} <span style="font-size:0.91em;opacity:.53">${
           lastSort.col===c ? (lastSort.asc ? "▲" : "▼") : ""
         }</span></th>`
       ).join('');
@@ -803,7 +661,7 @@
     }
   }
 
-  /* --- Top 10 Page: Tables + MVP Info Modal --- */
+  // --- Top 10 Rankings ---
   function renderTop10Tables() {
     if (!statsData.length || !standingsData.length) return;
     const cats = [
@@ -846,27 +704,20 @@
     document.getElementById('top10-tables').innerHTML = out;
   }
 
-  // MVP Calculation (fully normalized per spec)
+  // --- MVP Calculation ---
   function calcMVPScore(p) {
-    // Guard for empty/invalid data
     if (!statsData.length || !standingsData.length) return 0;
-    // Only count those with legs played
     let valid = statsData.filter(x=>asNum(x["Match Played"])>=2 && asNum(x["3 Dart Avg"]) && asNum(x["Legs Played"]) && asNum(x["Legs Won"]));
     if (!valid.length) return 0;
-    // 1. NormAvg: Player 3DAvg / Max 3DAvg
     let max3D = Math.max(...valid.map(x=>asNum(x["3 Dart Avg"])||0));
     let normAvg = (asNum(p["3 Dart Avg"])||0) / (max3D||1);
-    // 2. NormWinRate: (LegsWon/LegsPlayed) / MaxWinRate
     let playerWinRate = (asNum(p["Legs Played"])>0) ? ((asNum(p["Legs Won"])||0)/(asNum(p["Legs Played"])||1)) : 0;
     let maxWinRate = Math.max(...valid.map(x=>(asNum(x["Legs Played"])>0)?((asNum(x["Legs Won"])||0)/(asNum(x["Legs Played"])||1)):0));
     let normWinRate = playerWinRate / (maxWinRate||1);
-    // 3. NormLegsWon: Player LegsWon / Max LegsWon
     let maxLegsWon = Math.max(...valid.map(x=>asNum(x["Legs Won"])||0));
     let normLegsWon = (asNum(p["Legs Won"])||0)/(maxLegsWon||1);
-    // 4. NormHighFinish: Player HighFinish / Max HighFinish
     let maxHF = Math.max(...valid.map(x=>asNum(x["High Finish"])||0));
     let normHF = (asNum(p["High Finish"])||0)/(maxHF||1);
-    // 5. TeamSuccessScore: 1 - ((TeamRank-1)/(TotalTeams-1))
     let playerTeam = (p.Team||"").trim();
     let group = standingsData.find(x=>x.Team===playerTeam)?.Group || null;
     let teamsThisGroup = standingsData.filter(x=>x.Group===group);
@@ -874,16 +725,16 @@
     let teamRank = sorted.findIndex(t=>t.Team===playerTeam)+1;
     let totalTeams = sorted.length;
     let teamSuccess = (totalTeams>1) ? 1-((teamRank-1)/(totalTeams-1)) : 1;
-    // Weighted formula
     return (normAvg*0.40) + (normWinRate*0.25) + (normLegsWon*0.20) + (normHF*0.05) + (teamSuccess*0.10);
   }
-  // MVP info popup
+
+  // --- MVP Info Popup ---
   window.showMvpInfo = function() {
     showCustomPopup(`
       <div class="info-popup-card">
         <button class="close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-        <div style="font-weight:700;font-size:1.11em;margin:4px 0 14px 0;color:var(--primary);">How is MVP calculated?</div>
-        <div style="font-size:1.01em;line-height:1.56">
+        <div style="font-weight:700;font-size:1.14em;margin:4px 0 14px 0;color:var(--primary);">How is MVP calculated?</div>
+        <div style="font-size:1.06em;line-height:1.56">
         <b>MVP Score =</b> (NormAvg × 0.40) + (NormWinRate × 0.25) + (NormLegsWon × 0.20) + (NormHighFinish × 0.05) + (TeamSuccess × 0.10)<br><br>
         <b>Where:</b><br>
         NormAvg = Player’s 3DAvg ÷ Highest 3DAvg<br>
@@ -897,131 +748,84 @@
     `);
   };
 
-  /* --- Results Page by Group and Date --- */
-  function renderResultsList() {
-    if (!resultsData.length) {
-      document.getElementById('results-list').innerHTML =
-        `<div style="color:#888;padding:10px">No results loaded.</div>`;
-      return;
-    }
-    let byGroup = {};
-    resultsData.forEach(r => {
-      let group = r.Group || "Other";
-      (byGroup[group] = byGroup[group] || []).push(r);
-    });
-
-    let out = '';
-    Object.entries(byGroup).forEach(([group, matches]) => {
-      let byDate = {};
-      matches.forEach(r => {
-        let date = r.Date || '';
-        (byDate[date] = byDate[date] || []).push(r);
-      });
-      out += `<div style="margin-bottom:30px">
-        <div style="font-size:1.12em;font-weight:800;color:var(--primary);margin:12px 0 7px 3px;">Group: ${group}</div>`;
-      Object.entries(byDate).sort((a,b)=>{
-        let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
-        return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
-      }).forEach(([date, games]) => {
-        out += `<div class="date-group"><div class="date-label">${date}</div>
-          <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th></tr>`;
-        games.forEach(r => {
-          let a = +r["Score A"]||0, b = +r["Score B"]||0;
-          let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
-          out += `<tr>
-            <td>${r["Team A"]}</td><td style="color:#a81100;font-weight:700;">vs</td>
-            <td>${r["Team B"]}</td><td>${a} - ${b}</td>
-            <td class="winner-cell">${win}</td>
-          </tr>`;
-        });
-        out += `</table></div>`;
-      });
-      out += `</div>`;
-    });
-    document.getElementById('results-list').innerHTML = out;
-  }
-
-  /* --- Squads Page: Team Filter, TeamStats Popup --- */
+  // --- Squads ---
   function renderSquadsList() {
-  if (!statsData.length) return;
-  let byTeam = {};
-  statsData.forEach(p => (byTeam[p.Team] = byTeam[p.Team]||[]).push(p));
-  let teams = Object.keys(byTeam).sort();
-  // Team filter dropdown
-  let sel = document.getElementById('squad-team-filter');
-  if (sel.innerHTML === "" || sel.options.length !== teams.length+1) {
-    sel.innerHTML = `<option value="">All Teams</option>` + teams.map(t=>`<option>${t}</option>`).join('');
-  }
-  sel.onchange = renderSquadsList;
-  let filter = sel.value;
-  let showTeams = filter ? [filter] : teams;
-  let out = '';
-  showTeams.forEach(team => {
-    let players = byTeam[team];
-    out += `<div class="squad-team-section">
-      <div class="squad-team-name-row">
-        <span class="squad-team-name" onclick="showTeamStats('${encodeURIComponent(team)}')" title="Show stats for this team">${team}</span>
-        <span class="team-stats-note">Tap team for full stats</span>
-      </div>
-      <div class="squad-player-grid">`;
-    players.forEach(p=>{
-      out += `<div class="squad-player-card">
-        <button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">
-          ${p.Player}
-        </button>
-        <div class="squad-sets">${p["Sets Played"]||""} Sets, ${p["3 Dart Avg"]||""} 3DA</div>
-      </div>`;
-    });
-    out += `</div></div>`;
-  });
-  document.getElementById('squads-list').innerHTML = out;
-}
-
-  // TEAM STATS MODAL (like stats page but only for one team)
-  window.showTeamStats = function(teamEnc) {
-  let team = decodeURIComponent(teamEnc);
-  let players = statsData.filter(p=>p.Team===team);
-  if (!players.length) return;
-  // Pick stats columns to show (mobile-optimized)
-  const cols = [
-    "Player","Sets Played","Sets Won","3 Dart Avg","First 9 Avg",
-    "High Finish","100+","140+","180's","Win Rate (Legs)","Win Rate (Sets)"
-  ];
-  let ths = cols.map(c=>`<th>${c}</th>`).join('');
-  let trs = players.map(p=>'<tr>'+cols.map(c=>{
-    if(c==="Player") return `<td><button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>`;
-    if (c.startsWith("Win Rate")) {
-      let v = asNum(p[c]);
-      return `<td>${v!=null ? (v*100).toFixed(1)+"%" : ""}</td>`;
+    if (!statsData.length) return;
+    let byTeam = {};
+    statsData.forEach(p => (byTeam[p.Team] = byTeam[p.Team]||[]).push(p));
+    let teams = Object.keys(byTeam).sort();
+    // Team filter dropdown
+    let sel = document.getElementById('squad-team-filter');
+    if (sel.innerHTML === "" || sel.options.length !== teams.length+1) {
+      sel.innerHTML = `<option value="">All Teams</option>` + teams.map(t=>`<option>${t}</option>`).join('');
     }
-    return `<td>${p[c]||""}</td>`;
-  }).join('')+'</tr>').join('');
-  showCustomPopup(`
-    <div class="teamstats-popup-card">
-      <div class="team-stats-popup-header">
-        All Player Stats for ${team}
-        <button class="team-stats-popup-close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-      </div>
-      <div class="teamstats-popup-scroll">
-        <table class="stats-table" style="width:100%">
-          <tr>${ths}</tr>${trs}
-        </table>
-      </div>
-    </div>
-  `);
-};
+    sel.onchange = renderSquadsList;
+    let filter = sel.value;
+    let showTeams = filter ? [filter] : teams;
+    let out = '';
+    showTeams.forEach(team => {
+      let players = byTeam[team];
+      out += `<div class="squad-team-section" style="margin-bottom:24px">
+        <div class="squad-team-name-row" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+          <span class="squad-team-name" onclick="showTeamStats('${encodeURIComponent(team)}')" title="Show stats for this team" style="font-size:1.13em;font-weight:700;color:var(--primary);cursor:pointer;">${team}</span>
+          <span class="team-stats-note" style="color:#bbb;font-size:.96em;font-style:italic;">Tap team for full stats</span>
+        </div>
+        <div class="squad-player-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;">
+      `;
+      players.forEach(p=>{
+        out += `<div class="squad-player-card" style="background:var(--surface);box-shadow:0 2px 7px #ffe17418;border-radius:14px;padding:11px 7px 13px 7px;text-align:center;min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1.06em;">
+          <button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')" style="background:none;border:none;color:var(--primary);font-size:1.08em;font-weight:600;cursor:pointer;text-decoration:underline dotted;padding:0;margin:0 0 2px 0;">${p.Player}</button>
+          <div class="squad-sets" style="color:#888;font-size:0.92em;">${p["Sets Played"]||""} Sets, ${p["3 Dart Avg"]||""} 3DA</div>
+        </div>`;
+      });
+      out += `</div></div>`;
+    });
+    document.getElementById('squads-list').innerHTML = out;
+  }
 
-  // --- Player popup ---
+  // --- Team Stats Modal ---
+  window.showTeamStats = function(teamEnc) {
+    let team = decodeURIComponent(teamEnc);
+    let players = statsData.filter(p=>p.Team===team);
+    if (!players.length) return;
+    const cols = [
+      "Player","Sets Played","Sets Won","3 Dart Avg","First 9 Avg",
+      "High Finish","100+","140+","180's","Win Rate (Legs)","Win Rate (Sets)"
+    ];
+    let ths = cols.map(c=>`<th>${c}</th>`).join('');
+    let trs = players.map(p=>'<tr>'+cols.map(c=>{
+      if(c==="Player") return `<td><button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>`;
+      if (c.startsWith("Win Rate")) {
+        let v = asNum(p[c]);
+        return `<td>${v!=null ? (v*100).toFixed(1)+"%" : ""}</td>`;
+      }
+      return `<td>${p[c]||""}</td>`;
+    }).join('')+'</tr>').join('');
+    showCustomPopup(`
+      <div class="teamstats-popup-card">
+        <div class="team-stats-popup-header" style="background:var(--highlight-gold);border-bottom:1px solid #ececec;padding:14px 20px 10px 16px;color:var(--primary);font-size:1.13em;font-weight:800;text-align:center;">All Player Stats for ${team}
+          <button class="team-stats-popup-close-btn close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
+        </div>
+        <div class="teamstats-popup-scroll" style="overflow:auto;padding:13px 11px 19px 11px;flex:1 1 auto;min-height:0;">
+          <table class="stats-table" style="width:100%">
+            <tr>${ths}</tr>${trs}
+          </table>
+        </div>
+      </div>
+    `);
+  };
+
+  // --- Player Popup ---
   window.showPlayerPopup = function(nameEnc) {
     let name = decodeURIComponent(nameEnc);
     let p = statsData.find(x=>x.Player===name);
     if (!p) return;
-    let img = `<img src="${LOGO_URL}" alt="Player Photo">`;
+    let img = `<img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="Player Photo" style="width:58px;height:58px;border-radius:50%;object-fit:cover;border:3px solid #ffe174;background:#fff;margin-bottom:7px;">`;
     function grp(lbl, keys) {
       let rows = keys.filter(k=>p[k]!=null).map(k=>
         `<tr><td>${k}</td><td>${k.includes("Win Rate")? (asNum(p[k])*100).toFixed(1)+"%":p[k]}</td></tr>`
       ).join('');
-      return rows ? `<div class="stat-group-title">${lbl}</div><table class="stats-list">${rows}</table>` : '';
+      return rows ? `<div class="stat-group-title" style="color:var(--primary);font-weight:700;margin:7px 0 4px 0;font-size:1.05em;">${lbl}</div><table class="stats-list" style="width:100%">${rows}</table>` : '';
     }
     let core = ["Sets Played","Sets Won","3 Dart Avg","First 9 Avg","High Finish","100+","140+","180's"];
     let win  = ["Match Played","Win Rate (Legs)","Win Rate (Sets)","Legs Played","Legs Won","Legs Diff"];
@@ -1033,20 +837,20 @@
       ${grp("Highlights", ex)}
       ${grp("Other", other)}
     </div>`;
-    let btn = `<button class="save-card-btn" onclick="saveCardAsImage()">Save card as image</button>`;
+    let btn = `<button class="save-card-btn" onclick="saveCardAsImage()" style="margin-top:13px;background:var(--primary);color:#fff;font-weight:700;padding:7px 14px;border:none;border-radius:16px;font-size:1em;box-shadow:0 1px 10px #ffe17425;cursor:pointer;transition:background 0.17s;">Save card as image</button>`;
     showCustomPopup(`
       <div class="popup-card">
         <button class="close-btn" aria-label="Close" onclick="closeCustomPopup()">&times;</button>
         ${img}
-        <div class="name">${p.Player}</div>
-        <div class="team">${p.Team}</div>
+        <div class="name" style="font-size:1.18rem;font-weight:800;color:var(--primary);">${p.Player}</div>
+        <div class="team" style="font-size:1.04rem;color:#888;margin-bottom:7px;">${p.Team}</div>
         ${sections}
         ${btn}
       </div>
     `);
   };
 
-  // --- Popup helpers ---
+  // --- Popup Helpers ---
   function showCustomPopup(html) {
     let pb = document.getElementById('popup-backdrop');
     pb.innerHTML = html;
@@ -1074,11 +878,12 @@
       });
   };
 
-  // Backdrop click closes any popup
+  // Backdrop click closes popup
   document.getElementById('popup-backdrop').onclick = function(e) {
     if (e.target === this) closeCustomPopup();
   };
 </script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script defer src="https://analytics.vercel.com/script.js"></script>
 </body>
 </html>
