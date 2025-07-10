@@ -2,38 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Darts Carnival 2025</title>
+  <title>Royal Darts Premier League 2025</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#a81100">
-  <link rel="icon" type="image/avif" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif">
+  <link rel="icon" href="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" type="image/avif">
+  <!-- Google Fonts for premium look -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #a81100;
       --gold: #ffe174;
       --silver: #d2d7df;
       --eliminated: #ffefef;
-      --highlight: #fff6dd;
-      --background: #fafafa;
+      --highlight: #fff7e2;
+      --background: #f7f9fa;
       --surface: #fff;
-      --accent: #0b2239;
+      --accent: #1a222d;
       --border: #e2e8f0;
       --radius: 18px;
-      --shadow: 0 4px 16px rgba(0,0,0,0.06);
-      --logo-size: 42px;
-      --transition: 0.2s cubic-bezier(.4,0,.2,1);
-      --nav-z: 50;
+      --shadow: 0 4px 24px rgba(0,0,0,0.10);
+      --logo-size: 46px;
+      --transition: .18s cubic-bezier(.4,0,.2,1);
+      --nav-z: 60;
+      --nav-height: 59px;
       --drawer-width: 81vw;
       --max-drawer: 340px;
-      --info-blue: #268aff;
+      --brand-grad: linear-gradient(90deg, #a81100 30%, #f99d25 100%);
     }
-    * { box-sizing: border-box; }
     html, body {
       margin: 0; padding: 0;
-      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-family: 'Inter', 'Montserrat', Arial, sans-serif;
       background: var(--background);
       color: var(--accent);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
     body { display: flex; flex-direction: column; min-height: 100vh; }
 
@@ -41,83 +44,96 @@
     header {
       background: var(--surface);
       box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+      display: flex; flex-direction: row; align-items: center;
       padding: 0 8px 0 0;
       gap: 8px;
-      min-height: 56px;
+      min-height: var(--nav-height);
       position: sticky; top: 0; z-index: var(--nav-z);
-      width: 100vw;
-      overflow: visible;
+      width: 100vw; overflow: visible;
+      border-bottom: 3px solid #ffdc6d55;
     }
     header img {
       width: var(--logo-size); height: var(--logo-size);
-      min-width: 30px; min-height: 30px;
+      min-width: 36px; min-height: 36px;
       border-radius: 50%;
       background: #fff;
       object-fit: cover;
-      box-shadow: 0 1px 4px #0001;
+      box-shadow: 0 2px 8px #a8110025;
       flex-shrink: 0;
-      margin-left: 8px;
+      margin-left: 10px;
     }
     .header-titlebox {
       display: flex; flex-direction: column; flex: 1 1 auto; min-width: 0;
       justify-content: center; overflow: hidden;
     }
     .header-title {
-      font-size: 1.18rem;
+      font-size: 1.29rem;
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
       font-weight: 900;
       color: var(--primary);
-      line-height: 1.18;
+      background: linear-gradient(95deg, #a81100 68%, #f99d25 96%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.16;
       word-break: break-word;
-      white-space: normal;
       margin: 0 0 0 2px;
+      letter-spacing: -0.7px;
+      user-select: none;
+      text-shadow: 0 2px 6px #fff8, 0 1px 8px #0002;
     }
+    @media (max-width:600px) {
+      .header-title { font-size: 1.07rem; font-weight: 800; }
+      header img { width: 30px; height: 30px; min-width: 30px; }
+    }
+    /* NAV - Horizontal and Burger */
     .nav-horiz {
       display: flex;
-      gap: 3px;
+      gap: 4px;
       align-items: flex-end;
       margin-left: auto;
-      margin-right: 15px;
+      margin-right: 12px;
     }
     .nav-horiz button {
       background: none;
       border: none;
       color: var(--accent);
-      font-size: 1rem;
-      min-width: 68px;
+      font-size: 1.05em;
+      min-width: 73px;
       padding: 8px 10px;
-      font-weight: 500;
+      font-weight: 600;
       border-radius: 16px;
       transition: background var(--transition);
       cursor: pointer;
       outline: none;
       margin: 0 1px;
+      letter-spacing: .01em;
       white-space: nowrap;
     }
     .nav-horiz button.active,
     .nav-horiz button:focus-visible {
       background: var(--primary);
       color: #fff;
+      font-weight: 800;
     }
     .burger-btn {
       background: none;
       border: none;
       color: var(--primary);
-      font-size: 2.2em;
-      padding: 0 13px 0 7px;
+      font-size: 2.22em;
+      padding: 0 11px 0 5px;
       cursor: pointer;
       display: none;
       align-items: center;
       z-index: var(--nav-z);
+      transition: background .16s;
     }
     /* NAV DRAWER */
     .nav-drawer-backdrop {
       position: fixed;
       z-index: calc(var(--nav-z) + 1);
       left: 0; top: 0; width: 100vw; height: 100vh;
-      background: #0006;
+      background: #0b2239dd;
       display: none;
       transition: opacity 0.16s;
       align-items: stretch;
@@ -125,42 +141,51 @@
     .nav-drawer-backdrop.show { display: flex; }
     .nav-drawer {
       width: min(var(--drawer-width), var(--max-drawer));
-      max-width: 94vw;
+      max-width: 97vw;
       background: var(--surface);
-      box-shadow: 6px 0 18px #0003;
+      box-shadow: 7px 0 21px #a8110011;
       height: 100vh;
-      padding-top: 20px;
+      padding-top: 23px;
       padding-left: 7px;
       display: flex;
       flex-direction: column;
       position: relative;
-      animation: drawerIn .22s cubic-bezier(.55,0,.4,1);
+      animation: drawerIn .21s cubic-bezier(.55,0,.4,1);
       border-top-right-radius: var(--radius);
       border-bottom-right-radius: var(--radius);
+      border-right: 2.5px solid var(--primary);
     }
-    @keyframes drawerIn { from { transform: translateX(-80px); opacity: 0; } to { transform: none; opacity: 1; } }
+    @keyframes drawerIn { from { transform: translateX(-66px); opacity: 0; } to { transform: none; opacity: 1; } }
     .nav-drawer .nav-drawer-close {
       background: none;
       border: none;
       font-size: 2em;
-      color: #aaa;
+      color: #a81100;
       cursor: pointer;
       position: absolute;
-      top: 5px; right: 12px;
+      top: 6px; right: 15px;
+      transition: color .18s;
     }
+    .nav-drawer .nav-drawer-close:hover { color: #f99d25; }
     .nav-drawer .nav-links {
-      display: flex; flex-direction: column; gap: 3px;
+      display: flex; flex-direction: column; gap: 2px; margin-top: 22px;
     }
     .nav-drawer .nav-links button {
-      font-size: 1.04em;
+      font-size: 1.07em;
       text-align: left;
       min-width: 0;
       border-radius: 11px;
-      padding: 10px 10px;
+      padding: 13px 14px 11px 17px;
       margin: 2px 1px;
-      font-weight: 700;
+      font-weight: 800;
+      color: #a81100;
+      letter-spacing: .01em;
+      background: none;
+      border: none;
+      transition: background .16s, color .18s;
     }
     .nav-drawer .nav-links button.active { background: var(--primary); color: #fff;}
+    .nav-drawer .nav-links button:focus-visible { outline: 2px solid #f99d25;}
     @media (max-width:900px) {
       .nav-horiz { display: none; }
       .burger-btn { display: flex;}
@@ -171,13 +196,360 @@
       .nav-horiz { display: flex !important; }
     }
 
-    /* ... styles will continue in part 2 ... */
+    /* MAIN LAYOUT */
+    main { flex: 1; padding: 10px 0 23px 0; max-width: 1100px; margin: 0 auto; width: 100%; min-height: 60vh; background: var(--background);}
+    .tab-title { font-size: 1.16em; font-weight: 700; margin: 17px 0 11px 3px; color: var(--primary);}
+    section[hidden] { display: none !important; }
+    footer {
+      text-align: center;
+      font-size: 1.01em;
+      color: #8b2600;
+      margin-top: 18px;
+      padding-bottom: 19px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ... (the rest of the CSS and components will come in the next block!) */
+    /* STYLES CONTINUED */
+
+    /* Premium Card, Table, List UI */
+    .highlight-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(222px, 1fr));
+      gap: 18px 30px;
+      margin-bottom: 10px;
+      margin-top: 6px;
+    }
+    .stat-card {
+      background: var(--highlight);
+      border-radius: 17px;
+      padding: 15px 16px 14px 18px;
+      box-shadow: 0 2px 10px #a8110011;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 84px;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+      border: 1.5px solid #fff1;
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+      transition: box-shadow .14s;
+    }
+    .stat-card:hover { box-shadow: 0 6px 21px #a8110038; }
+    .stat-card .label {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: var(--primary);
+      opacity: .89;
+      margin-bottom: 2px;
+      letter-spacing: -.01em;
+    }
+    .stat-card .value {
+      font-size: 1.62rem;
+      font-weight: 900;
+      color: var(--accent);
+      line-height: 1.08;
+      margin-top: 1px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      letter-spacing: -.01em;
+    }
+    .stat-card .player {
+      font-size: 1.09rem;
+      font-weight: 500;
+      color: var(--accent);
+      opacity: 0.81;
+      margin-top: -3px;
+      letter-spacing: .01em;
+    }
+    .highlight-footer {
+      color: #888;
+      font-size: 0.99em;
+      margin-bottom: 25px;
+      margin-left: 5px;
+      margin-top: 4px;
+      font-style: italic;
+      letter-spacing: 0.01em;
+    }
+
+    .quick-standings, .standings-table, .stats-table, .top10-list-table {
+      width: 100%;
+      border-spacing: 0;
+      border-radius: var(--radius);
+      box-shadow: 0 1px 10px #a8110011;
+      background: var(--surface);
+      margin-bottom: 14px;
+      font-size: 1.03em;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    .quick-standings th, .standings-table th, .stats-table th, .top10-list-table th {
+      background: #f8f6f4;
+      padding: 8px 5px;
+      font-size: 1em;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1.5px solid #ffe17466;
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+      letter-spacing: -.01em;
+    }
+    .quick-standings td, .standings-table td, .stats-table td, .top10-list-table td {
+      padding: 7px 5px;
+      text-align: center;
+      font-size: 0.99em;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+    .winner-cell {
+      font-weight: 700;
+      color: #36a800;
+      background: #eaffd3;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+    }
+    .cup-gold { background: linear-gradient(90deg, var(--gold) 95%, #fff8 100%);}
+    .cup-silver { background: linear-gradient(90deg, var(--silver) 95%, #fff 100%);}
+    .cup-eliminated { background: var(--eliminated);}
+    .fixtures-list, .results-list { margin-bottom: 30px; }
+    .fixtures-list .date-group, .results-list .date-group { margin-bottom: 15px;}
+    .fixtures-list .date-label, .results-list .date-label {
+      font-weight: 700;
+      font-size: 1.05em;
+      margin: 8px 0 7px 3px;
+      color: var(--primary);
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+      letter-spacing: -.01em;
+    }
+
+    /* Top 10 Layout: Modern Single Column Tables */
+    .top10-list-section { margin-bottom: 27px;}
+    .top10-list-title {
+      font-weight: 700;
+      font-size: 1.11em;
+      color: var(--primary);
+      margin: 7px 0 7px 0;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+      letter-spacing: -.01em;
+    }
+    .top10-list-table th, .top10-list-table td { padding: 8px 3px; font-size: .99em;}
+    .top10-list-table td button {
+      color: var(--primary);
+      font-weight: 700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+      letter-spacing: -.01em;
+    }
+
+    /* SQUADS PAGE */
+    #squads-list { margin-top: 10px;}
+    .squad-team-section { margin-bottom: 23px;}
+    .squad-team-name-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;}
+    .squad-team-name {
+      font-size: 1.13em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 700;
+      color: var(--primary);
+      cursor: pointer;
+      transition: color .14s;
+    }
+    .squad-team-name:hover { text-decoration: underline dotted; color: #f99d25;}
+    .squad-player-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px,1fr));
+      gap: 11px;
+      margin-top: 6px;
+    }
+    .squad-player-card {
+      background: var(--surface);
+      box-shadow: 0 2px 7px #a8110020;
+      border-radius: 12px;
+      padding: 9px 6px 11px 8px;
+      text-align: center;
+      min-height: 63px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.01em;
+      font-family: 'Inter', Arial, sans-serif;
+      border: 1.3px solid #ffe17488;
+    }
+    .squad-player-card button {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.03em;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline dotted;
+      padding: 0;
+      margin: 0 0 2px 0;
+      font-family: 'Montserrat', 'Inter', Arial, sans-serif;
+      letter-spacing: -.01em;
+    }
+    .squad-player-card .squad-sets {
+      color: #888;
+      font-size: 0.91em;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    .squad-team-filter-row { display: flex; align-items: center; gap: 9px; margin-bottom: 13px;}
+    .squad-team-filter-row label { color: #444; font-size: 1em; font-weight: 500; }
+    .squad-team-filter { width: 166px; border-radius: 15px; padding: 7px 8px; border: 1px solid #ccc; font-size: 1em; background: #fff; color: #222;}
+    .team-stats-note {
+      color: #888; font-size: .94em; font-style: italic; margin: 3px 0 0 7px;
+    }
+
+    /* Match Details Fancy Popup */
+    .match-popup-backdrop {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: #081e3cde;
+      align-items: center; justify-content: center;
+      transition: opacity .17s;
+      overflow: auto;
+    }
+    .match-popup-backdrop.show { display: flex; }
+    .match-popup-card {
+      background: var(--surface);
+      border-radius: 21px;
+      box-shadow: 0 9px 44px #0004, 0 2px 8px #ffe17436;
+      padding: 0 0 20px 0;
+      width: 97vw;
+      max-width: 680px;
+      max-height: 93vh;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      position: relative;
+      animation: popupAppear .20s cubic-bezier(.68,-0.55,.27,1.55);
+      overflow: hidden;
+    }
+    @keyframes popupAppear { from { transform: scale(.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .match-popup-header {
+      background: var(--brand-grad);
+      color: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.17em;
+      font-weight: 900;
+      text-align: center;
+      padding: 21px 23px 13px 23px;
+      letter-spacing: 0.01em;
+      box-shadow: 0 2px 8px #a8110035;
+      border-top-left-radius: 21px;
+      border-top-right-radius: 21px;
+      position: sticky; top: 0; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 61px;
+    }
+    .match-popup-close-btn {
+      position: absolute;
+      top: 15px; right: 23px;
+      font-size: 2.1em;
+      color: #fff8;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      transition: color .14s;
+    }
+    .match-popup-close-btn:hover { color: #fff;}
+    .match-popup-content {
+      overflow-y: auto;
+      padding: 15px 12px 15px 19px;
+      flex: 1 1 auto;
+      min-height: 0;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    .match-meta-row {
+      display: flex; align-items: center; gap: 13px;
+      justify-content: center;
+      margin-bottom: 9px;
+      color: #b07c0c; font-size: 1.04em;
+    }
+    .set-section {
+      margin-bottom: 18px;
+      background: #fffcf5;
+      border-radius: 12px;
+      box-shadow: 0 1px 8px #f99d2515;
+      padding: 11px 10px 9px 11px;
+      border-left: 5px solid #ffe174;
+    }
+    .set-title {
+      color: var(--primary);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 800;
+      font-size: 1.07em;
+      margin-bottom: 6px;
+      letter-spacing: -.01em;
+    }
+    .leg-row {
+      margin-bottom: 7px;
+      font-size: 1.04em;
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .leg-winner {
+      color: #3cab00;
+      background: #e9ffd6;
+      border-radius: 10px;
+      padding: 1px 7px 2px 7px;
+      font-weight: 700;
+      margin-left: 8px;
+      font-size: .96em;
+    }
+    .leg-scorepair {
+      background: #fff;
+      border-radius: 7px;
+      box-shadow: 0 1px 5px #a8110011;
+      padding: 2px 8px;
+      font-weight: 700;
+      color: #174;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+    .leg-player {
+      color: var(--primary);
+      font-weight: 700;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-right: 4px;
+    }
+    .back-to-results-btn {
+      padding: 10px 24px;
+      font-size: 1.07em;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 17px;
+      box-shadow: 0 2px 9px #f99d2520;
+      cursor: pointer;
+      font-weight: 800;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-top: 18px;
+      transition: background .18s;
+    }
+    .back-to-results-btn:hover { background: #f99d25; color: #fff; }
+    @media (max-width:530px) {
+      .match-popup-card { max-width: 99vw;}
+      .match-popup-header { font-size: 1.01em; padding: 17px 7vw 10px 7vw; min-height: 42px;}
+      .match-popup-content { padding: 9px 3vw 12px 3vw;}
+      .set-section { padding: 8px 2vw 6px 2vw;}
+    }
+
+    /* Info, player, and team popups will be styled next block */
   </style>
 </head>
 <body>
 <header>
-  <img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="Royal Darts Carnival 2025 Logo" loading="lazy">
-  <div class="header-titlebox"><div class="header-title">Darts Carnival 2025</div></div>
+  <img src="https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif" alt="RDPL Logo" loading="lazy">
+  <div class="header-titlebox"><div class="header-title">Royal Darts Premier League 2025</div></div>
   <button class="burger-btn" id="burger-btn" aria-label="Open menu">&#9776;</button>
   <div class="nav-horiz" id="nav-horiz">
     <button data-tab="home" class="active" aria-current="page">Home</button>
@@ -190,23 +562,8 @@
     <button data-tab="squads">Squads</button>
   </div>
 </header>
-<div class="nav-drawer-backdrop" id="drawer-backdrop" tabindex="-1">
-  <nav class="nav-drawer" role="navigation" aria-label="Main Navigation">
-    <button class="nav-drawer-close" aria-label="Close menu" id="drawer-close">&times;</button>
-    <div class="nav-links">
-      <button data-tab="home">Home</button>
-      <button data-tab="fixtures">Fixtures</button>
-      <button data-tab="results">Results</button>
-      <button data-tab="standings">Standings</button>
-      <button data-tab="stats">Stats</button>
-      <button data-tab="top10">Top 10</button>
-      <button data-tab="live">Live</button>
-      <button data-tab="squads">Squads</button>
-    </div>
-  </nav>
-</div>
+
 <main>
-  <!-- Home Page -->
   <section id="tab-home">
     <div class="tab-title">Today’s Fixtures</div>
     <div class="fixtures-list" id="today-fixtures"></div>
@@ -216,22 +573,18 @@
     <div class="highlight-cards" id="stat-highlights"></div>
     <div class="highlight-footer">*2 matches min played</div>
   </section>
-  <!-- Fixtures Page -->
   <section id="tab-fixtures" hidden>
     <div class="tab-title">All Fixtures</div>
     <div class="fixtures-list" id="fixtures-list"></div>
   </section>
-  <!-- Results Page -->
   <section id="tab-results" hidden>
     <div class="tab-title">All Results</div>
     <div class="results-list" id="results-list"></div>
   </section>
-  <!-- Standings Page -->
   <section id="tab-standings" hidden>
     <div class="tab-title">Group Standings</div>
     <div id="standings-tables"></div>
   </section>
-  <!-- Stats Page -->
   <section id="tab-stats" hidden>
     <div class="tab-title">Player Statistics</div>
     <input id="stats-search" placeholder="Search player..." style="width:98%;max-width:330px;padding:9px 10px;border-radius:20px;border:1px solid #e3e3e3;margin:8px 0 18px 0;font-size:1em;">
@@ -239,17 +592,14 @@
       <table class="stats-table" id="stats-table"></table>
     </div>
   </section>
-  <!-- Top 10 Page -->
   <section id="tab-top10" hidden>
     <div class="tab-title">Top 10 Rankings</div>
     <div id="top10-tables"></div>
   </section>
-  <!-- Live Page -->
   <section id="tab-live" hidden>
     <iframe id="live-iframe" src="https://n01darts.com/n01/tournament/comp.php?id=t_OxWz_6427&tab=live"
       style="width:100%;height:72vh;border-radius:18px;border:none;box-shadow:0 2px 20px #0002;"></iframe>
   </section>
-  <!-- Squads Page -->
   <section id="tab-squads" hidden>
     <div class="tab-title">Squads / Player List</div>
     <div class="squad-team-filter-row">
@@ -260,664 +610,660 @@
     </div>
     <div id="squads-list"></div>
   </section>
-  <!-- Match Details Popup Page (hidden unless opened) -->
-  <section id="tab-matchdetails" hidden>
-    <div id="match-detail-content"></div>
-  </section>
 </main>
 
-<!-- Popups for Player, Info, TeamStats, and the animated Match Details -->
-<div class="popup-backdrop" id="popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
+<!-- Premium Match Details Popup (fancy layout) -->
+<div class="match-popup-backdrop" id="match-popup-backdrop" tabindex="-1" aria-modal="true" role="dialog" style="display:none"></div>
+
 <footer>
   Built by SUCA Analytics
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<!-- JS and all render functions coming up in next block -->
 <script>
-  // ========== CONFIG ==========
-  const API_URL = "https://script.google.com/macros/s/AKfycbxg9ASk6TWcgMn4O25XgTtHdxOULY-Dlw6UpcyzWpBwEXXlNS_FoOi4BVjR4HBS55QU7A/exec";
-  const LOGO_URL = "https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif";
-  const FIXTURES_JSON_URL = "csvjson.json";
-  const MATCH_PROXY_URL = "https://script.google.com/macros/s/AKfycbw_9Aw0hVVzer_waz02PY8QeMZkUy_GgBYUP_njxRN8GIOg48XdUOt6U7Ey9xKL99pSjA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxg9ASk6TWcgMn4O25XgTtHdxOULY-Dlw6UpcyzWpBwEXXlNS_FoOi4BVjR4HBS55QU7A/exec";
+const LOGO_URL = "https://i.postimg.cc/jSXT8DK8/temp-Image-El-Y5kn.avif";
+const FIXTURES_JSON_URL = "csvjson.json";
+const MATCH_PROXY_URL = "https://script.google.com/macros/s/AKfycbwUCpR3Xd7YchFmg04UMeKBRcA0FTD_RWZm0aA8FKVCHywCkk5Ux1umP5KPJ1vYHH7l/exec";
 
-  let allData = {}, statsData = [], standingsData = [], fixturesData = [], resultsData = [];
-  let filteredStats = [];
-  let lastSort = {col:null, asc:true};
+let allData = {}, statsData = [], standingsData = [], fixturesData = [], resultsData = [];
+let filteredStats = [];
+let lastSort = {col:null, asc:true};
 
-  document.addEventListener('DOMContentLoaded', () => {
-    setupNavigation();
-    setupDrawer();
-    fetchAllData();
-    setInterval(fetchAllData, 60000);
+document.addEventListener('DOMContentLoaded', () => {
+  setupNavigation();
+  setupDrawer();
+  fetchAllData();
+  setInterval(fetchAllData, 60000);
+});
+
+// NAV FUNCTIONS (desktop + burger in sync)
+function setupDrawer() {
+  const burgerBtn = document.getElementById('burger-btn');
+  const backdrop = document.querySelector('.nav-drawer-backdrop');
+  const drawer = document.querySelector('.nav-drawer');
+  const closeBtn = document.getElementById('drawer-close');
+  const navLinks = drawer ? drawer.querySelectorAll('.nav-links button') : [];
+  burgerBtn.onclick = () => { backdrop.classList.add('show'); backdrop.style.display='flex'; };
+  if(closeBtn) closeBtn.onclick = () => { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);}
+  if(backdrop) backdrop.onclick = (e) => { if(e.target === backdrop) { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180); } };
+  navLinks.forEach(btn => {
+    btn.onclick = () => {
+      backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);
+      activateTab(btn.dataset.tab);
+    };
   });
+}
+function setupNavigation() {
+  document.querySelectorAll('nav button, .nav-horiz button, .nav-drawer .nav-links button').forEach(btn => {
+    btn.onclick = () => { activateTab(btn.dataset.tab); };
+  });
+}
+function activateTab(tab) {
+  document.querySelectorAll('nav button, .nav-drawer .nav-links button, .nav-horiz button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tab);
+    if(btn.dataset.tab === tab) btn.setAttribute('aria-current','page');
+    else btn.removeAttribute('aria-current');
+  });
+  document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
+  document.getElementById('tab-' + tab).hidden = false;
+  // If coming back from match detail popup, hide it
+  closeMatchPopup();
+}
 
-  function setupDrawer() {
-    const burgerBtn = document.getElementById('burger-btn');
-    const backdrop = document.getElementById('drawer-backdrop');
-    const drawer = document.querySelector('.nav-drawer');
-    const closeBtn = document.getElementById('drawer-close');
-    const navLinks = drawer.querySelectorAll('.nav-links button');
-    burgerBtn.onclick = () => { backdrop.classList.add('show'); backdrop.style.display='flex'; };
-    closeBtn.onclick = () => { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);}
-    backdrop.onclick = (e) => { if(e.target === backdrop) { backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180); } };
-    navLinks.forEach(btn => {
-      btn.onclick = () => {
-        backdrop.classList.remove('show'); setTimeout(()=>{backdrop.style.display='none'},180);
-        activateTab(btn.dataset.tab);
+// DATA FETCHING
+async function fetchAllData() {
+  try {
+    let res = await fetch(API_URL + "?cachebust=" + Math.random());
+    allData = await res.json();
+    statsData = allData["PlayerStats"] || [];
+    standingsData = allData["Standings"] || [];
+    resultsData = allData["Results"] || [];
+    fixturesData = await fetchFixturesJson(FIXTURES_JSON_URL);
+    renderAll();
+  } catch (err) {
+    alert("Error loading data: " + err);
+  }
+}
+async function fetchFixturesJson(url) {
+  let resp = await fetch(url + "?cb=" + Math.random());
+  if (!resp.ok) return [];
+  return await resp.json();
+}
+function asNum(val) {
+  let v = (typeof val === "string" && val.trim()==="") ? NaN : Number(val);
+  return isNaN(v) ? null : v;
+}
+function getCupByPosition(pos) {
+  if (pos <= 3) return "gold";
+  if (pos <= 5) return "silver";
+  return "eliminated";
+}
+
+function renderAll() {
+  renderTodayFixtures();
+  renderQuickStandings();
+  renderStatHighlights();
+  renderFixturesList();
+  renderResultsList();
+  renderStandingsTables();
+  renderStatsTable();
+  renderTop10Tables();
+  renderSquadsList();
+}
+
+// HOME: Today’s Fixtures
+function renderTodayFixtures() {
+  if (!fixturesData.length) {
+    document.getElementById('today-fixtures').innerHTML =
+      `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
+    return;
+  }
+  let today = new Date();
+  let todayDay = today.getDate();
+  let todayMonth = today.getMonth();
+  let todays = fixturesData.filter(f => {
+    if (!f.Date) return false;
+    let parts = (f.Date+"").split(' ');
+    if (parts.length < 2) return false;
+    let day = parseInt(parts[0], 10);
+    let monthStr = parts[1].toLowerCase();
+    let monthNum = [
+      "january","february","march","april","may","june","july","august",
+      "september","october","november","december"
+    ].indexOf(monthStr);
+    return day === todayDay && monthNum === todayMonth;
+  });
+  if (!todays.length) {
+    document.getElementById('today-fixtures').innerHTML =
+      `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
+    return;
+  }
+  let out = `<table class="fixtures-table">
+    <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th></tr>`;
+  todays.forEach(f => {
+    out += `<tr>
+      <td>${f.Time || ""}</td>
+      <td>${f["Team A"]||""}</td>
+      <td style="color:#a81100;font-weight:700;">vs</td>
+      <td>${f["Team B"]||""}</td>
+    </tr>`;
+  });
+  out += `</table>`;
+  document.getElementById('today-fixtures').innerHTML = out;
+}
+
+// FIXTURES
+function renderFixturesList() {
+  if (!fixturesData.length) {
+    document.getElementById('fixtures-list').innerHTML =
+      `<div style="color:#888;padding:10px">No fixtures loaded.</div>`;
+    return;
+  }
+  let byDate = {};
+  fixturesData.forEach(f => {
+    let dateLabel = f.Date || "";
+    if (f["Team A"] && f["Team B"]) (byDate[dateLabel] = byDate[dateLabel]||[]).push(f);
+  });
+  let out = '';
+  let dateKeys = Object.keys(byDate).sort((a,b)=>{
+    let d1 = Date.parse(a + " 2025"), d2 = Date.parse(b + " 2025");
+    return (isNaN(d1)||isNaN(d2)) ? a.localeCompare(b) : d1-d2;
+  });
+  dateKeys.forEach(dateLabel => {
+    let matches = byDate[dateLabel];
+    out += `<div class="date-group"><div class="date-label">${dateLabel}</div>
+      <table>
+        <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th></tr>`;
+    matches.forEach(f => {
+      out += `<tr>
+        <td>${f.Time || ""}</td>
+        <td>${f["Team A"]}</td>
+        <td style="color:#a81100;font-weight:700;">vs</td>
+        <td>${f["Team B"]}</td>
+      </tr>`;
+    });
+    out += `</table></div>`;
+  });
+  document.getElementById('fixtures-list').innerHTML = out;
+}
+
+// QUICK STANDINGS (Premium sort, matches full standings)
+function renderQuickStandings() {
+  if (!standingsData.length) return;
+  let byGroup = {};
+  standingsData.forEach(row => {
+    let g = row.Group || "A";
+    (byGroup[g] = byGroup[g]||[]).push(row);
+  });
+  let out = '';
+  Object.entries(byGroup).forEach(([group, teams]) => {
+    teams.sort((a, b) =>
+      (+b.Points||0) - (+a.Points||0) ||
+      ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Again))) ||
+      (asNum(b.For) - asNum(a.For))
+    );
+    out += `<tr><th colspan="10" style="background:var(--primary);color:#fff;font-size:1.1em;">${group}</th></tr>`;
+    out += `<tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th></tr>`;
+    teams.forEach((t,i) => {
+      let cup = getCupByPosition(i+1);
+      let ew = asNum(t.For) != null ? asNum(t.For) : "";
+      let el = asNum(t.Against) != null ? asNum(t.Against) : "";
+      out += `<tr class="cup-${cup}">
+        <td>${i+1}</td><td>${t.Team}</td><td>${t.P}</td><td>${t.W}</td><td>${t.L}</td>
+        <td>${t.D}</td><td>${ew}</td><td>${el}</td><td>${t.Points}</td>
+      </tr>`;
+    });
+  });
+  document.getElementById('quick-standings').innerHTML = out;
+}
+function renderStandingsTables() {
+  if (!standingsData.length) return;
+  let byGroup = {};
+  standingsData.forEach(row => {
+    let g = row.Group || "A";
+    (byGroup[g] = byGroup[g]||[]).push(row);
+  });
+  let out = '';
+  Object.entries(byGroup).forEach(([group, teams]) => {
+    teams.sort((a,b) =>
+      (+b.Points||0) - (+a.Points||0) ||
+      ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Again))) ||
+      (asNum(b.For) - asNum(a.For))
+    );
+    out += `<div style="margin-bottom:23px">
+      <div style="font-size:1.11em;font-weight:700;color:var(--primary);margin:9px 0 3px 0">${group}</div>
+      <table class="standings-table">
+        <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th><th>Cup</th></tr>`;
+    teams.forEach((t,i) => {
+      let cup = getCupByPosition(i+1);
+      let cupText = cup==='gold'?'Gold':cup==='silver'?'Silver':'Eliminated';
+      let ew = asNum(t.For) != null ? asNum(t.For) : "";
+      let el = asNum(t.Against) != null ? asNum(t.Against) : "";
+      out += `<tr class="cup-${cup}">
+        <td>${i+1}</td><td>${t.Team}</td><td>${t.P}</td><td>${t.W}</td><td>${t.L}</td>
+        <td>${t.D}</td><td>${ew}</td><td>${el}</td>
+        <td>${t.Points}</td><td>${cupText}</td>
+      </tr>`;
+    });
+    out += `</table></div>`;
+  });
+  document.getElementById('standings-tables').innerHTML = out;
+}
+
+// (continues in next block...)
+
+</script>
+<script>
+/* --- Stat Highlights (NO Best Leg) --- */
+function renderStatHighlights() {
+  if (!statsData.length) return;
+  function bestStat(col, bestFn, postFn) {
+    let arr = statsData.filter(p => asNum(p["Match Played"]) >= 2 && asNum(p[col]) !== null && p[col] !== "");
+    if (!arr.length) return { value: "NA", player: "NA" };
+    let best = arr.reduce((a, b) => bestFn(a,b), arr[0]);
+    let tieArr = arr.filter(x => asNum(x[col]) === asNum(best[col]));
+    let winner = tieArr.sort((a,b) => asNum(b["Match Played"]) - asNum(a["Match Played"]))[0];
+    let val = asNum(winner[col]);
+    if (postFn) val = postFn(val);
+    return { value: val != null ? val : "NA", player: winner.Player || "NA" };
+  }
+  let highlights = [
+    { label: "Best 3 Dart Avg", ...bestStat("3 Dart Avg", (a,b) => asNum(b["3 Dart Avg"])>asNum(a["3 Dart Avg"])?b:a) },
+    { label: "Best Win Rate (Legs)", ...bestStat("Win Rate (Legs)", (a,b) => asNum(b["Win Rate (Legs)"])>asNum(a["Win Rate (Legs)"])?b:a, v => (v*100).toFixed(1)+"%") },
+    { label: "Best Win Rate (Sets)", ...bestStat("Win Rate (Sets)", (a,b) => asNum(b["Win Rate (Sets)"])>asNum(a["Win Rate (Sets)"])?b:a, v => (v*100).toFixed(1)+"%") },
+    { label: "High Finish", ...bestStat("High Finish", (a,b) => asNum(b["High Finish"])>asNum(a["High Finish"])?b:a) },
+    { label: "Best First 9 Avg", ...bestStat("First 9 Avg", (a,b) => asNum(b["First 9 Avg"])>asNum(a["First 9 Avg"])?b:a) }
+  ];
+  document.getElementById('stat-highlights').innerHTML = highlights.map(h => `
+    <div class="stat-card">
+      <span class="label">${h.label}</span>
+      <span class="value">${h.value}</span>
+      <span class="player">${h.player}</span>
+    </div>
+  `).join('');
+}
+
+/* --- Stats Table + Sorting (NO TEAM FILTER) --- */
+function renderStatsTable() {
+  if (!statsData.length) return;
+  const cols = [
+    "Player","Team","Sets Played","Sets Won","3 Dart Avg","First 9 Avg",
+    "High Finish","100+","140+","180's","Win Rate (Legs)","Win Rate (Sets)"
+  ];
+  let s = document.getElementById('stats-search').value?.toLowerCase?.() || "";
+  filteredStats = statsData.filter(r => (r.Player||"").toLowerCase().includes(s));
+  doStatsTable(filteredStats, cols);
+
+  document.getElementById('stats-search').oninput = () => {
+    let s = document.getElementById('stats-search').value.toLowerCase();
+    let data = statsData.filter(r => (r.Player||"").toLowerCase().includes(s));
+    doStatsTable(data, cols);
+  };
+
+  function doStatsTable(rows, cols) {
+    let ths = cols.map(c =>
+      `<th data-col="${c}" style="cursor:pointer">${c} <span style="font-size:0.92em;opacity:.56">${
+        lastSort.col===c ? (lastSort.asc ? "▲" : "▼") : ""
+      }</span></th>`
+    ).join('');
+    let trs = rows.map(r => `<tr>` + cols.map(c => {
+      if (c==="Player") {
+        return `<td><button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(r.Player)}')">${r.Player}</button></td>`;
+      } else if (c.startsWith("Win Rate")) {
+        let v = asNum(r[c]);
+        return `<td>${v!=null ? (v*100).toFixed(1)+"%" : ""}</td>`;
+      } else {
+        return `<td>${r[c]||""}</td>`;
+      }
+    }).join('') + `</tr>`).join('');
+    document.getElementById('stats-table').innerHTML = `<tr>${ths}</tr>${trs}`;
+
+    // Add sorting
+    document.querySelectorAll('#stats-table th').forEach((th,i) => {
+      th.onclick = () => {
+        let col = th.getAttribute('data-col');
+        lastSort.asc = lastSort.col===col ? !lastSort.asc : true;
+        lastSort.col = col;
+        rows.sort((a,b) => {
+          let av = asNum(a[col]), bv = asNum(b[col]);
+          if (av!=null && bv!=null) return lastSort.asc ? av-bv : bv-av;
+          return lastSort.asc 
+            ? (""+a[col]).localeCompare(b[col]) 
+            : (""+b[col]).localeCompare(a[col]);
+        });
+        doStatsTable(rows, cols);
       };
     });
   }
-  function setupNavigation() {
-    document.querySelectorAll('nav button, .nav-horiz button, .nav-drawer .nav-links button').forEach(btn => {
-      btn.onclick = () => { activateTab(btn.dataset.tab); };
-    });
-  }
-  function activateTab(tab) {
-    document.querySelectorAll('nav button, .nav-drawer .nav-links button, .nav-horiz button').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === tab);
-      if(btn.dataset.tab === tab) btn.setAttribute('aria-current','page');
-      else btn.removeAttribute('aria-current');
-    });
-    document.querySelectorAll('main > section').forEach(sec => sec.hidden = true);
-    document.getElementById('tab-' + tab).hidden = false;
-  }
+}
 
-  async function fetchAllData() {
-    try {
-      let res = await fetch(API_URL + "?cachebust=" + Math.random());
-      allData = await res.json();
-      statsData = allData["PlayerStats"] || [];
-      standingsData = allData["Standings"] || [];
-      resultsData = allData["Results"] || [];
-      fixturesData = await fetchFixturesJson(FIXTURES_JSON_URL);
-      renderAll();
-    } catch (err) {
-      alert("Error loading data: " + err);
-    }
-  }
-  async function fetchFixturesJson(url) {
-    let resp = await fetch(url + "?cb=" + Math.random());
-    if (!resp.ok) return [];
-    return await resp.json();
-  }
-  function asNum(val) {
-    let v = (typeof val === "string" && val.trim()==="") ? NaN : Number(val);
-    return isNaN(v) ? null : v;
-  }
-  function getCupByPosition(pos) {
-    if (pos <= 3) return "gold";
-    if (pos <= 5) return "silver";
-    return "eliminated";
-  }
-
-  function renderAll() {
-    renderTodayFixtures();
-    renderQuickStandings();
-    renderStatHighlights();
-    renderFixturesList();
-    renderResultsList();
-    renderStandingsTables();
-    renderStatsTable();
-    renderTop10Tables();
-    renderSquadsList();
-  }
-
-  // --- Home Page Today Fixtures ---
-  function renderTodayFixtures() {
-    if (!fixturesData.length) {
-      document.getElementById('today-fixtures').innerHTML =
-        `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
-      return;
-    }
-    let today = new Date();
-    let todayDay = today.getDate();
-    let todayMonth = today.getMonth();
-    let todays = fixturesData.filter(f => {
-      if (!f.Date) return false;
-      let parts = (f.Date+"").split(' ');
-      if (parts.length < 2) return false;
-      let day = parseInt(parts[0], 10);
-      let monthStr = parts[1].toLowerCase();
-      let monthNum = [
-        "january","february","march","april","may","june","july","august",
-        "september","october","november","december"
-      ].indexOf(monthStr);
-      return day === todayDay && monthNum === todayMonth;
+/* --- Top 10 Page: Modern layout, MVP info popup --- */
+function renderTop10Tables() {
+  if (!statsData.length || !standingsData.length) return;
+  const cats = [
+    { label:"MVP", key:"MVP", compute:calcMVPScore, min:2, info: true },
+    { label:"3 Dart Avg", key:"3 Dart Avg", min:2 },
+    { label:"First 9 Avg", key:"First 9 Avg", min:2 },
+    { label:"100+ Scores", key:"100+", min:2 },
+    { label:"High Finish", key:"High Finish", min:2 }
+  ];
+  let out = '';
+  cats.forEach(cat => {
+    let el = statsData.filter(p=>+p["Match Played"]>=cat.min);
+    if (cat.compute) el.forEach(p=> p._MVP = cat.compute(p));
+    if (cat.key==="100+") el.forEach(p=> p._100Total = (+p["100+"]||0)+(+p["140+"]||0)+(+p["170+"]||0)+(+p["180's"]||0));
+    el.sort((a,b) => {
+      if (cat.compute) return b._MVP - a._MVP;
+      if (cat.key==="100+") return b._100Total - a._100Total;
+      return (+b[cat.key]||0) - (+a[cat.key]||0);
     });
-    if (!todays.length) {
-      document.getElementById('today-fixtures').innerHTML =
-        `<div style="color:#888;padding:12px">No fixtures scheduled for today.</div>`;
-      return;
-    }
-    let out = `<table class="fixtures-table">
-      <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th></tr>`;
-    todays.forEach(f => {
+    let top = el.slice(0,10);
+    out += `<div class="top10-list-section">
+      <div class="top10-list-title">
+        Top 10 ${cat.label}
+        ${cat.info ? `<span class="info-icon" onclick="showMvpInfo()" title="How is MVP calculated?">i</span>` : ''}
+      </div>
+      <table class="top10-list-table">
+      <tr><th>Rank</th><th>Player</th><th>Team</th><th>${cat.label}</th></tr>`;
+    top.forEach((p,i) => {
+      let v = cat.compute ? p._MVP.toFixed(3)
+         : cat.key==="100+" ? p._100Total : p[cat.key];
       out += `<tr>
-        <td>${f.Time || ""}</td>
-        <td>${f["Team A"]||""}</td>
-        <td style="color:#a81100;font-weight:700;">vs</td>
-        <td>${f["Team B"]||""}</td>
+        <td>#${i+1}</td>
+        <td><button onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>
+        <td>${p.Team}</td>
+        <td>${v}</td>
       </tr>`;
     });
-    out += `</table>`;
-    document.getElementById('today-fixtures').innerHTML = out;
-  }
+    out += `</table></div>`;
+  });
+  document.getElementById('top10-tables').innerHTML = out;
+}
+window.showMvpInfo = function() {
+  showCustomPopup(`
+    <div class="info-popup-card" style="padding: 25px 14px 18px 20px; background: #fff; border-radius: 15px; max-width: 375px;">
+      <button class="close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
+      <div style="font-weight:700;font-size:1.12em;margin-bottom:14px;color:var(--primary);">How is MVP calculated?</div>
+      <div style="font-size:1.04em;line-height:1.62">
+      <b>MVP Score =</b> (NormAvg × 0.40) + (NormWinRate × 0.25) + (NormLegsWon × 0.20) + (NormHighFinish × 0.05) + (TeamSuccess × 0.10)<br><br>
+      <b>Where:</b><br>
+      NormAvg = Player’s 3DAvg ÷ Highest 3DAvg<br>
+      NormWinRate = (LegsWon ÷ LegsPlayed) ÷ Highest Win Rate<br>
+      NormLegsWon = LegsWon ÷ Highest LegsWon<br>
+      NormHighFinish = Player’s HighFinish ÷ Highest HighFinish<br>
+      TeamSuccess = 1 - ((TeamRank-1) ÷ (TotalTeams-1))<br><br>
+      <i>This rewards individual performance & consistency as well as team achievement.</i>
+      </div>
+    </div>
+  `);
+};
+// MVP Calculation (fully normalized per spec)
+function calcMVPScore(p) {
+  if (!statsData.length || !standingsData.length) return 0;
+  let valid = statsData.filter(x=>asNum(x["Match Played"])>=2 && asNum(x["3 Dart Avg"]) && asNum(x["Legs Played"]) && asNum(x["Legs Won"]));
+  if (!valid.length) return 0;
+  let max3D = Math.max(...valid.map(x=>asNum(x["3 Dart Avg"])||0));
+  let normAvg = (asNum(p["3 Dart Avg"])||0) / (max3D||1);
+  let playerWinRate = (asNum(p["Legs Played"])>0) ? ((asNum(p["Legs Won"])||0)/(asNum(p["Legs Played"])||1)) : 0;
+  let maxWinRate = Math.max(...valid.map(x=>(asNum(x["Legs Played"])>0)?((asNum(x["Legs Won"])||0)/(asNum(x["Legs Played"])||1)):0));
+  let normWinRate = playerWinRate / (maxWinRate||1);
+  let maxLegsWon = Math.max(...valid.map(x=>asNum(x["Legs Won"])||0));
+  let normLegsWon = (asNum(p["Legs Won"])||0)/(maxLegsWon||1);
+  let maxHF = Math.max(...valid.map(x=>asNum(x["High Finish"])||0));
+  let normHF = (asNum(p["High Finish"])||0)/(maxHF||1);
+  let playerTeam = (p.Team||"").trim();
+  let group = standingsData.find(x=>x.Team===playerTeam)?.Group || null;
+  let teamsThisGroup = standingsData.filter(x=>x.Group===group);
+  let sorted = [...teamsThisGroup].sort((a,b)=>(+b.Points||0)-(+a.Points||0));
+  let teamRank = sorted.findIndex(t=>t.Team===playerTeam)+1;
+  let totalTeams = sorted.length;
+  let teamSuccess = (totalTeams>1) ? 1-((teamRank-1)/(totalTeams-1)) : 1;
+  return (normAvg*0.40) + (normWinRate*0.25) + (normLegsWon*0.20) + (normHF*0.05) + (teamSuccess*0.10);
+}
 
-  // --- Fixtures Page: Group by Date ---
-  function renderFixturesList() {
-    if (!fixturesData.length) {
-      document.getElementById('fixtures-list').innerHTML =
-        `<div style="color:#888;padding:10px">No fixtures loaded.</div>`;
-      return;
-    }
+/* --- Results Page with View Details button --- */
+function renderResultsList() {
+  if (!resultsData.length) {
+    document.getElementById('results-list').innerHTML =
+      `<div style="color:#888;padding:10px">No results loaded.</div>`;
+    return;
+  }
+  let byGroup = {};
+  resultsData.forEach(r => {
+    let group = r.Group || "Other";
+    (byGroup[group] = byGroup[group] || []).push(r);
+  });
+  let out = '';
+  Object.entries(byGroup).forEach(([group, matches]) => {
     let byDate = {};
-    fixturesData.forEach(f => {
-      let dateLabel = f.Date || "";
-      if (f["Team A"] && f["Team B"]) (byDate[dateLabel] = byDate[dateLabel]||[]).push(f);
+    matches.forEach(r => {
+      let date = r.Date || '';
+      (byDate[date] = byDate[date] || []).push(r);
     });
-    let out = '';
-    let dateKeys = Object.keys(byDate).sort((a,b)=>{
-      let d1 = Date.parse(a + " 2025"), d2 = Date.parse(b + " 2025");
-      return (isNaN(d1)||isNaN(d2)) ? a.localeCompare(b) : d1-d2;
-    });
-    dateKeys.forEach(dateLabel => {
-      let matches = byDate[dateLabel];
-      out += `<div class="date-group"><div class="date-label">${dateLabel}</div>
-        <table>
-          <tr><th>Time</th><th>Team A</th><th></th><th>Team B</th></tr>`;
-      matches.forEach(f => {
+    out += `<div style="margin-bottom:30px">
+      <div style="font-size:1.12em;font-weight:800;color:var(--primary);margin:12px 0 7px 3px;">Group: ${group}</div>`;
+    Object.entries(byDate).sort((a,b)=>{
+      let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
+      return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
+    }).forEach(([date, games]) => {
+      out += `<div class="date-group"><div class="date-label">${date}</div>
+        <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th><th></th></tr>`;
+      games.forEach(r => {
+        let a = +r["Score A"]||0, b = +r["Score B"]||0;
+        let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
+        let matchId = r.TMATCH_ID || r.MatchID || "";
         out += `<tr>
-          <td>${f.Time || ""}</td>
-          <td>${f["Team A"]}</td>
+          <td>${r["Team A"]}</td>
           <td style="color:#a81100;font-weight:700;">vs</td>
-          <td>${f["Team B"]}</td>
+          <td>${r["Team B"]}</td>
+          <td>${a} - ${b}</td>
+          <td class="winner-cell">${win}</td>
+          <td><button class="view-match-btn" onclick="loadMatchDetails('${matchId}')">View Details</button></td>
         </tr>`;
       });
       out += `</table></div>`;
     });
-    document.getElementById('fixtures-list').innerHTML = out;
-  }
+    out += `</div>`;
+  });
+  document.getElementById('results-list').innerHTML = out;
+}
 
-  /* --- Stat Highlights (NO Best Leg) --- */
-  function renderStatHighlights() {
-    if (!statsData.length) return;
-    function bestStat(col, bestFn, postFn) {
-      let arr = statsData.filter(p => asNum(p["Match Played"]) >= 2 && asNum(p[col]) !== null && p[col] !== "");
-      if (!arr.length) return { value: "NA", player: "NA" };
-      let best = arr.reduce((a, b) => bestFn(a,b), arr[0]);
-      let tieArr = arr.filter(x => asNum(x[col]) === asNum(best[col]));
-      let winner = tieArr.sort((a,b) => asNum(b["Match Played"]) - asNum(a["Match Played"]))[0];
-      let val = asNum(winner[col]);
-      if (postFn) val = postFn(val);
-      return { value: val != null ? val : "NA", player: winner.Player || "NA" };
-    }
-    let highlights = [
-      { label: "Best 3 Dart Avg", ...bestStat("3 Dart Avg", (a,b) => asNum(b["3 Dart Avg"])>asNum(a["3 Dart Avg"])?b:a) },
-      { label: "Best Win Rate (Legs)", ...bestStat("Win Rate (Legs)", (a,b) => asNum(b["Win Rate (Legs)"])>asNum(a["Win Rate (Legs)"])?b:a, v => (v*100).toFixed(1)+"%") },
-      { label: "Best Win Rate (Sets)", ...bestStat("Win Rate (Sets)", (a,b) => asNum(b["Win Rate (Sets)"])>asNum(a["Win Rate (Sets)"])?b:a, v => (v*100).toFixed(1)+"%") },
-      { label: "High Finish", ...bestStat("High Finish", (a,b) => asNum(b["High Finish"])>asNum(a["High Finish"])?b:a) },
-      { label: "Best First 9 Avg", ...bestStat("First 9 Avg", (a,b) => asNum(b["First 9 Avg"])>asNum(a["First 9 Avg"])?b:a) }
-    ];
-    document.getElementById('stat-highlights').innerHTML = highlights.map(h => `
-      <div class="stat-card">
-        <span class="label">${h.label}</span>
-        <span class="value">${h.value}</span>
-        <span class="player">${h.player}</span>
+/* --- Squads Page with Team Filter & TeamStats Popup --- */
+function renderSquadsList() {
+  if (!statsData.length) return;
+  let byTeam = {};
+  statsData.forEach(p => (byTeam[p.Team] = byTeam[p.Team]||[]).push(p));
+  let teams = Object.keys(byTeam).sort();
+  let sel = document.getElementById('squad-team-filter');
+  if (sel.innerHTML === "" || sel.options.length !== teams.length+1) {
+    sel.innerHTML = `<option value="">All Teams</option>` + teams.map(t=>`<option>${t}</option>`).join('');
+  }
+  sel.onchange = renderSquadsList;
+  let filter = sel.value;
+  let showTeams = filter ? [filter] : teams;
+  let out = '';
+  showTeams.forEach(team => {
+    let players = byTeam[team];
+    out += `<div class="squad-team-section">
+      <div class="squad-team-name-row">
+        <span class="squad-team-name" onclick="showTeamStats('${encodeURIComponent(team)}')" title="Show stats for this team">${team}</span>
+        <span class="team-stats-note">Tap team for full stats</span>
       </div>
-    `).join('');
-  }
-
-  /* --- Standings (Quick and Full) --- */
-  function renderQuickStandings() {
-    if (!standingsData.length) return;
-    let byGroup = {};
-    standingsData.forEach(row => {
-      let g = row.Group || "A";
-      (byGroup[g] = byGroup[g]||[]).push(row);
+      <div class="squad-player-grid">`;
+    players.forEach(p=>{
+      out += `<div class="squad-player-card">
+        <button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">
+          ${p.Player}
+        </button>
+        <div class="squad-sets">${p["Sets Played"]||""} Sets, ${p["3 Dart Avg"]||""} 3DA</div>
+      </div>`;
     });
-    let out = '';
-    Object.entries(byGroup).forEach(([group, teams]) => {
-      teams.sort((a, b) =>
-        (+b.Points||0) - (+a.Points||0) ||
-        ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
-        (asNum(b.For) - asNum(a.For))
-      );
-      out += `<tr><th colspan="10" style="background:var(--primary);color:#fff;font-size:1.1em;">${group}</th></tr>`;
-      out += `<tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th></tr>`;
-      teams.forEach((t,i) => {
-        let cup = getCupByPosition(i+1);
-        let ew = asNum(t.For) != null ? asNum(t.For) : "";
-        let el = asNum(t.Against) != null ? asNum(t.Against) : "";
-        out += `<tr class="cup-${cup}">
-          <td>${i+1}</td><td>${t.Team}</td><td>${t.P}</td><td>${t.W}</td><td>${t.L}</td>
-          <td>${t.D}</td><td>${ew}</td><td>${el}</td><td>${t.Points}</td>
-        </tr>`;
-      });
-    });
-    document.getElementById('quick-standings').innerHTML = out;
-  }
-  function renderStandingsTables() {
-    if (!standingsData.length) return;
-    let byGroup = {};
-    standingsData.forEach(row => {
-      let g = row.Group || "A";
-      (byGroup[g] = byGroup[g]||[]).push(row);
-    });
-    let out = '';
-    Object.entries(byGroup).forEach(([group, teams]) => {
-      teams.sort((a, b) =>
-        (+b.Points||0) - (+a.Points||0) ||
-        ((asNum(b.For)-asNum(b.Against)) - (asNum(a.For)-asNum(a.Against))) ||
-        (asNum(b.For) - asNum(a.For))
-      );
-      out += `<div style="margin-bottom:23px">
-        <div style="font-size:1.11em;font-weight:700;color:var(--primary);margin:9px 0 3px 0">${group}</div>
-        <table class="standings-table">
-          <tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>D</th><th>EW</th><th>EL</th><th>Pts</th><th>Cup</th></tr>`;
-      teams.forEach((t,i) => {
-        let cup = getCupByPosition(i+1);
-        let cupText = cup==='gold'?'Gold':cup==='silver'?'Silver':'Eliminated';
-        let ew = asNum(t.For) != null ? asNum(t.For) : "";
-        let el = asNum(t.Against) != null ? asNum(t.Against) : "";
-        out += `<tr class="cup-${cup}">
-          <td>${i+1}</td><td>${t.Team}</td><td>${t.P}</td><td>${t.W}</td><td>${t.L}</td>
-          <td>${t.D}</td><td>${ew}</td><td>${el}</td>
-          <td>${t.Points}</td><td>${cupText}</td>
-        </tr>`;
-      });
-      out += `</table></div>`;
-    });
-    document.getElementById('standings-tables').innerHTML = out;
-  }
+    out += `</div></div>`;
+  });
+  document.getElementById('squads-list').innerHTML = out;
+}
 
-  /* --- Stats Table + Sorting (NO TEAM FILTER) --- */
-  function renderStatsTable() {
-    if (!statsData.length) return;
-    const cols = [
-      "Player","Team","Sets Played","Sets Won","3 Dart Avg","First 9 Avg",
-      "High Finish","100+","140+","180's","Win Rate (Legs)","Win Rate (Sets)"
-    ];
-    let s = document.getElementById('stats-search').value?.toLowerCase?.() || "";
-    filteredStats = statsData.filter(r => (r.Player||"").toLowerCase().includes(s));
-    doStatsTable(filteredStats, cols);
-
-    document.getElementById('stats-search').oninput = () => {
-      let s = document.getElementById('stats-search').value.toLowerCase();
-      let data = statsData.filter(r => (r.Player||"").toLowerCase().includes(s));
-      doStatsTable(data, cols);
-    };
-
-    function doStatsTable(rows, cols) {
-      let ths = cols.map(c =>
-        `<th data-col="${c}" style="cursor:pointer">${c} <span style="font-size:0.92em;opacity:.56">${
-          lastSort.col===c ? (lastSort.asc ? "▲" : "▼") : ""
-        }</span></th>`
-      ).join('');
-      let trs = rows.map(r => `<tr>` + cols.map(c => {
-        if (c==="Player") {
-          return `<td><button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(r.Player)}')">${r.Player}</button></td>`;
-        } else if (c.startsWith("Win Rate")) {
-          let v = asNum(r[c]);
-          return `<td>${v!=null ? (v*100).toFixed(1)+"%" : ""}</td>`;
-        } else {
-          return `<td>${r[c]||""}</td>`;
-        }
-      }).join('') + `</tr>`).join('');
-      document.getElementById('stats-table').innerHTML = `<tr>${ths}</tr>${trs}`;
-
-      // Add sorting
-      document.querySelectorAll('#stats-table th').forEach((th,i) => {
-        th.onclick = () => {
-          let col = th.getAttribute('data-col');
-          lastSort.asc = lastSort.col===col ? !lastSort.asc : true;
-          lastSort.col = col;
-          rows.sort((a,b) => {
-            let av = asNum(a[col]), bv = asNum(b[col]);
-            if (av!=null && bv!=null) return lastSort.asc ? av-bv : bv-av;
-            return lastSort.asc 
-              ? (""+a[col]).localeCompare(b[col]) 
-              : (""+b[col]).localeCompare(a[col]);
-          });
-          doStatsTable(rows, cols);
-        };
-      });
+/* --- TeamStats Modal (one team) --- */
+window.showTeamStats = function(teamEnc) {
+  let team = decodeURIComponent(teamEnc);
+  let players = statsData.filter(p=>p.Team===team);
+  if (!players.length) return;
+  const cols = [
+    "Player","Sets Played","Sets Won","3 Dart Avg","First 9 Avg",
+    "High Finish","100+","140+","180's","Win Rate (Legs)","Win Rate (Sets)"
+  ];
+  let ths = cols.map(c=>`<th>${c}</th>`).join('');
+  let trs = players.map(p=>'<tr>'+cols.map(c=>{
+    if(c==="Player") return `<td><button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>`;
+    if (c.startsWith("Win Rate")) {
+      let v = asNum(p[c]);
+      return `<td>${v!=null ? (v*100).toFixed(1)+"%" : ""}</td>`;
     }
-  }
-
-  /* --- Top 10 Page: Tables + MVP Info Modal --- */
-  function renderTop10Tables() {
-    if (!statsData.length || !standingsData.length) return;
-    const cats = [
-      { label:"MVP", key:"MVP", compute:calcMVPScore, min:2, info: true },
-      { label:"3 Dart Avg", key:"3 Dart Avg", min:2 },
-      { label:"First 9 Avg", key:"First 9 Avg", min:2 },
-      { label:"100+ Scores", key:"100+", min:2 },
-      { label:"High Finish", key:"High Finish", min:2 }
-    ];
-    let out = '';
-    cats.forEach(cat => {
-      let el = statsData.filter(p=>+p["Match Played"]>=cat.min);
-      if (cat.compute) el.forEach(p=> p._MVP = cat.compute(p));
-      if (cat.key==="100+") el.forEach(p=> p._100Total = (+p["100+"]||0)+(+p["140+"]||0)+(+p["170+"]||0)+(+p["180's"]||0));
-      el.sort((a,b) => {
-        if (cat.compute) return b._MVP - a._MVP;
-        if (cat.key==="100+") return b._100Total - a._100Total;
-        return (+b[cat.key]||0) - (+a[cat.key]||0);
-      });
-      let top = el.slice(0,10);
-      out += `<div class="top10-list-section">
-        <div class="top10-list-title">
-          Top 10 ${cat.label}
-          ${cat.info ? `<span class="info-icon" onclick="showMvpInfo()" title="How is MVP calculated?">i</span>` : ''}
-        </div>
-        <table class="top10-list-table">
-        <tr><th>Rank</th><th>Player</th><th>Team</th><th>${cat.label}</th></tr>`;
-      top.forEach((p,i) => {
-        let v = cat.compute ? p._MVP.toFixed(3)
-           : cat.key==="100+" ? p._100Total : p[cat.key];
-        out += `<tr>
-          <td>#${i+1}</td>
-          <td><button onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>
-          <td>${p.Team}</td>
-          <td>${v}</td>
-        </tr>`;
-      });
-      out += `</table></div>`;
-    });
-    document.getElementById('top10-tables').innerHTML = out;
-  }
-  // MVP Calculation (fully normalized per spec)
-  function calcMVPScore(p) {
-    if (!statsData.length || !standingsData.length) return 0;
-    let valid = statsData.filter(x=>asNum(x["Match Played"])>=2 && asNum(x["3 Dart Avg"]) && asNum(x["Legs Played"]) && asNum(x["Legs Won"]));
-    if (!valid.length) return 0;
-    let max3D = Math.max(...valid.map(x=>asNum(x["3 Dart Avg"])||0));
-    let normAvg = (asNum(p["3 Dart Avg"])||0) / (max3D||1);
-    let playerWinRate = (asNum(p["Legs Played"])>0) ? ((asNum(p["Legs Won"])||0)/(asNum(p["Legs Played"])||1)) : 0;
-    let maxWinRate = Math.max(...valid.map(x=>(asNum(x["Legs Played"])>0)?((asNum(x["Legs Won"])||0)/(asNum(x["Legs Played"])||1)):0));
-    let normWinRate = playerWinRate / (maxWinRate||1);
-    let maxLegsWon = Math.max(...valid.map(x=>asNum(x["Legs Won"])||0));
-    let normLegsWon = (asNum(p["Legs Won"])||0)/(maxLegsWon||1);
-    let maxHF = Math.max(...valid.map(x=>asNum(x["High Finish"])||0));
-    let normHF = (asNum(p["High Finish"])||0)/(maxHF||1);
-    let playerTeam = (p.Team||"").trim();
-    let group = standingsData.find(x=>x.Team===playerTeam)?.Group || null;
-    let teamsThisGroup = standingsData.filter(x=>x.Group===group);
-    let sorted = [...teamsThisGroup].sort((a,b)=>(+b.Points||0)-(+a.Points||0));
-    let teamRank = sorted.findIndex(t=>t.Team===playerTeam)+1;
-    let totalTeams = sorted.length;
-    let teamSuccess = (totalTeams>1) ? 1-((teamRank-1)/(totalTeams-1)) : 1;
-    return (normAvg*0.40) + (normWinRate*0.25) + (normLegsWon*0.20) + (normHF*0.05) + (teamSuccess*0.10);
-  }
-  window.showMvpInfo = function() {
-    showCustomPopup(`
-      <div class="info-popup-card">
-        <button class="close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-        <div style="font-weight:700;font-size:1.11em;margin:4px 0 14px 0;color:var(--primary);">How is MVP calculated?</div>
-        <div style="font-size:1.01em;line-height:1.56">
-        <b>MVP Score =</b> (NormAvg × 0.40) + (NormWinRate × 0.25) + (NormLegsWon × 0.20) + (NormHighFinish × 0.05) + (TeamSuccess × 0.10)<br><br>
-        <b>Where:</b><br>
-        NormAvg = Player’s 3DAvg ÷ Highest 3DAvg<br>
-        NormWinRate = (LegsWon ÷ LegsPlayed) ÷ Highest Win Rate<br>
-        NormLegsWon = LegsWon ÷ Highest LegsWon<br>
-        NormHighFinish = Player’s HighFinish ÷ Highest HighFinish<br>
-        TeamSuccess = 1 - ((TeamRank-1) ÷ (TotalTeams-1))<br><br>
-        <i>This method rewards individual performance & consistency as well as team achievement.</i>
-        </div>
+    return `<td>${p[c]||""}</td>`;
+  }).join('')+'</tr>').join('');
+  showCustomPopup(`
+    <div class="teamstats-popup-card">
+      <div class="team-stats-popup-header" style="font-weight:800;padding:15px 11px 7px 14px;">All Player Stats for ${team}
+        <button class="close-btn" onclick="closeCustomPopup()" aria-label="Close" style="position:absolute;top:8px;right:14px;font-size:2em;">&times;</button>
       </div>
-    `);
-  };
+      <div class="teamstats-popup-scroll" style="overflow:auto;max-height:75vh;">
+        <table class="stats-table" style="min-width:390px">
+          <tr>${ths}</tr>${trs}
+        </table>
+      </div>
+    </div>
+  `);
+};
 
-  // --- Results Page with Match Details Button ---
-  function renderResultsList() {
-    if (!resultsData.length) {
-      document.getElementById('results-list').innerHTML =
-        `<div style="color:#888;padding:10px">No results loaded.</div>`;
-      return;
-    }
-    let byGroup = {};
-    resultsData.forEach(r => {
-      let group = r.Group || "Other";
-      (byGroup[group] = byGroup[group] || []).push(r);
-    });
-
-    let out = '';
-    Object.entries(byGroup).forEach(([group, matches]) => {
-      let byDate = {};
-      matches.forEach(r => {
-        let date = r.Date || '';
-        (byDate[date] = byDate[date] || []).push(r);
-      });
-      out += `<div style="margin-bottom:30px">
-        <div style="font-size:1.12em;font-weight:800;color:var(--primary);margin:12px 0 7px 3px;">Group: ${group}</div>`;
-      Object.entries(byDate).sort((a,b)=>{
-        let d1=Date.parse(a[0]+" 2025"),d2=Date.parse(b[0]+" 2025");
-        return (isNaN(d1)||isNaN(d2))?a[0].localeCompare(b[0]):d2-d1;
-      }).forEach(([date, games]) => {
-        out += `<div class="date-group"><div class="date-label">${date}</div>
-          <table><tr><th>Team A</th><th></th><th>Team B</th><th>Score</th><th>Winner</th><th>Details</th></tr>`;
-        games.forEach(r => {
-          let a = +r["Score A"]||0, b = +r["Score B"]||0;
-          let win = r.Winner || (a > b ? r["Team A"] : b > a ? r["Team B"] : "Draw");
-          let matchid = r.TMATCH_ID || r.MatchID || "";
-          out += `<tr>
-            <td>${r["Team A"]}</td>
-            <td style="color:#a81100;font-weight:700;">vs</td>
-            <td>${r["Team B"]}</td>
-            <td>${a} - ${b}</td>
-            <td class="winner-cell">${win}</td>
-            <td>
-              ${matchid ? `<button class="view-match-btn" onclick="showMatchDetailPopup('${matchid.replace(/'/g, "\\'")}')">View Details</button>` : `<span style="color:#ccc">-</span>`}
-            </td>
-          </tr>`;
-        });
-        out += `</table></div>`;
-      });
-      out += `</div>`;
-    });
-    document.getElementById('results-list').innerHTML = out;
+/* --- Player popup (responsive, scrollable, closeable) --- */
+window.showPlayerPopup = function(nameEnc) {
+  let name = decodeURIComponent(nameEnc);
+  let p = statsData.find(x=>x.Player===name);
+  if (!p) return;
+  let img = `<img src="${LOGO_URL}" alt="Player Photo">`;
+  function grp(lbl, keys) {
+    let rows = keys.filter(k=>p[k]!=null).map(k=>
+      `<tr><td>${k}</td><td>${k.includes("Win Rate")? (asNum(p[k])*100).toFixed(1)+"%":p[k]}</td></tr>`
+    ).join('');
+    return rows ? `<div class="stat-group-title">${lbl}</div><table class="stats-list">${rows}</table>` : '';
   }
+  let core = ["Sets Played","Sets Won","3 Dart Avg","First 9 Avg","High Finish","100+","140+","180's"];
+  let win  = ["Match Played","Win Rate (Legs)","Win Rate (Sets)","Legs Played","Legs Won","Legs Diff"];
+  let ex   = ["Best Leg","Worst Leg"];
+  let other = Object.keys(p).filter(k=>![...core, ...win, ...ex].includes(k));
+  let sections = `<div class="stats-sections">
+    ${grp("Core Stats", core)}
+    ${grp("Win & Rates", win)}
+    ${grp("Highlights", ex)}
+    ${grp("Other", other)}
+  </div>`;
+  let btn = `<button class="save-card-btn" onclick="saveCardAsImage()">Save card as image</button>`;
+  showCustomPopup(`
+    <div class="popup-card">
+      <button class="close-btn" aria-label="Close" onclick="closeCustomPopup()">&times;</button>
+      ${img}
+      <div class="name">${p.Player}</div>
+      <div class="team">${p.Team}</div>
+      ${sections}
+      ${btn}
+    </div>
+  `);
+};
 
-  /* --- Squads Page: Team Filter, TeamStats Popup --- */
-  function renderSquadsList() {
-    if (!statsData.length) return;
-    let byTeam = {};
-    statsData.forEach(p => (byTeam[p.Team] = byTeam[p.Team]||[]).push(p));
-    let teams = Object.keys(byTeam).sort();
-    let sel = document.getElementById('squad-team-filter');
-    if (sel.innerHTML === "" || sel.options.length !== teams.length+1) {
-      sel.innerHTML = `<option value="">All Teams</option>` + teams.map(t=>`<option>${t}</option>`).join('');
-    }
-    sel.onchange = renderSquadsList;
-    let filter = sel.value;
-    let showTeams = filter ? [filter] : teams;
-    let out = '';
-    showTeams.forEach(team => {
-      let players = byTeam[team];
-      out += `<div class="squad-team-section">
-        <div class="squad-team-name-row">
-          <span class="squad-team-name" onclick="showTeamStats('${encodeURIComponent(team)}')" title="Show stats for this team">${team}</span>
-          <span class="team-stats-note">Tap team for full stats</span>
-        </div>
-        <div class="squad-player-grid">`;
-      players.forEach(p=>{
-        out += `<div class="squad-player-card">
-          <button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">
-            ${p.Player}
-          </button>
-          <div class="squad-sets">${p["Sets Played"]||""} Sets, ${p["3 Dart Avg"]||""} 3DA</div>
-        </div>`;
-      });
-      out += `</div></div>`;
-    });
-    document.getElementById('squads-list').innerHTML = out;
+/* --- Match Details Fancy Popup with Live Proxy Fetch --- */
+window.loadMatchDetails = async function(matchID) {
+  if (!matchID) {
+    alert("Match ID not available.");
+    return;
   }
-  // TEAM STATS MODAL
-  window.showTeamStats = function(teamEnc) {
-    let team = decodeURIComponent(teamEnc);
-    let players = statsData.filter(p=>p.Team===team);
-    if (!players.length) return;
-    const cols = [
-      "Player","Sets Played","Sets Won","3 Dart Avg","First 9 Avg",
-      "High Finish","100+","140+","180's","Win Rate (Legs)","Win Rate (Sets)"
-    ];
-    let ths = cols.map(c=>`<th>${c}</th>`).join('');
-    let trs = players.map(p=>'<tr>'+cols.map(c=>{
-      if(c==="Player") return `<td><button class="player-link" onclick="showPlayerPopup('${encodeURIComponent(p.Player)}')">${p.Player}</button></td>`;
-      if (c.startsWith("Win Rate")) {
-        let v = asNum(p[c]);
-        return `<td>${v!=null ? (v*100).toFixed(1)+"%" : ""}</td>`;
+  showMatchPopup(`<div style="padding:38px 0;text-align:center;color:#555;font-size:1.07em;">Loading detailed match data...</div>`);
+  try {
+    const res = await fetch(`${MATCH_PROXY_URL}?tid=${encodeURIComponent(matchID)}`);
+    if (!res.ok) throw new Error("Failed to fetch match data");
+    const data = await res.json();
+    showMatchPopup(renderMatchDetailLayout(data));
+  } catch (e) {
+    showMatchPopup(`<div style="padding:34px 0;text-align:center;color:#a81100">Failed to load match details.<br>${e}</div>`);
+  }
+}
+function renderMatchDetailLayout(data) {
+  if (!data || !data.players || !data.sets) {
+    return `<div style="padding:28px 0;text-align:center;color:#a81100">No data for this match.</div>`;
+  }
+  let players = data.players.map(p=>p.name).join(" <span style='color:#f99d25;font-weight:900;'>vs</span> ");
+  let out = `<div class="match-popup-header">
+    <span>${players}</span>
+    <button class="match-popup-close-btn" onclick="closeMatchPopup()" aria-label="Close">&times;</button>
+  </div>
+  <div class="match-popup-content">`;
+  if(data.date) out += `<div class="match-meta-row"><span>${data.date}</span></div>`;
+  data.sets.forEach((set, sidx) => {
+    out += `<div class="set-section"><div class="set-title">Set ${sidx+1}</div>`;
+    set.legs.forEach((leg, lidx) => {
+      out += `<div class="leg-row">
+        <span style="color:#a81100;font-weight:700;">Leg ${lidx+1}</span>`;
+      leg.scores.forEach((score, pidx) => {
+        out += `<span class="leg-scorepair"><span class="leg-player">${data.players[pidx].name}:</span> ${score}</span>`;
+      });
+      if (leg.winner_name) {
+        out += `<span class="leg-winner">${leg.winner_name}</span>`;
       }
-      return `<td>${p[c]||""}</td>`;
-    }).join('')+'</tr>').join('');
-    showCustomPopup(`
-      <div class="teamstats-popup-card">
-        <div class="team-stats-popup-header">
-          All Player Stats for ${team}
-          <button class="team-stats-popup-close-btn" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-        </div>
-        <div class="teamstats-popup-scroll">
-          <table class="stats-table" style="width:100%">
-            <tr>${ths}</tr>${trs}
-          </table>
-        </div>
-      </div>
-    `);
-  };
-
-  // PLAYER POPUP
-  window.showPlayerPopup = function(nameEnc) {
-    let name = decodeURIComponent(nameEnc);
-    let p = statsData.find(x=>x.Player===name);
-    if (!p) return;
-    let img = `<img src="${LOGO_URL}" alt="Player Photo">`;
-    function grp(lbl, keys) {
-      let rows = keys.filter(k=>p[k]!=null).map(k=>
-        `<tr><td>${k}</td><td>${k.includes("Win Rate")? (asNum(p[k])*100).toFixed(1)+"%":p[k]}</td></tr>`
-      ).join('');
-      return rows ? `<div class="stat-group-title">${lbl}</div><table class="stats-list">${rows}</table>` : '';
-    }
-    let core = ["Sets Played","Sets Won","3 Dart Avg","First 9 Avg","High Finish","100+","140+","180's"];
-    let win  = ["Match Played","Win Rate (Legs)","Win Rate (Sets)","Legs Played","Legs Won","Legs Diff"];
-    let ex   = ["Best Leg","Worst Leg"];
-    let other = Object.keys(p).filter(k=>![...core, ...win, ...ex].includes(k));
-    let sections = `<div class="stats-sections">
-      ${grp("Core Stats", core)}
-      ${grp("Win & Rates", win)}
-      ${grp("Highlights", ex)}
-      ${grp("Other", other)}
-    </div>`;
-    let btn = `<button class="save-card-btn" onclick="saveCardAsImage()">Save card as image</button>`;
-    showCustomPopup(`
-      <div class="popup-card">
-        <button class="close-btn" aria-label="Close" onclick="closeCustomPopup()">&times;</button>
-        ${img}
-        <div class="name">${p.Player}</div>
-        <div class="team">${p.Team}</div>
-        ${sections}
-        ${btn}
-      </div>
-    `);
-  };
-
-  // --- MATCH DETAIL POPUP (WOW LAYOUT, real data from your proxy) ---
-  window.showMatchDetailPopup = async function(matchid) {
-    // Show popup with loading
-    showCustomPopup(`
-      <div style="background:#fff;border-radius:18px;box-shadow:0 8px 40px #0003;max-width:98vw;width:470px;max-height:97vh;display:flex;flex-direction:column;align-items:center;overflow:auto;position:relative;padding:0;">
-        <button style="position:absolute;top:7px;right:12px;font-size:2em;color:#888;background:none;border:none;cursor:pointer;z-index:2;" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-        <div style="font-size:1.18em;font-weight:900;color:var(--primary);margin:22px 0 12px 0;">Loading Match Details...</div>
-        <div style="padding:12px 10px 24px 10px;">
-          <span style="color:#aaa;font-size:1.08em;">Please wait</span>
-        </div>
-      </div>
-    `);
-    try {
-      let res = await fetch(MATCH_PROXY_URL + "?tid=" + encodeURIComponent(matchid));
-      let data = await res.json();
-      showCustomPopup(renderMatchDetailLayout(data));
-    } catch (e) {
-      showCustomPopup(`<div style="padding:50px 0;text-align:center;color:#a81100;font-size:1.1em">Could not load match details.</div>`);
-    }
-  };
-
-  function renderMatchDetailLayout(data) {
-    if (!data || !data.players || !data.sets) {
-      return `<div style="padding:30px 0;text-align:center;color:#a81100">No data for this match.</div>`;
-    }
-    let players = data.players.map(p=>p.name).join(" <span style='color:#a81100;font-weight:600'>vs</span> ");
-    let out = `
-      <div style="background:#fff;border-radius:18px;box-shadow:0 8px 40px #0003;max-width:98vw;width:470px;max-height:97vh;display:flex;flex-direction:column;align-items:center;overflow:auto;position:relative;padding:0;">
-        <button style="position:absolute;top:7px;right:12px;font-size:2em;color:#888;background:none;border:none;cursor:pointer;z-index:2;" onclick="closeCustomPopup()" aria-label="Close">&times;</button>
-        <div style="font-size:1.24em;font-weight:900;color:var(--primary);background:var(--highlight);width:100%;padding:16px 0 8px 0;text-align:center;border-top-left-radius:18px;border-top-right-radius:18px;">
-          ${players}
-        </div>
-        <div style="color:#888;font-size:1em;margin-top:-7px;">${data.date||""}</div>
-        <div style="padding:7px 12px 8px 12px;width:98%;max-width:440px;">
-    `;
-    // Sets and legs, fancy timeline
-    data.sets.forEach((set, sidx) => {
-      out += `<div style="margin-bottom:13px;padding:10px 7px 6px 7px;border-radius:10px;background:rgba(230,230,230,.16);box-shadow:0 1px 5px #0001;">
-        <div style="font-weight:700;color:#6a3e01;margin-bottom:3px;">Set ${sidx+1}</div>`;
-      set.legs.forEach((leg, lidx) => {
-        out += `<div style="margin-bottom:3px;display:flex;align-items:center;gap:7px;">
-          <span style="font-weight:600;color:#345;">Leg ${lidx+1}:</span>`;
-        leg.scores.forEach((score, pidx) => {
-          out += `<span style="margin:0 4px;color:#222;min-width:72px;display:inline-block;">
-              <b>${data.players[pidx].name}:</b> ${score}
-            </span>`;
-        });
-        if (leg.winner_name) {
-          out += `<span style="color:#36a800;font-weight:600;">🏆 ${leg.winner_name}</span>`;
-        }
-        out += `</div>`;
-      });
       out += `</div>`;
     });
-    // Events (highlights)
-    if (data.events && data.events.length) {
-      out += `<div style="margin:19px 0 6px 0;">
-        <div style="font-weight:700;color:#055ec0;margin-bottom:4px;font-size:1.09em;">Match Events</div>`;
-      data.events.forEach(ev => {
-        out += `<div style="font-size:.99em;color:#333;margin-bottom:2px;">${ev.time ? `<b>[${ev.time}]</b> ` : ""}${ev.text || ev.type || ""}</div>`;
-      });
-      out += `</div>`;
-    }
-    out += `<div style="text-align:center;margin-top:18px;">
-      <button style="padding:10px 22px;font-size:1.03em;background:var(--primary);color:#fff;border:none;border-radius:16px;box-shadow:0 1px 7px #0002;cursor:pointer;"
-        onclick="closeCustomPopup()">Close</button>
-      </div></div></div>`;
-    return out;
-  }
+    out += `</div>`;
+  });
+  out += `<div style="text-align:center;margin-top:16px;">
+    <button class="back-to-results-btn" onclick="closeMatchPopup()">Back to Results</button>
+  </div></div>`;
+  return out;
+}
+function showMatchPopup(html) {
+  let pb = document.getElementById('match-popup-backdrop');
+  pb.innerHTML = `<div class="match-popup-card">${html}</div>`;
+  pb.classList.add('show'); pb.style.display='flex';
+  document.body.style.overflow = 'hidden';
+  pb.scrollTop = 0;
+}
+function closeMatchPopup() {
+  let pb = document.getElementById('match-popup-backdrop');
+  pb.classList.remove('show');
+  setTimeout(()=>{pb.style.display='none';},180);
+  document.body.style.overflow = '';
+}
 
-  // --- POPUP HELPERS ---
-  function showCustomPopup(html) {
-    let pb = document.getElementById('popup-backdrop');
-    pb.innerHTML = html;
-    pb.classList.add('show'); pb.style.display='flex';
-    document.body.style.overflow = 'hidden';
-    pb.scrollTop = 0;
-  }
-  function closeCustomPopup() {
-    let pb = document.getElementById('popup-backdrop');
-    pb.classList.remove('show');
-    setTimeout(()=>{pb.style.display='none';},180);
-    document.body.style.overflow = '';
-  }
-  window.closeCustomPopup = closeCustomPopup;
-  window.saveCardAsImage = function() {
-    let card = document.querySelector('.popup-card');
-    if(!card) return;
-    html2canvas(card, {backgroundColor:"#fff", scale:2})
-      .then(canvas => {
-        let a = document.createElement('a');
-        a.download = "player_card.png";
-        a.href = canvas.toDataURL();
-        a.click();
-      });
-  };
-  document.getElementById('popup-backdrop').onclick = function(e) {
-    if (e.target === this) closeCustomPopup();
-  };
+// Generic Info, player, and team popup helpers
+function showCustomPopup(html) {
+  // Use match-popup-backdrop for all popups for consistency
+  let pb = document.getElementById('match-popup-backdrop');
+  pb.innerHTML = html;
+  pb.classList.add('show'); pb.style.display='flex';
+  document.body.style.overflow = 'hidden';
+  pb.scrollTop = 0;
+}
+function closeCustomPopup() {
+  let pb = document.getElementById('match-popup-backdrop');
+  pb.classList.remove('show');
+  setTimeout(()=>{pb.style.display='none';},180);
+  document.body.style.overflow = '';
+}
+window.closeCustomPopup = closeCustomPopup;
+
+window.saveCardAsImage = function() {
+  let card = document.querySelector('.popup-card');
+  if(!card) return;
+  html2canvas(card, {backgroundColor:"#fff", scale:2})
+    .then(canvas => {
+      let a = document.createElement('a');
+      a.download = "player_card.png";
+      a.href = canvas.toDataURL();
+      a.click();
+    });
+};
+// Clicking backdrop closes all popups
+document.getElementById('match-popup-backdrop').onclick = function(e) {
+  if (e.target === this) closeMatchPopup();
+};
 </script>
 </body>
 </html>
