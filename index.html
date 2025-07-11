@@ -880,27 +880,45 @@
 
   // ---- MVP CALCULATION ----
   function calcMVPScore(p) {
-    if (!statsData.length || !standingsData.length) return 0;
-    let valid = statsData.filter(x=>asNum(x["Match Played"])>=2 && asNum(x["3 Dart Avg"]) && asNum(x["Legs Played"]) && asNum(x["Legs Won"]));
-    if (!valid.length) return 0;
-    let max3D = Math.max(...valid.map(x=>asNum(x["3 Dart Avg"])||0));
-    let normAvg = (asNum(p["3 Dart Avg"])||0) / (max3D||1);
-    let playerWinRate = (asNum(p["Legs Played"])>0) ? ((asNum(p["Legs Won"])||0)/(asNum(p["Legs Played"])||1)) : 0;
-    let maxWinRate = Math.max(...valid.map(x=>(asNum(x["Legs Played"])>0)?((asNum(x["Legs Won"])||0)/(asNum(x["Legs Played"])||1)):0));
-    let normWinRate = playerWinRate / (maxWinRate||1);
-    let maxLegsWon = Math.max(...valid.map(x=>asNum(x["Legs Won"])||0));
-    let normLegsWon = (asNum(p["Legs Won"])||0)/(maxLegsWon||1);
-    let maxHF = Math.max(...valid.map(x=>asNum(x["High Finish"])||0));
-    let normHF = (asNum(p["High Finish"])||0)/(maxHF||1);
-    let playerTeam = (p.Team||"").trim();
-    let group = standingsData.find(x=>x.Team===playerTeam)?.Group || null;
-    let teamsThisGroup = standingsData.filter(x=>x.Group===group);
-    let sorted = [...teamsThisGroup].sort((a,b)=>(+b.Points||0)-(+a.Points||0));
-    let teamRank = sorted.findIndex(t=>t.Team===playerTeam)+1;
-    let totalTeams = sorted.length;
-    let teamSuccess = (totalTeams>1) ? 1-((teamRank-1)/(totalTeams-1)) : 1;
-    return (normAvg*0.40) + (normWinRate*0.25) + (normLegsWon*0.20) + (normHF*0.05) + (teamSuccess*0.10);
-  }
+  // Guard for empty/invalid data
+  if (!statsData.length || !standingsData.length) return 0;
+  // Only count those with legs played
+  let valid = statsData.filter(x=>asNum(x["Match Played"])>=2 && asNum(x["3 Dart Avg"]) && asNum(x["Legs Played"]) && asNum(x["Legs Won"]));
+  if (!valid.length) return 0;
+  // 1. NormAvg: Player 3DAvg / Max 3DAvg
+  let max3D = Math.max(...valid.map(x=>asNum(x["3 Dart Avg"])||0));
+  let normAvg = (asNum(p["3 Dart Avg"])||0) / (max3D||1);
+  // 2. NormWinRate: (LegsWon/LegsPlayed) / MaxWinRate
+  let playerWinRate = (asNum(p["Legs Played"])>0) ? ((asNum(p["Legs Won"])||0)/(asNum(p["Legs Played"])||1)) : 0;
+  let maxWinRate = Math.max(...valid.map(x=>(asNum(x["Legs Played"])>0)?((asNum(x["Legs Won"])||0)/(asNum(x["Legs Played"])||1)):0));
+  let normWinRate = playerWinRate / (maxWinRate||1);
+  // 3. NormLegsWon: Player LegsWon / Max LegsWon
+  let maxLegsWon = Math.max(...valid.map(x=>asNum(x["Legs Won"])||0));
+  let normLegsWon = (asNum(p["Legs Won"])||0)/(maxLegsWon||1);
+  // 4. NormHighFinish: Player HighFinish / Max HighFinish
+  let maxHF = Math.max(...valid.map(x=>asNum(x["High Finish"])||0));
+  let normHF = (asNum(p["High Finish"])||0)/(maxHF||1);
+  // 5. Norm180s: Player 180's / Max 180's
+  let max180 = Math.max(...valid.map(x=>asNum(x["180's"])||0));
+  let norm180 = (asNum(p["180's"])||0) / (max180 || 1);
+  // 6. TeamSuccessScore: 1 - ((TeamRank-1)/(TotalTeams-1))
+  let playerTeam = (p.Team||"").trim();
+  let group = standingsData.find(x=>x.Team===playerTeam)?.Group || null;
+  let teamsThisGroup = standingsData.filter(x=>x.Group===group);
+  let sorted = [...teamsThisGroup].sort((a,b)=>(+b.Points||0)-(+a.Points||0));
+  let teamRank = sorted.findIndex(t=>t.Team===playerTeam)+1;
+  let totalTeams = sorted.length;
+  let teamSuccess = (totalTeams>1) ? 1-((teamRank-1)/(totalTeams-1)) : 1;
+  // Weighted formula (total 1.0)
+  return (
+    (normAvg*0.40) +
+    (normWinRate*0.25) +
+    (normLegsWon*0.20) +
+    (normHF*0.05) +
+    (norm180*0.05) +
+    (teamSuccess*0.05)
+  );
+}
   window.showMvpInfo = function() {
     showCustomPopup(`
       <div style="background:#fff;border-radius:18px;box-shadow:0 8px 40px #0003;padding:19px 17px 13px 17px;min-width:240px;max-width:98vw;">
